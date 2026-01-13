@@ -4,6 +4,9 @@ import requests
 import re
 from typing import Optional
 
+# Store documents in memory
+document_storage = {}
+
 app = FastAPI()
 
 # Allow frontend to call backend
@@ -69,6 +72,10 @@ async def upload_file(file: UploadFile = File(...)):
     content = await file.read()
     text = content.decode('utf-8', errors='ignore')
     
+    # Store full document
+    doc_id = file.filename
+    document_storage[doc_id] = text
+    
     # Detect PII
     pii_results = detect_pii(text)
     
@@ -85,25 +92,26 @@ Provide a brief executive summary."""
     return {
         "pii": pii_results,
         "summary": summary,
-        "filename": file.filename
+        "filename": file.filename,
+        "doc_id": doc_id
     }
 
 @app.post("/query")
-async def query_document(question: str = Form(...), context: str = Form(...)):
-    # Use Ollama to answer question based on document context
+async def query_document(question: str = Form(...), doc_id: str = Form(...)):
+    if doc_id not in document_storage:
+        return {"error": "Document not found"}
+    
+    full_text = document_storage[doc_id]
+    
     query_prompt = f"""Based on the following document, answer this question: {question}
 
-Document context:
-{context[:2000]}
+Full Document:
+{full_text[:4000]}
 
 Answer:"""
     
     answer = call_ollama(query_prompt)
-    
-    return {
-        "question": question,
-        "answer": answer
-    }
+    return {"question": question, "answer": answer}
 
 @app.get("/")
 def root():

@@ -10,6 +10,7 @@ function App() {
   const [documentContext, setDocumentContext] = useState('');
   const [query, setQuery] = useState('');
   const [queryHistory, setQueryHistory] = useState([]);
+  const [docId, setDocId] = useState('');
 
   // Real file upload - calls backend
   const handleFileUpload = async (e) => {
@@ -30,7 +31,8 @@ function App() {
       });
       
       const data = await response.json();
-      
+      setDocId(data.doc_id);
+
       // Store results
       setPiiResults(data.pii);
       setSummary(data.summary);
@@ -53,7 +55,7 @@ function App() {
     try {
       const formData = new FormData();
       formData.append('question', query);
-      formData.append('context', documentContext);
+      formData.append('doc_id', docId);
       
       const response = await fetch('http://localhost:8000/query', {
         method: 'POST',
