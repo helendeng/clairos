@@ -1,11 +1,10 @@
+# v2
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 import re
 from typing import Optional
-
-# Store documents in memory
-document_storage = {}
+import random
 
 app = FastAPI()
 
@@ -17,6 +16,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Store full documents in memory
+document_storage = {}
+
+# Store approval states for manager review
+approval_storage = {
+    "items": [],
+    "metadata": {}
+}
 
 # Simple PII detection using regex (your teammates can replace with ML models)
 def detect_pii(text):
@@ -48,6 +56,33 @@ def detect_pii(text):
         "redacted_count": redacted_count
     }
 
+# Calculate confidence score based on response characteristics
+def calculate_confidence(text, prompt_length):
+    """
+    Simple confidence scoring - your teammates can replace with real model
+    """
+    # Base confidence on response length and specificity
+    base_confidence = 0.7
+    
+    # Longer, more detailed responses get higher confidence
+    if len(text) > 200:
+        base_confidence += 0.1
+    
+    # If response contains specific numbers/dates, increase confidence
+    if re.search(r'\b\d{4}\b', text):  # Contains year
+        base_confidence += 0.05
+    if re.search(r'\b\d{1,2}/\d{1,2}\b', text):  # Contains date
+        base_confidence += 0.05
+    
+    # If response says "I don't know", set low confidence
+    if "don't have" in text.lower() or "verified context" in text.lower():
+        base_confidence = 0.4 + random.uniform(0, 0.1)
+    
+    # Add small random variation
+    confidence = min(1.0, base_confidence + random.uniform(-0.05, 0.05))
+    
+    return round(confidence, 2)
+
 # Call Ollama API
 def call_ollama(prompt, model="llama3.2"):
     try:
@@ -66,55 +101,124 @@ def call_ollama(prompt, model="llama3.2"):
     except Exception as e:
         return f"Error: {str(e)}"
 
+# TO HELEN: CUSTOMIZE THE GENERATION OF THE HANDOFF BRIEF HERE! 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     # Read file content
     content = await file.read()
     text = content.decode('utf-8', errors='ignore')
     
-    # Store full document
+    # Store full document text with filename as ID
     doc_id = file.filename
     document_storage[doc_id] = text
     
     # Detect PII
     pii_results = detect_pii(text)
     
-    # Generate summary using Ollama
-    summary_prompt = f"""Summarize this document in 3-4 sentences. Focus on key findings and main topics.
-    
-Document:
-{text[:2000]}  
+    # Generate handoff brief structure using Ollama
+    brief_prompt = f"""Generate a professional employee handoff brief for an existing role based off of data from a transitioning employee. You are addressing the new employee, so stay neutral when talking about the role. Based on the following document, extract:
 
-Provide a brief executive summary."""
+1. Role Overview (neutral, professional tone, 2-3 sentences about the job responsibilities)
+2. Recurring Tasks (ongoing responsibilities with frequency)
+3. Non-Recurring Tasks (upcoming deadlines and one-time projects)
+4. Key Contacts (important people to know)
+
+Document:
+{text[:3000]}
+
+Format your response clearly with these sections. 
+Be specific and actionable. 
+Do not include anything meta abut the prompt in your output, just labels, titles, or headings. 
+Do not include any asterisks. 
+"""
     
-    summary = call_ollama(summary_prompt)
+    brief_content = call_ollama(brief_prompt)
+    confidence = calculate_confidence(brief_content, len(brief_prompt))
+    
+    # Store in approval system for manager review
+    approval_storage["items"] = [
+        {
+            "id": "1",
+            "type": "overview",
+            "title": "Role Overview",
+            "content": brief_content[:500],  # First part is usually overview
+            "sources": [file.filename],
+            "approved": None,
+            "flagged": False,
+            "confidence": confidence
+        }
+    ]
+    approval_storage["metadata"] = {
+        "doc_id": doc_id,
+        "filename": file.filename,
+        "pii_detected": pii_results["detected"],
+        "pii_count": pii_results["redacted_count"]
+    }
     
     return {
         "pii": pii_results,
-        "summary": summary,
+        "summary": brief_content,
         "filename": file.filename,
-        "doc_id": doc_id
+        "doc_id": doc_id,
+        "confidence": confidence,
+        "sources": [{"type": "document", "name": file.filename}]
     }
 
 @app.post("/query")
 async def query_document(question: str = Form(...), doc_id: str = Form(...)):
+    # Retrieve full document from storage
     if doc_id not in document_storage:
-        return {"error": "Document not found"}
+        return {
+            "question": question,
+            "answer": "Error: Document not found. Please upload the document again.",
+            "confidence": 0.0,
+            "sources": []
+        }
     
     full_text = document_storage[doc_id]
     
+    # Use full document for context
     query_prompt = f"""Based on the following document, answer this question: {question}
 
 Full Document:
 {full_text[:4000]}
 
+Provide a clear, concise answer. If you cannot find the answer in the document, say "I don't have verified context for that specific question in the documentation."
+
 Answer:"""
     
     answer = call_ollama(query_prompt)
-    return {"question": question, "answer": answer}
+    confidence = calculate_confidence(answer, len(query_prompt))
+    
+    # Determine sources
+    sources = [{"type": "document", "name": doc_id}]
+    if "don't have" in answer.lower():
+        sources = [{"type": "system", "name": "System Prompt"}]
+    
+    return {
+        "question": question,
+        "answer": answer,
+        "confidence": confidence,
+        "sources": sources
+    }
+
+@app.get("/approval-items")
+async def get_approval_items():
+    """Get items pending manager approval"""
+    return approval_storage
+
+@app.post("/approve-item")
+async def approve_item(item_id: str = Form(...), approved: bool = Form(...), flagged: bool = Form(False)):
+    """Manager approves/rejects an item"""
+    for item in approval_storage["items"]:
+        if item["id"] == item_id:
+            item["approved"] = approved
+            item["flagged"] = flagged
+            return {"success": True, "item": item}
+    return {"success": False, "error": "Item not found"}
 
 @app.get("/")
 def root():
-    return {"status": "Backend running!", "message": "Upload files to /upload or query at /query"}
+    return {"status": "ClairOS Backend Running!", "message": "Upload files to /upload or query at /query"}
 
 # Run with: uvicorn server:app --reload --port 8000
