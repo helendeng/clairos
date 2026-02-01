@@ -1,46 +1,52 @@
 """
 Main script to run the ingestion pipeline
-run to upload chunks to Qdrant
+Loads test cases and uploads all chunks to Qdrant
+Demonstrates domain/subdomain separation
 """
 
 from ingest_chunks import ChunkIngestion
+from test_cases import TEST_CHUNKS
 
-# Example:provides this format
-example_parsed_chunks = [
-    {
-        "chunk_id": "scheduling_001",
-        "domain": "scheduling",
-        "subdomain": "meeting time",
-        "text": "Meeting set for 3pm PST / 6pm EST tomorrow to review onboarding.",
-        "source": {
-            "email_id": "sch_email_001",
-            "subject": "Onboarding meeting",
-            "timestamp": "2026-01-18"
-        }
-    },
-    {
-        "chunk_id": "scheduling_002",
-        "domain": "project_update",
-        "subdomain": "Atlas project",
-        "text": "The Atlas project environmental assessment is progressing well.",
-        "source": {
-            "email_id": "proj_email_002",
-            "subject": "Atlas Update",
-            "timestamp": "2026-01-19"
-        }
-    }
-]
+def flatten_test_chunks():
+    """
+    Flatten nested test cases into a single list
+    TEST_CHUNKS is organized as: {domain: {subdomain: [chunks]}}
+    """
+    all_chunks = []
+    
+    for domain, subdomains in TEST_CHUNKS.items():
+        for subdomain, chunks in subdomains.items():
+            all_chunks.extend(chunks)
+    
+    return all_chunks
 
 def main():
     """Main ingestion function"""
     
+    print("="*70)
+    print("ClairOS DATABASE INGESTION")
+    print("="*70)
+    
     # Initialize ingestion service
     ingestion = ChunkIngestion()
     
-    # Option 2: Batch upload (recommended, faster)
-    ingestion.upload_batch(example_parsed_chunks)
+    # Get all test chunks
+    all_chunks = flatten_test_chunks()
     
-    print("\n✓ Ingestion complete!")
+    print(f"\nPreparing to upload {len(all_chunks)} chunks")
+    print(f"Covering {len(TEST_CHUNKS)} domains")
+    print()
+    
+    # Batch upload (recommended, faster)
+    ingestion.upload_batch(all_chunks)
+    
+    print("\n" + "="*70)
+    print("✓ Ingestion complete!")
+    print("="*70)
+    print("\nNext steps:")
+    print("  1. Run visualize_database.py to see what was stored")
+    print("  2. Run test_database_metrics.py to validate separation")
+    print("  3. Test domain filtering to ensure no cross-contamination")
 
 if __name__ == "__main__":
     main()

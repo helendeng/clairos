@@ -1,0 +1,200 @@
+{
+  "data_coverage": {
+    "total_subdomains": 24,
+    "covered_subdomains": 22,
+    "coverage_percentage": 91.66666666666666,
+    "total_chunks": 47,
+    "distribution": {
+      "Contractual": 2,
+      "All_HR": 2,
+      "Scientific and IP R&D": 2,
+      "Direct Identifiers": 4,
+      "Project Metadata": 4,
+      "Sensitive Vendor Documents": 2,
+      "Support & Escalation": 2,
+      "All_Schedule": 1,
+      "Contact Identifiers": 2,
+      "Company Financial Strategy": 2,
+      "Technical R&D": 2,
+      "Org-Structure Metadata": 2,
+      "Security Behavioral Data": 2,
+      "Privileged Communications": 2,
+      "Litigation Sensitive": 2,
+      "Operational Security": 2,
+      "Vendor Metadata": 2,
+      "Accounting": 2,
+      "System Operations": 2,
+      "Financial Identifiers": 2,
+      "Compliance & Regulatory": 2,
+      "Business Strategy": 2
+    }
+  },
+  "isolation_quality": {
+    "perfect_isolation": true,
+    "isolation_score": 100.0,
+    "total_subdomains": 22,
+    "issues_found": 0,
+    "issues": []
+  },
+  "subdomain_filtering": {
+    "all_passed": true,
+    "pass_rate": 100.0,
+    "subdomains_tested": 22,
+    "detailed_results": [
+      {
+        "subdomain": "Accounting",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "All_HR",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "All_Schedule",
+        "chunks_found": 1,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Business Strategy",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Company Financial Strategy",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Compliance & Regulatory",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Contact Identifiers",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Contractual",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Direct Identifiers",
+        "chunks_found": 4,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Financial Identifiers",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Litigation Sensitive",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Operational Security",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Org-Structure Metadata",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Privileged Communications",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Project Metadata",
+        "chunks_found": 4,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Scientific and IP R&D",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Security Behavioral Data",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Sensitive Vendor Documents",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Support & Escalation",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "System Operations",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Technical R&D",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      },
+      {
+        "subdomain": "Vendor Metadata",
+        "chunks_found": 2,
+        "contamination": 0,
+        "passed": true
+      }
+    ]
+  },
+  "data_quality": {
+    "quality_score": 100.0,
+    "total_chunks": 47,
+    "field_coverage": {
+      "chunk_id": 47,
+      "subdomain": 47,
+      "domain": 47,
+      "text": 47,
+      "source": 47
+    },
+    "source_field_coverage": {
+      "email_id": 47,
+      "from": 47,
+      "subject": 47,
+      "timestamp": 47
+    },
+    "issues_count": 0
+  },
+  "overall_score": 100.0,
+  "health_status": "EXCELLENT",
+  "timestamp": "2026-02-01T12:19:06.092298",
+  "collection_name": "clairos_email_chunks"
+}

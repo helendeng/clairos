@@ -18,3 +18,4 @@ class EmbeddingService:
     def embed_batch(self, texts: list) -> list:
         """Generate embeddings for multiple texts (faster)"""
         return self.model.encode(texts).tolist()
+    
