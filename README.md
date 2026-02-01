@@ -9,7 +9,7 @@ What you'll see: Messages about the server starting Leave it running! Don't clos
 
 # Terminal 2: Backend (The Middleman) 🔧
 What it does: Receives files from your website, detects PII, talks to Ollama, sends results back
-How to start:
+How to start:  
 bash  
 export PATH="/usr/local/bin:$PATH"  
 cd ~/clairos/pii-demo-project/backend  
