@@ -23,6 +23,7 @@ bash
 export PATH="/usr/local/bin:$PATH"
 cd ~/clairos/pii-demo-project
 npm run dev
+
 What you'll see: "Local: http://localhost:5173/" Leave it running! Don't close this window
 
 # Step 4: Open Your Browser 🌍
