@@ -8,7 +8,7 @@ ollama serve
 What you'll see: Messages about the server starting Leave it running! Don't close this window
 
 # Terminal 2: Backend (The Middleman) 🔧
-What it does: Receives files from your website, detects PII, talks to Ollama, sends results back
+What it does: Receives files from your website, detects PII, talks to Ollama, sends results back.  
 How to start:  
 bash  
 export PATH="/usr/local/bin:$PATH"  
@@ -17,8 +17,8 @@ uvicorn server:app --reload --port 8000
 What you'll see: "Uvicorn running on http://127.0.0.1:8000" Leave it running! Don't close this window
 
 # Terminal 3: Frontend (The Website)
-What it does: Shows the pretty interface you see in your browser
-How to start:
+What it does: Shows the pretty interface you see in your browser.  
+How to start:  
 bash  
 export PATH="/usr/local/bin:$PATH"  
 cd ~/clairos/pii-demo-project  
