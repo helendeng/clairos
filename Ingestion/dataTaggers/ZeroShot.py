@@ -8,7 +8,6 @@ import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Import local variables and files
-from Schemas.taxonomy import ZERO_SHOT_LABELS
 # Load the model and the tokenizer locally
 tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-mnli")
 model = AutoModelForSequenceClassification.from_pretrained("facebook/bart-large-mnli")

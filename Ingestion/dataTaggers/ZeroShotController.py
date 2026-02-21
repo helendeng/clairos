@@ -3,9 +3,11 @@
 def process_email_with_zero_shot(
                             email_text: str,
                             subject: str,
-                            labels_dict: dict,
+                            high_level_labels: dict,
+                            low_level_labels: dict,
                             zero_shot_classify_fn,
-                            threshold: float = 0.5,
+                            high_level_threshold: float = 0.5,
+                            low_level_threshold: float = 0.5,
                             split_by: str = "sentence"  # "sentence" or "paragraph"
                         ) -> dict:
     """
@@ -15,9 +17,11 @@ def process_email_with_zero_shot(
     -----------
     email_text : str: The full email body text
     subject : str: Email subject line
-    labels_dict : dict: Your category name -> description mapping
+    high_level_labels : dict: High level category labels list -> description mapping
+    low_level_labels : dict: Sub-Categories label list -> description mapping
     zero_shot_classify_fn : function: Your zero_shot_classify function
-    threshold : float: Confidence threshold for predictions (default 0.5)
+    high_level_threshold : float: Confidence threshold for predictions during high level labeling (default 0.5)
+    low_level_threshold : float: Confidence threshold for predictions during low level labeling (default 0.5)
     split_by : str: How to split text: "sentence" or "paragraph"
     
     Returns:
@@ -31,23 +35,21 @@ def process_email_with_zero_shot(
         }
     """
     
-    # Combine subject and body for processing
+    # Combine subject and body
     full_text = f"Subject: {subject}\n\n{email_text}"
     
     # Split into chunks
     if split_by == "sentence":
-        # Simple sentence splitting (split on ., !, ?)
         import re
         chunks = re.split(r'[.!?]+', full_text)
-        chunks = [c.strip() for c in chunks if c.strip() and len(c.strip()) > 10]  # Filter out very short chunks
+        chunks = [c.strip() for c in chunks if c.strip() and len(c.strip()) > 10]
     elif split_by == "paragraph":
-        # Split on double newlines
         chunks = [p.strip() for p in full_text.split('\n\n') if p.strip()]
     else:
-        raise ValueError(f"Invalid split_by: {split_by}. Use 'sentence' or 'paragraph'")
+        raise ValueError(f"Invalid split_by: {split_by}")
     
     if not chunks:
-        print("⚠️ No chunks found after splitting. Email might be too short or empty.")
+        print("⚠️ No chunks found after splitting.")
         return {
             'email_text': email_text,
             'subject': subject,
@@ -57,58 +59,82 @@ def process_email_with_zero_shot(
     
     print(f"📧 Processing email with {len(chunks)} {split_by}(s)...")
     
-    # Get candidate labels
-    candidate_labels = list(labels_dict.values())
-    
-    # Process each chunk
+    # Process each chunk with hierarchical classification
     classified_chunks = []
     all_tags = set()
     
     for idx, chunk in enumerate(chunks):
-        # Run zero-shot classification
-        result = zero_shot_classify_fn(
+        
+        # === STAGE 1: Top-level classification ===
+        stage1_candidate_labels = list(high_level_labels.values())
+        stage1_result = zero_shot_classify_fn(
             chunk,
-            candidate_labels,
+            stage1_candidate_labels,
             multi_label=True
         )
         
-        # Map descriptions back to category names and apply threshold
+        # Map descriptions back to top-level category names
+        detected_top_level = []
+        stage1_scores = {}
+        
+        for label_desc, score in zip(stage1_result['labels'], stage1_result['scores']):
+            for cat_name, cat_desc in high_level_labels.items():
+                if cat_desc == label_desc:
+                    stage1_scores[cat_name] = score
+                    if score >= high_level_threshold:
+                        detected_top_level.append(cat_name)
+                    break
+        
+        # === STAGE 2: Subcategory classification ===
         chunk_tags = []
         chunk_scores = {}
         
-        for label_desc, score in zip(result['labels'], result['scores']):
-            # Find category name from description
-            category_name = None
-            for cat_name, cat_desc in labels_dict.items():
-                if cat_desc == label_desc:
-                    category_name = cat_name
-                    break
-            
-            if category_name is None:
+        for top_cat in detected_top_level:
+            # Check if this top-level has subcategories
+            if top_cat not in low_level_labels:
+                # No subcategories - just use top-level tag
+                chunk_tags.append(top_cat)
+                chunk_scores[top_cat] = stage1_scores[top_cat]
                 continue
             
-            chunk_scores[category_name] = score
+            # Get subcategories for this top-level
+            subcat_dict = low_level_labels[top_cat]
+            stage2_candidate_labels = list(subcat_dict.values())
             
-            # Apply threshold
-            if score >= threshold:
-                chunk_tags.append(category_name)
-                all_tags.add(category_name)
+            # Run zero-shot on subcategories
+            stage2_result = zero_shot_classify_fn(
+                chunk,
+                stage2_candidate_labels,
+                multi_label=True
+            )
+            
+            # Map descriptions back to subcategory names
+            for label_desc, score in zip(stage2_result['labels'], stage2_result['scores']):
+                for subcat_name, subcat_desc in subcat_dict.items():
+                    if subcat_desc == label_desc:
+                        chunk_scores[subcat_name] = score
+                        if score >= low_level_threshold:
+                            chunk_tags.append(subcat_name)
+                            all_tags.add(subcat_name)
+                        break
         
         # Store classified chunk
         chunk_data = {
             'chunk_id': idx,
             'text': chunk,
+            'stage1_detected': detected_top_level,
+            'stage1_scores': stage1_scores,
             'tags': chunk_tags,
             'scores': chunk_scores
         }
         
         classified_chunks.append(chunk_data)
         
-        # "Save to database" (print statement for now)
+        # "Save to database"
         if chunk_tags:
-            print(f"✅ Saved chunk {idx} to database domains: {', '.join(chunk_tags)}")
+            print(f"✅ Chunk {idx}: {', '.join(chunk_tags)}")
         else:
-            print(f"ℹ️  Chunk {idx} had no tags above threshold")
+            print(f"ℹ️  Chunk {idx}: No tags above threshold")
     
     # Aggregate results
     result = {
