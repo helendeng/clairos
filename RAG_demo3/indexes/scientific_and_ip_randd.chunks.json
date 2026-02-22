@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "scientific_and_ip_randd_001",
+    "domain": "scientific_and_ip_randd",
+    "text": "Patent application drafted for solar panel coating technology. Prior art search complete.",
+    "source": {
+      "email_id": "rd_ip_001",
+      "from": "rnd@company.com",
+      "cc": "legal@company.com",
+      "bcc": "",
+      "subject": "Patent Filing - Solar Tech",
+      "timestamp": "2026-01-24"
+    }
+  }
+]

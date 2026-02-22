@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "security_behavioral_data_001",
+    "domain": "security_behavioral_data",
+    "text": "Unusual login pattern detected from employee account. Investigation ongoing.",
+    "source": {
+      "email_id": "security_behavior_001",
+      "from": "security@company.com",
+      "cc": "soc@company.com",
+      "bcc": "",
+      "subject": "Security Alert",
+      "timestamp": "2026-01-21"
+    }
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "operational_security_001",
+    "domain": "operational_security",
+    "text": "New access codes for data center. Effective immediately: [REDACTED].",
+    "source": {
+      "email_id": "security_ops_001",
+      "from": "security@company.com",
+      "cc": "it@company.com",
+      "bcc": "",
+      "subject": "Updated Security Codes",
+      "timestamp": "2026-01-20"
+    }
+  }
+]

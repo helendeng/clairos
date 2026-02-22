@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "litigation_sensitive_001",
+    "domain": "litigation_sensitive",
+    "text": "Pending lawsuit regarding Atlas project delays. Attorney-client privileged.",
+    "source": {
+      "email_id": "legal_litigation_001",
+      "from": "legal@company.com",
+      "cc": "counsel@company.com",
+      "bcc": "",
+      "subject": "PRIVILEGED: Atlas Litigation",
+      "timestamp": "2026-01-16"
+    }
+  }
+]

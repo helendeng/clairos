@@ -1,0 +1,68 @@
+[
+  {
+    "id": "t1",
+    "question": "What routing number should we use for Vendor Z?",
+    "domains_to_search": [
+      "financial"
+    ],
+    "expected_chunk_ids": [
+      "financial_001"
+    ],
+    "expected_answer": "021000021"
+  },
+  {
+    "id": "t2",
+    "question": "What was the company EIN in the W-9 thread?",
+    "domains_to_search": [
+      "legal"
+    ],
+    "expected_chunk_ids": [
+      "legal_001"
+    ],
+    "expected_answer": "12-3456789"
+  },
+  {
+    "id": "t3",
+    "question": "What API key do we need to rotate after the incident?",
+    "domains_to_search": [
+      "security"
+    ],
+    "expected_chunk_ids": [
+      "security_001"
+    ],
+    "expected_answer": "sk-test1234567890abcdefghij"
+  },
+  {
+    "id": "t4",
+    "question": "Which internal IP was flagged in the incident report?",
+    "domains_to_search": [
+      "security"
+    ],
+    "expected_chunk_ids": [
+      "security_001"
+    ],
+    "expected_answer": "192.168.1.100"
+  },
+  {
+    "id": "t5",
+    "question": "When is the onboarding meeting scheduled?",
+    "domains_to_search": [
+      "scheduling"
+    ],
+    "expected_chunk_ids": [
+      "scheduling_001"
+    ],
+    "expected_answer": "3pm PST"
+  },
+  {
+    "id": "t6",
+    "question": "What's the response SLA for Vendor Z?",
+    "domains_to_search": [
+      "vendor"
+    ],
+    "expected_chunk_ids": [
+      "vendor_002"
+    ],
+    "expected_answer": "24 hours"
+  }
+]

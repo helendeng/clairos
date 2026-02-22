@@ -1,0 +1,22 @@
+[
+  {
+    "chunk_id": "vendor_001",
+    "domain": "vendor",
+    "text": "Support escalation: Vendor Z reported payout delay; please confirm ACH routing and account are correct.",
+    "source": {
+      "email_id": "ven_email_001",
+      "subject": "Vendor Z escalation",
+      "timestamp": "2026-01-17"
+    }
+  },
+  {
+    "chunk_id": "vendor_002",
+    "domain": "vendor",
+    "text": "Vendor metadata: primary contact is Jane Doe (vendor success) and response SLA is 24 hours.",
+    "source": {
+      "email_id": "ven_email_002",
+      "subject": "Vendor profile",
+      "timestamp": "2026-01-17"
+    }
+  }
+]

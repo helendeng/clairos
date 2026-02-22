@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "accounting_001",
+    "domain": "accounting",
+    "text": "Q4 revenue projections revised downward by 8%. Earnings call scheduled.",
+    "source": {
+      "email_id": "finance_accounting_001",
+      "from": "accounting@company.com",
+      "cc": "cfo@company.com",
+      "bcc": "",
+      "subject": "Q4 Forecast Update",
+      "timestamp": "2026-01-25"
+    }
+  }
+]

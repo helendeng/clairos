@@ -1,0 +1,22 @@
+[
+  {
+    "chunk_id": "scheduling_001",
+    "domain": "scheduling",
+    "text": "Meeting set for 3pm PST / 6pm EST tomorrow to review onboarding.",
+    "source": {
+      "email_id": "sch_email_001",
+      "subject": "Onboarding meeting",
+      "timestamp": "2026-01-18"
+    }
+  },
+  {
+    "chunk_id": "scheduling_002",
+    "domain": "scheduling",
+    "text": "Call scheduled for UTC+05:30 to accommodate the India team.",
+    "source": {
+      "email_id": "sch_email_002",
+      "subject": "Timezone coordination",
+      "timestamp": "2026-01-18"
+    }
+  }
+]

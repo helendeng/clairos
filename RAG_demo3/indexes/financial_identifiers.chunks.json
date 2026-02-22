@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "financial_identifiers_001",
+    "domain": "financial_identifiers",
+    "text": "Bank account for direct deposit: [REDACTED]. Routing number: [REDACTED].",
+    "source": {
+      "email_id": "pii_financial_001",
+      "from": "employee@company.com",
+      "cc": "payroll@company.com",
+      "bcc": "",
+      "subject": "Payroll Setup",
+      "timestamp": "2026-01-13"
+    }
+  }
+]

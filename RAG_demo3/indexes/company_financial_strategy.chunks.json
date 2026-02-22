@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "company_financial_strategy_001",
+    "domain": "company_financial_strategy",
+    "text": "Board approved $50M capital raise. Term sheet negotiations with investors ongoing.",
+    "source": {
+      "email_id": "finance_strategy_001",
+      "from": "cfo@company.com",
+      "cc": "board@company.com",
+      "bcc": "",
+      "subject": "CONFIDENTIAL: Funding Round",
+      "timestamp": "2026-01-26"
+    }
+  }
+]

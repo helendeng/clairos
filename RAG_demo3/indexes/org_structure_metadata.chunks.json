@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "org_structure_metadata_001",
+    "domain": "org_structure_metadata",
+    "text": "Organizational restructure announced. Three departments merging into Energy Division.",
+    "source": {
+      "email_id": "ops_org_001",
+      "from": "ceo@company.com",
+      "cc": "all@company.com",
+      "bcc": "",
+      "subject": "Org Structure Changes",
+      "timestamp": "2026-01-29"
+    }
+  }
+]

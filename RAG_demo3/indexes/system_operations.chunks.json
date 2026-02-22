@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "system_operations_001",
+    "domain": "system_operations",
+    "text": "Planned system maintenance window: February 10, 2am-6am EST. All services offline.",
+    "source": {
+      "email_id": "ops_systems_001",
+      "from": "ops@company.com",
+      "cc": "it@company.com",
+      "bcc": "",
+      "subject": "Maintenance Notice",
+      "timestamp": "2026-01-30"
+    }
+  }
+]

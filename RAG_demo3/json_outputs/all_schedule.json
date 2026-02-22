@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "subdomain": "All_Schedule",
+    "domain": "Scheduling",
+    "chunk_count": 2,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.339835",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Meeting set for 3pm PST / 6pm EST tomorrow to review onboarding.",
+      "source": {
+        "email_id": "sch_email_001",
+        "from": "manager@company.com",
+        "cc": "team@company.com",
+        "bcc": "",
+        "subject": "Onboarding meeting",
+        "timestamp": "2026-01-18"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Meeting set for 3pm PST / 6pm EST tomorrow to review onboarding.",
+      "source": {
+        "email_id": "sch_email_001",
+        "from": "manager@company.com",
+        "cc": "team@company.com",
+        "bcc": "",
+        "subject": "Onboarding meeting",
+        "timestamp": "2026-01-18"
+      }
+    }
+  ]
+}

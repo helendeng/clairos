@@ -1,0 +1,90 @@
+[
+  {
+    "id": "t1",
+    "question": "When is the onboarding meeting scheduled?",
+    "domains_to_search": [
+      "all_schedule"
+    ],
+    "relevant_chunk_ids": [
+      "all_schedule_001"
+    ],
+    "expected_answer": "3pm PST"
+  },
+  {
+    "id": "t2",
+    "question": "What are the new access codes for the data center?",
+    "domains_to_search": [
+      "operational_security"
+    ],
+    "relevant_chunk_ids": [
+      "operational_security_001"
+    ],
+    "expected_answer": "REDACTED"
+  },
+  {
+    "id": "t3",
+    "question": "What is the resolution ETA for the escalated support ticket?",
+    "domains_to_search": [
+      "support_and_escalation"
+    ],
+    "relevant_chunk_ids": [
+      "support_and_escalation_001"
+    ],
+    "expected_answer": "48 hours"
+  },
+  {
+    "id": "t4",
+    "question": "When is the EPA compliance review due?",
+    "domains_to_search": [
+      "compliance_and_regulatory"
+    ],
+    "relevant_chunk_ids": [
+      "compliance_and_regulatory_001"
+    ],
+    "expected_answer": "March 1st"
+  },
+  {
+    "id": "t5",
+    "question": "What information was included in the parking pass application?",
+    "domains_to_search": [
+      "direct_identifiers"
+    ],
+    "relevant_chunk_ids": [
+      "direct_identifiers_001"
+    ],
+    "expected_answer": "Driver's license"
+  },
+  {
+    "id": "t6",
+    "question": "When is the performance review scheduled?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_002"
+    ],
+    "expected_answer": "Q1"
+  },
+  {
+    "id": "t7",
+    "question": "What was the Q4 revenue projection change?",
+    "domains_to_search": [
+      "accounting"
+    ],
+    "relevant_chunk_ids": [
+      "accounting_001"
+    ],
+    "expected_answer": "downward by 8%"
+  },
+  {
+    "id": "t8",
+    "question": "What HR matter was discussed with the manager?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_001"
+    ],
+    "expected_answer": "Disciplinary action"
+  }
+]

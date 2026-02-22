@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "contact_identifiers_001",
+    "domain": "contact_identifiers",
+    "text": "Personal phone: [REDACTED]. Personal email: [REDACTED].",
+    "source": {
+      "email_id": "pii_contact_001",
+      "from": "employee@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Emergency Contact Update",
+      "timestamp": "2026-01-12"
+    }
+  }
+]

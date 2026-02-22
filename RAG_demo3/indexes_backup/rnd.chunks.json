@@ -1,0 +1,12 @@
+[
+  {
+    "chunk_id": "rnd_001",
+    "domain": "rnd",
+    "text": "Technical R&D: prototype uses a retrieval step over domain-scoped indexes to reduce latency.",
+    "source": {
+      "email_id": "rnd_email_001",
+      "subject": "R&D notes",
+      "timestamp": "2026-01-06"
+    }
+  }
+]

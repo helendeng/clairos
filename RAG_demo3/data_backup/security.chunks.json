@@ -1,0 +1,32 @@
+[
+  {
+    "chunk_id": "security_001",
+    "domain": "security",
+    "text": "Incident report: repeated failed logins from internal IP 192.168.1.100. Rotate API key sk-test1234567890abcdefghij immediately.",
+    "source": {
+      "email_id": "sec_email_001",
+      "subject": "Incident report",
+      "timestamp": "2026-01-13"
+    }
+  },
+  {
+    "chunk_id": "security_002",
+    "domain": "security",
+    "text": "MFA backup codes distributed for emergency access: ABCD-1234 and WXYZ-5678.",
+    "source": {
+      "email_id": "sec_email_002",
+      "subject": "MFA recovery",
+      "timestamp": "2026-01-14"
+    }
+  },
+  {
+    "chunk_id": "security_003",
+    "domain": "security",
+    "text": "Encryption: AES key example for test system: 0123456789abcdef0123456789abcdef.",
+    "source": {
+      "email_id": "sec_email_003",
+      "subject": "Key management",
+      "timestamp": "2026-01-15"
+    }
+  }
+]

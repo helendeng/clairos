@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "privileged_communications_001",
+    "domain": "privileged_communications",
+    "text": "Attorney work product regarding regulatory strategy. Do not forward.",
+    "source": {
+      "email_id": "legal_privileged_001",
+      "from": "attorney@lawfirm.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "PRIVILEGED: Legal Strategy",
+      "timestamp": "2026-01-19"
+    }
+  }
+]

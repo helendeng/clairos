@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "all_schedule_001",
+    "domain": "all_schedule",
+    "text": "Meeting set for 3pm PST / 6pm EST tomorrow to review onboarding.",
+    "source": {
+      "email_id": "sch_email_001",
+      "from": "manager@company.com",
+      "cc": "team@company.com",
+      "bcc": "",
+      "subject": "Onboarding meeting",
+      "timestamp": "2026-01-18"
+    }
+  }
+]

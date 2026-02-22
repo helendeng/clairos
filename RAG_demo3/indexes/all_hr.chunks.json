@@ -1,0 +1,28 @@
+[
+  {
+    "chunk_id": "all_hr_001",
+    "domain": "all_hr",
+    "text": "Disciplinary action recorded. Employee counseling session notes attached.",
+    "source": {
+      "email_id": "hr_002",
+      "from": "hr@company.com",
+      "cc": "manager@company.com",
+      "bcc": "",
+      "subject": "Employee Relations Matter",
+      "timestamp": "2026-01-15"
+    }
+  },
+  {
+    "chunk_id": "all_hr_002",
+    "domain": "all_hr",
+    "text": "Performance review scheduled for Q1. Discussion of salary adjustment pending.",
+    "source": {
+      "email_id": "hr_001",
+      "from": "hr@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Annual Review Notice",
+      "timestamp": "2026-01-14"
+    }
+  }
+]

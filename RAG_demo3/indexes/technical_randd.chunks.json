@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "technical_randd_001",
+    "domain": "technical_randd",
+    "text": "New turbine blade design shows 15% efficiency improvement in testing. Patent pending.",
+    "source": {
+      "email_id": "rd_tech_001",
+      "from": "rnd@company.com",
+      "cc": "engineering@company.com",
+      "bcc": "",
+      "subject": "Turbine Innovation - Confidential",
+      "timestamp": "2026-01-23"
+    }
+  }
+]

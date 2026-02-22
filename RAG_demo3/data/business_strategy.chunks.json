@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "business_strategy_001",
+    "domain": "business_strategy",
+    "text": "Q2 acquisition target identified. Board approval pending. HIGHLY CONFIDENTIAL.",
+    "source": {
+      "email_id": "strategy_001",
+      "from": "strategy@company.com",
+      "cc": "ceo@company.com",
+      "bcc": "",
+      "subject": "CONFIDENTIAL: M&A Opportunity",
+      "timestamp": "2026-01-22"
+    }
+  }
+]

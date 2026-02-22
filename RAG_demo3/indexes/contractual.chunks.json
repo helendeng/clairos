@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "contractual_001",
+    "domain": "contractual",
+    "text": "Vendor contract renewal terms under negotiation. NDA restrictions apply.",
+    "source": {
+      "email_id": "legal_contract_001",
+      "from": "legal@company.com",
+      "cc": "procurement@company.com",
+      "bcc": "",
+      "subject": "Contract Renewal - Confidential",
+      "timestamp": "2026-01-18"
+    }
+  }
+]

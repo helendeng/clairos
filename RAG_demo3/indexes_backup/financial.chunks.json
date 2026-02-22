@@ -1,0 +1,32 @@
+[
+  {
+    "chunk_id": "financial_001",
+    "domain": "financial",
+    "text": "Vendor Z ACH setup: use routing number 021000021 and account number 9876543210 for payments.",
+    "source": {
+      "email_id": "fin_email_001",
+      "subject": "Vendor payment setup",
+      "timestamp": "2026-01-10"
+    }
+  },
+  {
+    "chunk_id": "financial_002",
+    "domain": "financial",
+    "text": "Corporate card on file for travel expenses: 4111-1111-1111-1111 (store securely).",
+    "source": {
+      "email_id": "fin_email_002",
+      "subject": "Corporate card",
+      "timestamp": "2026-01-11"
+    }
+  },
+  {
+    "chunk_id": "financial_003",
+    "domain": "financial",
+    "text": "Quarter close reminder: book revenue accruals and reconcile AP aging by Friday.",
+    "source": {
+      "email_id": "fin_email_003",
+      "subject": "Month-end close",
+      "timestamp": "2026-01-12"
+    }
+  }
+]

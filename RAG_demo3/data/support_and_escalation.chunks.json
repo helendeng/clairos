@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "support_and_escalation_001",
+    "domain": "support_and_escalation",
+    "text": "Critical support ticket escalated to vendor engineering team. Resolution ETA 48 hours.",
+    "source": {
+      "email_id": "vendor_support_001",
+      "from": "support@vendor.com",
+      "cc": "it@company.com",
+      "bcc": "",
+      "subject": "Escalation: Ticket #12345",
+      "timestamp": "2026-02-01"
+    }
+  }
+]

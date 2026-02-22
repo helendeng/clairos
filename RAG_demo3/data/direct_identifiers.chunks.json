@@ -1,0 +1,28 @@
+[
+  {
+    "chunk_id": "direct_identifiers_001",
+    "domain": "direct_identifiers",
+    "text": "Driver's license number for David Smith: [REDACTED]. Home address: [REDACTED].",
+    "source": {
+      "email_id": "pii_direct_002",
+      "from": "facilities@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Parking Pass Application",
+      "timestamp": "2026-01-11"
+    }
+  },
+  {
+    "chunk_id": "direct_identifiers_002",
+    "domain": "direct_identifiers",
+    "text": "Employee SSN: [REDACTED]. Date of birth: [REDACTED]. Passport number [REDACTED].",
+    "source": {
+      "email_id": "pii_direct_001",
+      "from": "admin@company.com",
+      "cc": "hr@company.com",
+      "bcc": "",
+      "subject": "Employee Verification",
+      "timestamp": "2026-01-10"
+    }
+  }
+]

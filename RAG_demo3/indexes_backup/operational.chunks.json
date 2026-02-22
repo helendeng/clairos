@@ -1,0 +1,22 @@
+[
+  {
+    "chunk_id": "operational_001",
+    "domain": "operational",
+    "text": "System operations: deploy window scheduled tonight; rollback plan documented in runbook section 4.",
+    "source": {
+      "email_id": "ops_email_001",
+      "subject": "Deploy window",
+      "timestamp": "2026-01-16"
+    }
+  },
+  {
+    "chunk_id": "operational_002",
+    "domain": "operational",
+    "text": "Project metadata: Atlas migration status is GREEN; next checkpoint is Tuesday.",
+    "source": {
+      "email_id": "ops_email_002",
+      "subject": "Atlas status",
+      "timestamp": "2026-01-16"
+    }
+  }
+]

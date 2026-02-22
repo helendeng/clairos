@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "vendor_metadata_001",
+    "domain": "vendor_metadata",
+    "text": "Vendor contact updated: New account manager assigned to our account.",
+    "source": {
+      "email_id": "vendor_meta_001",
+      "from": "vendor@supplier.com",
+      "cc": "procurement@company.com",
+      "bcc": "",
+      "subject": "Account Manager Change",
+      "timestamp": "2026-02-02"
+    }
+  }
+]

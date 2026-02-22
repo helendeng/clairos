@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "compliance_and_regulatory_001",
+    "domain": "compliance_and_regulatory",
+    "text": "Environmental permit compliance review due by March 1st per EPA regulations.",
+    "source": {
+      "email_id": "legal_compliance_001",
+      "from": "compliance@company.com",
+      "cc": "project@company.com",
+      "bcc": "",
+      "subject": "EPA Compliance Deadline",
+      "timestamp": "2026-01-17"
+    }
+  }
+]

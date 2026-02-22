@@ -1,0 +1,15 @@
+[
+  {
+    "chunk_id": "sensitive_vendor_documents_001",
+    "domain": "sensitive_vendor_documents",
+    "text": "Vendor pricing proposal for turbine components. NDA-protected terms included.",
+    "source": {
+      "email_id": "vendor_sensitive_001",
+      "from": "vendor@supplier.com",
+      "cc": "procurement@company.com",
+      "bcc": "",
+      "subject": "CONFIDENTIAL: Pricing Proposal",
+      "timestamp": "2026-01-31"
+    }
+  }
+]
