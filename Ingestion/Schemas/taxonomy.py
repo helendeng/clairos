@@ -212,51 +212,34 @@ class CategoryKey(Enum):
 11. Personal Life: Health disclosures, Crisis content
 """
 
-
-## This list will get fed into the model initially to see what categories the model thinks the
-## piece of text contains, THEN we will feed the model the full label list for the 
-## higher level category in order to get exactly what the piece of text is
-ZERO_SHOT_LABELS_STAGE_1 = {
-    'HR': 'Human resources discussion about employees or workplace',
-    'Legal': 'Legal matter, compliance, or contractual discussion',
-    'Security': 'Security-related content, credentials, or incidents',
-    'Strategic': 'Strategic business discussion about company direction',
-    'R&D': 'Research and development, experiments, or innovation',
-    'Financial': 'Financial discussion about money, budget, or compensation',
-    'Operational': 'Operational or project-related work content',
-    'Vendor': 'Vendor or contractor-related discussion',
-    'Scheduling': 'Scheduling, calendar, or meeting coordination',
-    'Personal_Life': 'Personal life matter unrelated to work'
-}
-
-
-ZERO_SHOT_LABELS_STAGE_2 = {
-    #### HR
-    "HR": {
-        "HR.Performance_Reviews": "Employee performance review, evaluation, or feedback discussion",
-        "HR.Internal_Disputes": "Internal workplace conflict, disagreement, or dispute between employee",
-    },
-
+## We are tagging in groups, thus we need to split up the labels into groups of 10 each
+ZERO_SHOT_LABEL_GROUPS = {
     #### Legal
+    # "Legal": {
+    #     "Legal.Litigation.Legal_Disputes": "Legal dispute, lawsuit, litigation, or court proceeding",
+    #     "Legal.Litigation.Notice_of_Claims": "Notice of claim, formal complaint, or legal demand letter",
+    #     "Legal.Litigation.Pre_Litigation": "Pre-litigation discussion, potential lawsuit, or threatened legal action",
+    #     "Legal.Compliance.SOX": "Sarbanes-Oxley compliance, financial controls, or audit requirements",
+    #     "Legal.Compliance.Safety": "Safety compliance, OSHA requirements, or workplace safety violations",
+    #     "Legal.Compliance.Reporting_Obligations": "Regulatory reporting obligation, compliance deadline, or mandatory disclosure",
+    #     "Legal.Privileged.To_From_Counsel": "Communication with attorney, legal counsel, or lawyer providing legal advice",
+    #     "Legal.Privileged.Referencing_Legal_Advice": "Discussion referencing attorney advice, legal counsel recommendation, or privileged communication",
+    # },
+
     "Legal": {
-        "Legal.Litigation.Legal_Disputes": "Legal dispute, lawsuit, litigation, or court proceeding",
-        "Legal.Litigation.Notice_of_Claims": "Notice of claim, formal complaint, or legal demand letter",
-        "Legal.Litigation.Pre_Litigation": "Pre-litigation discussion, potential lawsuit, or threatened legal action",
-        "Legal.Compliance.SOX": "Sarbanes-Oxley compliance, financial controls, or audit requirements",
-        "Legal.Compliance.Safety": "Safety compliance, OSHA requirements, or workplace safety violations",
-        "Legal.Compliance.Reporting_Obligations": "Regulatory reporting obligation, compliance deadline, or mandatory disclosure",
-        "Legal.Privileged.To_From_Counsel": "Communication with attorney, legal counsel, or lawyer providing legal advice",
-        "Legal.Privileged.Referencing_Legal_Advice": "Discussion referencing attorney advice, legal counsel recommendation, or privileged communication",
+        'Legal.All': 'Legal matter including lawsuits, compliance requirements, contracts, NDAs, attorney communications, or regulatory issues'
     },
 
-    #### Strategic
-    " Strategic": {
+    #### Strategic and HR
+    "Strategic_&_HR": {
         "Strategic.M&A": "Merger, acquisition, company purchase, or buyout discussion",
         "Strategic.Market_Expansion": "Market expansion plan, new geographic territory, or business growth strategy",
         "Strategic.Pricing_Models": "Pricing strategy, pricing model, or margin analysis",
         "Strategic.Customer_Acquisition": "Customer acquisition strategy, sales funnel, or user growth tactics",
         "Strategic.Competitive_Analysis": "Competitive analysis, competitor research, or market positioning study",
         "Strategic.Board_Communications": "Board of directors meeting, board-level decision, or executive leadership communication",
+        "HR.Performance_Reviews": "Employee performance review, evaluation, or feedback discussion",
+        "HR.Internal_Disputes": "Internal workplace conflict, disagreement, or dispute between employee",
     },
 
     #### Research and Development
@@ -280,14 +263,10 @@ ZERO_SHOT_LABELS_STAGE_2 = {
     },
 
     #### Operational
-    "Operational": {
+    "Operational_&_Personal": {
         "Operational.Project.Technical_Blockers": "Technical blocker, project impediment, or development dependency",
         "Operational.Project.Progress_Updates": "Project progress update, status report, or milestone achievement",
-    },
-
-    #### Personal Life
-    "Personal_Life": {
         "Personal_Life.Health_Disclosures": "Personal health issue, medical condition, or doctor appointment",
         "Personal_Life.Crisis_Content": "Personal crisis, family emergency, or sensitive life event"
-    }
+    },
 }

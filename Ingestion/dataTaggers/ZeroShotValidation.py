@@ -7,136 +7,99 @@ import pandas as pd
 # temporary import the testing examples list
 from ZeroShot import zero_shot_classify
 from ZeroShotTestExamples import zero_shot_test_examples
-from Schemas.taxonomy import ZERO_SHOT_LABELS_STAGE_1, ZERO_SHOT_LABELS_STAGE_2
+from Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS
 
-def evaluate_zero_shot_classifier_hierarchical(
-                    test_examples: List[Dict[str, Any]], 
-                    high_level_labels: Dict[str, str],
-                    low_level_labels: Dict[str, Dict[str, str]],
+def evaluate_zero_shot_classifier_parallel(
+                    test_examples: List[Dict[str, Any]],
+                    label_groups: Dict[str, Dict[str, str]],
                     zero_shot_classify_fn,
-                    top_level_threshold: float = 0.5,
-                    subcategory_threshold: float = 0.5,
+                    threshold: float = 0.5,
                     multi_label: bool = True
                                 ) -> Dict[str, Any]:
     """
-    Evaluate hierarchical zero-shot classifier on test examples.
-    
+    Evaluate parallel-group zero-shot classifier on test examples.
+
     Parameters:
     -----------
     test_examples : list of dict
         Each dict must have: {'text': str, 'true_labels': list of str}
-        Note: true_labels should be SUBCATEGORY names (e.g., 'Legal.Litigation.Legal_Disputes')
-    
-    high_level_labels : dict
-        Maps top-level category name -> description
-        Example: {'Legal': 'Legal matter, compliance, or contractual discussion'}
-    
-    low_level_labels : dict
-        Maps top-level name -> dict of subcategories
+        Note: true_labels should be subcategory names (e.g., 'Legal.Litigation.Legal_Disputes')
+
+    label_groups : dict
+        Maps group_name -> {category_name: description}
         Example: {
-            'Legal': {
-                'Legal.Litigation.Legal_Disputes': 'Legal dispute, lawsuit...',
-                'Legal.Litigation.Notice_of_Claims': 'Notice of claim...'
-            }
+            'legal': {'Legal.Litigation.Legal_Disputes': 'Legal dispute...', ...},
+            'financial_hr': {'HR.Performance_Reviews': '...', ...},
+            ...
         }
-    
+
     zero_shot_classify_fn : function
         Your zero_shot_classify function
-    
-    top_level_threshold : float
-        Threshold for Stage 1 (top-level detection)
-    
-    subcategory_threshold : float
-        Threshold for Stage 2 (subcategory detection)
-    
+
+    threshold : float
+        Confidence threshold for predictions
+
     multi_label : bool
         Whether to use multi-label mode
-    
+
     Returns:
     --------
     results : dict
         Comprehensive evaluation metrics
     """
-    
-    # Build flat list of all subcategories for tracking
+
+    # Build flat dict of all subcategories across all groups
     all_subcategories = {}
-    for top_cat, subcat_dict in low_level_labels.items():
-        all_subcategories.update(subcat_dict)
-    
+    for group_labels in label_groups.values():
+        all_subcategories.update(group_labels)
+
     # Initialize tracking structures
     all_predictions = []
     per_category_stats = {label: {'tp': 0, 'fp': 0, 'fn': 0, 'tn': 0} for label in all_subcategories.keys()}
     confusion_pairs = defaultdict(int)
-    
+
     start_time = time.time()
-    
-    print(f"Evaluating on {len(test_examples)} examples with hierarchical classification...")
-    print(f"Top-level categories: {len(high_level_labels)}")
+
+    print(f"Evaluating on {len(test_examples)} examples with parallel-group classification...")
+    print(f"Label groups: {list(label_groups.keys())}")
     print(f"Total subcategories: {len(all_subcategories)}")
-    
+
     # Process each test example
     for idx, example in enumerate(test_examples):
         if idx % 10 == 0 and idx > 0:
             print(f"Processed {idx}/{len(test_examples)} examples...")
-        
+
         text = example['text']
         true_labels = set(example['true_labels'])
-        
+
         try:
-            # === STAGE 1: Top-level classification ===
-            stage1_candidate_labels = list(high_level_labels.values())
-            stage1_result = zero_shot_classify_fn(
-                text,
-                stage1_candidate_labels,
-                multi_label=multi_label
-            )
-            
-            # Map descriptions back to top-level category names
-            detected_top_level = []
-            stage1_scores = {}
-            
-            for label_desc, score in zip(stage1_result['labels'], stage1_result['scores']):
-                for cat_name, cat_desc in high_level_labels.items():
-                    if cat_desc == label_desc:
-                        stage1_scores[cat_name] = score
-                        if score >= top_level_threshold:
-                            detected_top_level.append(cat_name)
-                        break
-            
-            # === STAGE 2: Subcategory classification ===
+            # Run all groups in parallel - no hierarchical gating
             predicted_subcategories = set()
             all_subcat_scores = {}
-            
-            for top_cat in detected_top_level:
-                # Check if this top-level has subcategories
-                if top_cat not in low_level_labels:
-                    continue
-                
-                # Get subcategories for this top-level
-                subcat_dict = low_level_labels[top_cat]
-                stage2_candidate_labels = list(subcat_dict.values())
-                
-                # Run zero-shot on subcategories
-                stage2_result = zero_shot_classify_fn(
+
+            for _, group_labels in label_groups.items():
+                candidate_labels = list(group_labels.values())
+
+                result = zero_shot_classify_fn(
                     text,
-                    stage2_candidate_labels,
+                    candidate_labels,
                     multi_label=multi_label
                 )
-                
-                # Map descriptions back to subcategory names
-                for label_desc, score in zip(stage2_result['labels'], stage2_result['scores']):
-                    for subcat_name, subcat_desc in subcat_dict.items():
-                        if subcat_desc == label_desc:
-                            all_subcat_scores[subcat_name] = score
-                            if score >= subcategory_threshold:
-                                predicted_subcategories.add(subcat_name)
+
+                # Map descriptions back to category names and apply threshold
+                for label_desc, score in zip(result['labels'], result['scores']):
+                    for cat_name, cat_desc in group_labels.items():
+                        if cat_desc == label_desc:
+                            all_subcat_scores[cat_name] = score
+                            if score >= threshold:
+                                predicted_subcategories.add(cat_name)
                             break
-            
+
             # Calculate correctness
             true_positives = predicted_subcategories & true_labels
             false_positives = predicted_subcategories - true_labels
             false_negatives = true_labels - predicted_subcategories
-            
+
             # Update per-category statistics
             for label in all_subcategories.keys():
                 if label in true_positives:
@@ -147,20 +110,18 @@ def evaluate_zero_shot_classifier_hierarchical(
                     per_category_stats[label]['fn'] += 1
                 if label not in predicted_subcategories and label not in true_labels:
                     per_category_stats[label]['tn'] += 1
-            
+
             # Track confusion pairs
             for fp_label in false_positives:
                 for true_label in true_labels:
                     confusion_pairs[(fp_label, true_label)] += 1
-            
+
             # Store detailed prediction
             prediction_record = {
                 'example_id': idx,
                 'text': text[:200] + '...' if len(text) > 200 else text,
                 'true_labels': sorted(list(true_labels)),
                 'predicted_labels': sorted(list(predicted_subcategories)),
-                'stage1_detected': detected_top_level,
-                'stage1_scores': stage1_scores,
                 'all_scores': all_subcat_scores,
                 'correct': (predicted_subcategories == true_labels),
                 'true_positives': sorted(list(true_positives)),
@@ -168,7 +129,7 @@ def evaluate_zero_shot_classifier_hierarchical(
                 'false_negatives': sorted(list(false_negatives))
             }
             all_predictions.append(prediction_record)
-            
+
         except Exception as e:
             print(f"Error processing example {idx}: {e}")
             all_predictions.append({
@@ -176,36 +137,36 @@ def evaluate_zero_shot_classifier_hierarchical(
                 'text': text,
                 'error': str(e)
             })
-    
+
     processing_time = time.time() - start_time
-    
+
     print(f"\nProcessing complete! Time: {processing_time:.2f}s")
     print("Calculating metrics...\n")
-    
+
     # Calculate overall metrics
     total_tp = sum(stats['tp'] for stats in per_category_stats.values())
     total_fp = sum(stats['fp'] for stats in per_category_stats.values())
     total_fn = sum(stats['fn'] for stats in per_category_stats.values())
-    
+
     micro_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0
     micro_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0
     micro_f1 = 2 * micro_precision * micro_recall / (micro_precision + micro_recall) if (micro_precision + micro_recall) > 0 else 0
-    
+
     # Calculate per-category metrics
     per_category_metrics = {}
     precisions = []
     recalls = []
     f1s = []
-    
+
     for label, stats in per_category_stats.items():
         tp, fp, fn = stats['tp'], stats['fp'], stats['fn']
-        
+
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0
         recall = tp / (tp + fn) if (tp + fn) > 0 else 0
         f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
-        
+
         support = tp + fn
-        
+
         per_category_metrics[label] = {
             'precision': precision,
             'recall': recall,
@@ -215,20 +176,20 @@ def evaluate_zero_shot_classifier_hierarchical(
             'fp': fp,
             'fn': fn
         }
-        
+
         if support > 0:
             precisions.append(precision)
             recalls.append(recall)
             f1s.append(f1)
-    
+
     macro_precision = np.mean(precisions) if precisions else 0
     macro_recall = np.mean(recalls) if recalls else 0
     macro_f1 = np.mean(f1s) if f1s else 0
-    
+
     # Calculate exact match accuracy
     exact_matches = sum(1 for pred in all_predictions if pred.get('correct', False))
     exact_match_accuracy = exact_matches / len(test_examples) if test_examples else 0
-    
+
     # Calculate hamming loss
     hamming_losses = []
     for pred in all_predictions:
@@ -237,10 +198,10 @@ def evaluate_zero_shot_classifier_hierarchical(
             errors = len(pred['false_positives']) + len(pred['false_negatives'])
             hamming_losses.append(errors / total_labels)
     hamming_loss = np.mean(hamming_losses) if hamming_losses else 0
-    
+
     # Identify confusion patterns
     most_confused_pairs = sorted(confusion_pairs.items(), key=lambda x: x[1], reverse=True)[:10]
-    
+
     # Identify frequent false positives and false negatives
     fp_counts = defaultdict(int)
     fn_counts = defaultdict(int)
@@ -250,97 +211,73 @@ def evaluate_zero_shot_classifier_hierarchical(
                 fp_counts[fp] += 1
             for fn in pred['false_negatives']:
                 fn_counts[fn] += 1
-    
+
     frequent_false_positives = sorted(fp_counts.items(), key=lambda x: x[1], reverse=True)[:10]
     frequent_false_negatives = sorted(fn_counts.items(), key=lambda x: x[1], reverse=True)[:10]
-    
+
     # Identify failed examples
     low_confidence_correct = []
     high_confidence_wrong = []
     missed_completely = []
-    
+
     for pred in all_predictions:
         if 'error' in pred:
             continue
-            
+
         max_score = max(pred['all_scores'].values()) if pred['all_scores'] else 0
-        
+
         if pred['correct'] and max_score < 0.6:
             low_confidence_correct.append(pred)
         elif not pred['correct'] and max_score > 0.8:
             high_confidence_wrong.append(pred)
         elif len(pred['predicted_labels']) == 0 and len(pred['true_labels']) > 0:
             missed_completely.append(pred)
-    
-    # Threshold analysis for subcategory threshold
+
+    # Threshold analysis
     threshold_values = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     threshold_analysis = {}
-    
+
     for thresh in threshold_values:
         thresh_tp = 0
         thresh_fp = 0
         thresh_fn = 0
-        
+
         for pred in all_predictions:
             if 'error' in pred:
                 continue
-                
-            # Reapply predictions with this threshold
+
             predicted_at_thresh = set([
-                label for label, score in pred['all_scores'].items() 
+                label for label, score in pred['all_scores'].items()
                 if score >= thresh
             ])
             true_labels_set = set(pred['true_labels'])
-            
+
             thresh_tp += len(predicted_at_thresh & true_labels_set)
             thresh_fp += len(predicted_at_thresh - true_labels_set)
             thresh_fn += len(true_labels_set - predicted_at_thresh)
-        
+
         thresh_prec = thresh_tp / (thresh_tp + thresh_fp) if (thresh_tp + thresh_fp) > 0 else 0
         thresh_rec = thresh_tp / (thresh_tp + thresh_fn) if (thresh_tp + thresh_fn) > 0 else 0
         thresh_f1 = 2 * thresh_prec * thresh_rec / (thresh_prec + thresh_rec) if (thresh_prec + thresh_rec) > 0 else 0
-        
+
         threshold_analysis[thresh] = {
             'precision': thresh_prec,
             'recall': thresh_rec,
             'f1': thresh_f1
         }
-    
+
     # Calculate summary statistics
     avg_true_labels = np.mean([len(pred['true_labels']) for pred in all_predictions if 'error' not in pred])
     avg_pred_labels = np.mean([len(pred['predicted_labels']) for pred in all_predictions if 'error' not in pred])
     zero_predictions = sum(1 for pred in all_predictions if 'error' not in pred and len(pred['predicted_labels']) == 0)
     perfect_matches = sum(1 for pred in all_predictions if pred.get('correct', False))
-    
+
     # Categories never predicted
     never_predicted = [label for label, stats in per_category_stats.items() if stats['tp'] + stats['fp'] == 0]
-    
+
     # Categories never in test set
     never_in_test = [label for label, stats in per_category_stats.items() if stats['tp'] + stats['fn'] == 0]
-    
-    # Stage 1 accuracy analysis
-    stage1_correct = 0
-    stage1_total = 0
-    for pred in all_predictions:
-        if 'error' in pred:
-            continue
-        
-        # Determine which top-level categories should have been detected
-        true_top_level = set()
-        for true_subcat in pred['true_labels']:
-            for top_cat, subcat_dict in low_level_labels.items():
-                if true_subcat in subcat_dict:
-                    true_top_level.add(top_cat)
-                    break
-        
-        detected_top_level = set(pred.get('stage1_detected', []))
-        
-        if true_top_level == detected_top_level:
-            stage1_correct += 1
-        stage1_total += 1
-    
-    stage1_accuracy = stage1_correct / stage1_total if stage1_total > 0 else 0
-    
+
     # Build results dictionary
     results = {
         'overall_metrics': {
@@ -352,7 +289,6 @@ def evaluate_zero_shot_classifier_hierarchical(
             'macro_f1': macro_f1,
             'exact_match_accuracy': exact_match_accuracy,
             'hamming_loss': hamming_loss,
-            'stage1_accuracy': stage1_accuracy
         },
         'per_category_metrics': per_category_metrics,
         'confusion_analysis': {
@@ -379,7 +315,7 @@ def evaluate_zero_shot_classifier_hierarchical(
             'avg_time_per_example': processing_time / len(test_examples) if test_examples else 0
         }
     }
-    
+
     return results
 
 
@@ -387,16 +323,15 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
     """
     Print a human-readable evaluation report.
     """
-    
+
     print("=" * 80)
-    print("HIERARCHICAL ZERO-SHOT CLASSIFIER EVALUATION REPORT")
+    print("PARALLEL-GROUP ZERO-SHOT CLASSIFIER EVALUATION REPORT")
     print("=" * 80)
-    
+
     # Overall metrics
-    print("\n📊 OVERALL METRICS")
+    print("\nOVERALL METRICS")
     print("-" * 80)
     om = results['overall_metrics']
-    print(f"Stage 1 (Top-Level) Accuracy: {om['stage1_accuracy']:.3f}")
     print(f"Micro Precision:              {om['micro_precision']:.3f}")
     print(f"Micro Recall:                 {om['micro_recall']:.3f}")
     print(f"Micro F1:                     {om['micro_f1']:.3f}")
@@ -405,9 +340,9 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
     print(f"Macro F1:                     {om['macro_f1']:.3f}")
     print(f"Exact Match Accuracy:         {om['exact_match_accuracy']:.3f}")
     print(f"Hamming Loss:                 {om['hamming_loss']:.3f}")
-    
+
     # Summary statistics
-    print("\n📈 SUMMARY STATISTICS")
+    print("\nSUMMARY STATISTICS")
     print("-" * 80)
     ss = results['summary_statistics']
     print(f"Total Examples:                    {ss['total_examples']}")
@@ -417,97 +352,95 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
     print(f"Examples with Perfect Match:       {ss['examples_with_perfect_match']}")
     print(f"Processing Time:                   {ss['processing_time_seconds']:.2f}s")
     print(f"Avg Time per Example:              {ss['avg_time_per_example']:.3f}s")
-    
+
     # Top performing categories
-    print(f"\n✅ TOP {top_n} PERFORMING CATEGORIES (by F1)")
+    print(f"\nTOP {top_n} PERFORMING CATEGORIES (by F1)")
     print("-" * 80)
     sorted_categories = sorted(
-        results['per_category_metrics'].items(), 
-        key=lambda x: x[1]['f1'], 
+        results['per_category_metrics'].items(),
+        key=lambda x: x[1]['f1'],
         reverse=True
     )
-    
+
     print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Support':<8}")
     print("-" * 80)
     for cat, metrics in sorted_categories[:top_n]:
         if metrics['support'] > 0:
             print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['support']:<8}")
-    
+
     # Bottom performing categories
-    print(f"\n❌ BOTTOM {top_n} PERFORMING CATEGORIES (by F1)")
+    print(f"\nBOTTOM {top_n} PERFORMING CATEGORIES (by F1)")
     print("-" * 80)
     print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Support':<8}")
     print("-" * 80)
     bottom_categories = [x for x in reversed(sorted_categories) if x[1]['support'] > 0][:top_n]
     for cat, metrics in bottom_categories:
         print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['support']:<8}")
-    
+
     # Categories never predicted
     if ss['categories_never_predicted']:
-        print(f"\n⚠️  CATEGORIES NEVER PREDICTED")
+        print(f"\nCATEGORIES NEVER PREDICTED")
         print("-" * 80)
         for cat in ss['categories_never_predicted'][:10]:
             print(f"  - {cat}")
-    
+
     # Confusion analysis
-    print(f"\n🔀 MOST CONFUSED CATEGORY PAIRS")
+    print(f"\nMOST CONFUSED CATEGORY PAIRS")
     print("-" * 80)
     print(f"{'Predicted':<40} {'Should Be':<40} {'Count':<8}")
     print("-" * 80)
     for (pred_cat, true_cat), count in results['confusion_analysis']['most_confused_pairs'][:5]:
         print(f"{pred_cat:<40} {true_cat:<40} {count:<8}")
-    
+
     # Frequent false positives
-    print(f"\n🚫 MOST FREQUENT FALSE POSITIVES")
+    print(f"\nMOST FREQUENT FALSE POSITIVES")
     print("-" * 80)
     for cat, count in results['confusion_analysis']['frequent_false_positives'][:5]:
         print(f"  {cat:<50} ({count} times)")
-    
+
     # Frequent false negatives
-    print(f"\n⚠️  MOST FREQUENT FALSE NEGATIVES (Missed)")
+    print(f"\nMOST FREQUENT FALSE NEGATIVES (Missed)")
     print("-" * 80)
     for cat, count in results['confusion_analysis']['frequent_false_negatives'][:5]:
         print(f"  {cat:<50} ({count} times)")
-    
+
     # Threshold analysis
-    print(f"\n🎯 THRESHOLD ANALYSIS (Subcategory Threshold)")
+    print(f"\nTHRESHOLD ANALYSIS")
     print("-" * 80)
     print(f"{'Threshold':<12} {'Precision':<12} {'Recall':<12} {'F1':<12}")
     print("-" * 80)
     for thresh, metrics in sorted(results['threshold_analysis'].items()):
         print(f"{thresh:<12.1f} {metrics['precision']:<12.3f} {metrics['recall']:<12.3f} {metrics['f1']:<12.3f}")
-    
+
     # Recommendation for best threshold
     best_thresh = max(results['threshold_analysis'].items(), key=lambda x: x[1]['f1'])
-    print(f"\n💡 Recommended subcategory threshold: {best_thresh[0]} (F1: {best_thresh[1]['f1']:.3f})")
-    
+    print(f"\nRecommended threshold: {best_thresh[0]} (F1: {best_thresh[1]['f1']:.3f})")
+
     print("\n" + "=" * 80)
 
 
 def export_results_to_csv(results: Dict[str, Any], output_prefix: str = "zero_shot_eval"):
     """Export evaluation results to CSV files."""
-    
+
     per_cat_df = pd.DataFrame(results['per_category_metrics']).T
     per_cat_df.to_csv(f"{output_prefix}_per_category_metrics.csv")
-    print(f"✅ Saved per-category metrics to {output_prefix}_per_category_metrics.csv")
-    
+    print(f"Saved per-category metrics to {output_prefix}_per_category_metrics.csv")
+
     predictions_df = pd.DataFrame(results['predictions'])
     predictions_df.to_csv(f"{output_prefix}_predictions.csv", index=False)
-    print(f"✅ Saved predictions to {output_prefix}_predictions.csv")
-    
+    print(f"Saved predictions to {output_prefix}_predictions.csv")
+
     threshold_df = pd.DataFrame(results['threshold_analysis']).T
     threshold_df.to_csv(f"{output_prefix}_threshold_analysis.csv")
-    print(f"✅ Saved threshold analysis to {output_prefix}_threshold_analysis.csv")
+    print(f"Saved threshold analysis to {output_prefix}_threshold_analysis.csv")
 
 
 # ===== RUN EVALUATION =====
-results = evaluate_zero_shot_classifier_hierarchical(
+results = evaluate_zero_shot_classifier_parallel(
     test_examples=zero_shot_test_examples,
-    high_level_labels=ZERO_SHOT_LABELS_STAGE_1,
-    low_level_labels=ZERO_SHOT_LABELS_STAGE_2,
+    label_groups=ZERO_SHOT_LABEL_GROUPS,
     zero_shot_classify_fn=zero_shot_classify,
-    top_level_threshold=0.5,
-    subcategory_threshold=0.5,
+    threshold=0.5,
     multi_label=True
 )
 
@@ -515,4 +448,4 @@ results = evaluate_zero_shot_classifier_hierarchical(
 print_evaluation_report(results, top_n=10)
 
 # Optionally export to CSV
-# export_results_to_csv(results, output_prefix="hierarchical_zero_shot_eval")
+# export_results_to_csv(results, output_prefix="parallel_zero_shot_eval")
