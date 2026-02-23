@@ -7,7 +7,7 @@ ollama serve
 
 What you'll see: Messages about the server starting Leave it running! Don't close this window
 
-# Terminal 2: Backend (The Middleman) 🔧
+# Terminal 2: Backend (The Middleman)
 What it does: Receives files from your website, detects PII, talks to Ollama, sends results back.  
 How to start:  
 bash  
@@ -25,7 +25,7 @@ cd ~/clairos/pii-demo-project
 npm run dev  
 What you'll see: "Local: http://localhost:5173/" Leave it running! Don't close this window
 
-# Step 4: Open Your Browser 🌍
+# Step 4: Open Your Browser
 Go to: http://localhost:5173/  
 Now you can upload files and ask questions!
 
