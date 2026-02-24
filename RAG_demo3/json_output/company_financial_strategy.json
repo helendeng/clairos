@@ -1,0 +1,517 @@
+{
+  "metadata": {
+    "subdomain": "Company Financial Strategy",
+    "domain": "Financial",
+    "chunk_count": 36,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-24T12:43:08.906765",
+    "export_date": "2026-02-24",
+    "export_time": "12:43:08"
+  },
+  "chunks": [
+    {
+      "chunk_id": "007",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Here sales numbers from Reagan: As you can see his units sold at a variety of prices per square foot. The 1308/1308 model seems to have the most data and looks most similiar to the units you are selling. At 2.7 MM, my bid is .70/sf higher than his units under construction. I am having a hard time justifying paying much more with competition on the way. The price I am bidding is higher than any deals actually done to date.",
+      "source": {
+        "email_id": "27",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Tue, 19 Sep 2000 07:26:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "004",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Several new studies we have looked at show that the rents for our duplexes and for these new units are going to be significantly higher, roughly $1.25 per square foot if leased for the entire unit on a 12-month lease and $1.30-$1.40 psf if leased on a 12-month term, but by individual room.",
+      "source": {
+        "email_id": "18",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate",
+        "timestamp": "Tue, 3 Oct 2000 09:30:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "016",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "USE OF INITIAL INVESTMENT The initial investment is used for land deposit, engineering & architectural design, soils tests, surveys, filing fees, legal fees for organization and condominium association formation, and appraisals. Unlike many real estate investment programs, none of the funds are used for fees to Creekside Builders, LLC. These professional expenses will be incurred over the estimated 6 month design and approval period.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "020",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Phasing works as follows. If the first phase was say 40 units, the total lot improvement cost might average $31,000 per lot. Of this, probably $13,000 would be for improvements and $19,000 for the land cost. The land loan for undeveloped lots would be 70% of the appraised raw lot value, which I would estimate as $10,000 per lot for a loan value of $7,000 per lot. Then the loan value for each improved lot would be $15,000 per lot. This would give you a total loan of $992,000, total cost of $1,232,645 for equity required of $241,000.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "024",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "These fees are the only monies to Creekside, Larry Lewter or myself prior to calculation of profit, except for a) direct reimbursement for partnership expenses and b) direct payment to CB for any subcontractor costs that it has to perform. For example, if CB cannot find a good trim carpenter sub, or cannot find enough trim carpenters, etc., and it decides to undertake this function, it will charge the partnership the same fee it was able to obtain from third parties and will disclose those cases to the partnership.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "017",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "EARLY LAND COSTS The $4,000 per month costs listed in the cash flow as part of land cost represent the extension fees due to the seller for up to 4 months of extensions on closing. As an alternative, we can close into a land loan at probably 70% of appraised value. With a land value equal to the purchase price of $680,000 this would mean a land loan of $476,000 with estimated monthly interest payments of $3,966, given a 10% annual interest rate, plus approximately 1.25% of the loan amount for closing costs and loan fees.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "015",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "All loans for residential construction, that are intended for re-sale, are full recourse loans. If we are pursuing multifamily rental developments, the construction loans are still full recourse but the mortgage can often be non-recourse.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "021",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "CONSTRUCTION LOANS There are three types of construction loans. First, is a speculative (spec) loan that is taken out prior to any pre-sales activity. Second, is a construction loan for a pre-sold unit, but the loan remains in the builder/developers name. Third, is a pre-sold unit with the construction loan in the name of the buyer. We expect to have up to 8 spec loans to start the project and expect all other loans to be pre-sold units with loans in the name of the builder/developer.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "038",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "I wish. As to your complaint about my failure to tip you off, there were two primary reasons: (1) if I told you and got caught I'd go to prison, and, more importantly, (2) I had no clue. its better to be lucky than good! Check out ENE over the last 30 days. I'm a few more weeks away from retirement. Do you own any?",
+      "source": {
+        "email_id": "50",
+        "from": "drew.fossum@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: ENE",
+        "timestamp": "Fri, 21 Jan 2000 07:31:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "001",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "We have the opportunity to sell customer kWh 's using microturbine or sell them turbines themselves. kWh deal must have limited/ no risk forward gas price to make deal work. We are proposing installing 180 - 240 units across a large number of stores (60-100) in San Diego. For 6-8 hours a day Microturbine run time: Gas requirement for 180 microturbines 227 - 302 MMcf per year Gas requirement for 240 microturbines 302 - 403 MMcf per year. Gas will likely be consumed from May through September, during peak electric period. Gas price required: Burnertip price behind (LDC) San Diego Gas & Electric Need detail breakout of commodity and transport cost (firm or interruptible).",
+      "source": {
+        "email_id": "10",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FW: fixed forward or other Collar floor gas price terms",
+        "timestamp": "Mon, 16 Oct 2000 06:44:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "031",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The Lone Star gas line easement in the lower portion of the property is not expected to impact sales significantly. Other projects have been quite successful with identical relationships to this pipeline, such as the adjoining single family residential and a project at St. Edwards University.",
+      "source": {
+        "email_id": "35",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate Proforma-Phillip Allen.xls",
+        "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "009",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "What is up with Burnet?",
+      "source": {
+        "email_id": "28",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Tue, 19 Sep 2000 03:15:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "036",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The SEC gave its approval to the merger on an important condition. Under the laws of the Public Utilities Holding Company Act of 1935 (PUHCA), the SEC has required NiSource to divest of IWC Resources, its water operations subsidiary based in Indianapolis. Under PUHCA, utility holding companies are required to divest operations that are not integral to their primary operations. The divestiture must take place within three years to comply with U.S. legislation.",
+      "source": {
+        "email_id": "38",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "NiSource and Columbia Energy Group Complete Merger",
+        "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "018",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "EQUITY AT IMPROVEMENT LOAN Once the site plan is approved by the City of Austin, the City will require the development entity to post funds for fiscal improvements, referred to as the fiscals. This cost represents a bond for the completion of improvements that COA considers vital and these funds are released once the improvements have been completed and accepted by COA. This release will be for 90% of the cost with the remaining 10% released one year after completion.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "019",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The lot improvement loan is typically 75% of the appraised value of a finished lot, which I suspect will be at least $20,000 and potentially as high as $25,000. This would produce a loan amount of $15,000 on $20,000 per lot. With estimated per lot improvement costs of $9,000, 'fiscals' at $2,000 and the land cost at $8,000, total improved lot cost is $19,000 which means $0 to $4,000 per lot in total equity.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "002",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "35 million is fine",
+      "source": {
+        "email_id": "15",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: 2001 Margin Plan",
+        "timestamp": "Thu, 5 Oct 2000 05:55:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "025",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Finally, CB will receive a fee for the use of any of its equipment if it is used in lieu of leasing equipment from others. At present CB does not own any significant equipment, but it is considering the purchase of a sky track to facilitate and speed up framing, cornice, roofing and drywall spreading.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "003",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The property across the street from the Sagewood units in San Marcos is for sale and approved for 134 units. The land is selling for $2.50 per square foot as it is one of only two remaining approved multifamily parcels in West San Marcos, which now has a moratorium on development.",
+      "source": {
+        "email_id": "18",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate",
+        "timestamp": "Tue, 3 Oct 2000 09:30:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "034",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "NiSource Inc. and Columbia Energy Group received approval for their merger from the U.S. Securities and Exchange Commission (SEC) and are expected to close their transaction today. The combined company will continue to trade on the New York Stock Exchange as NiSource (NYSE: NI). The merger creates a company that could gain a strong lock on the natural-gas market in a corridor stretching from Texas to Maine.",
+      "source": {
+        "email_id": "38",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "NiSource and Columbia Energy Group Complete Merger",
+        "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "005",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "If this project is of serious interest to you, please let me know as there is a very, very short window of opportunity. The equity requirement is not yet known, but it would be likely to be $300,000 to secure the land.",
+      "source": {
+        "email_id": "18",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate",
+        "timestamp": "Tue, 3 Oct 2000 09:30:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "027",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "INVESTOR INPUT We are glad to have the investor's input on design and materials. As always the question will be who has final say if there is disagreement, but in my experience I have always been able to reach consensus. As you, and I presume Keith, want to be involved to learn as much as possible we would make every effort to be accommodating.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "008",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "I will follow up with an email and phone call about Cherry Creek. I am sure Deborah Yates let you know that the bid was rejected on the De Ville property.",
+      "source": {
+        "email_id": "27",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Tue, 19 Sep 2000 07:26:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "035",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Under the terms of the merger agreement, NiSource is offering 3.04 shares for each Columbia common share. CEG shareholders can elect to receive New NiSource stock, or receive a combination of $70 in cash plus $2.60 in securities. Just today, NiSource revised its estimate of the number of CEG shares electing to receive NiSource stock upward to approximately 77 percent from its original estimate of 60 percent.",
+      "source": {
+        "email_id": "38",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "NiSource and Columbia Energy Group Complete Merger",
+        "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "026",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "REPORTING We are more than willing to provide reports to track expenses vs. plan. What did you have in mind? I would like to use some form of internet based reporting.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "030",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The project does have approved zoning and will only require a site plan. As it is in the Smart Growth Corridor area designated by the City of Austin for preferred development, this will be fast tracked and should be complete in less than 6 months. Additionally, many of the current and more severe water treatment ordinances have been waived.",
+      "source": {
+        "email_id": "35",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate Proforma-Phillip Allen.xls",
+        "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "011",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "I checked my records and I mailed check #1178 for the normal amount on August 28th. I mailed it to 4303 Pate Rd. #29, College Station, TX 77845. I will go ahead and mail you another check. If the first one shows up you can treat the 2nd as payment for October.",
+      "source": {
+        "email_id": "31",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: Sept 1 Payment",
+        "timestamp": "Tue, 12 Sep 2000 06:42:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "014",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "LAND OWNERSHIP & LOANS The property would be purchased in the name of the limited partnership and any land loans, land improvements loans and construction loans would be in the name of the limited partnership. Each of the individual investors and all of the principals in Creekside would also personally guarantee the loans. If the investor(s) do not sign on the loans, this generally means that a larger amount of cash is required and the investor's share of profits is reduced.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "023",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "DISBURSEMENTS Disbursements will be handled by the General Partner to cover current and near term third party costs, then to necessary reserves, then to priority payments and then to the partners per the agreement. The General Partner will contract with Creekside Builders, LLC to construct the units and the fee to CB will include a construction management and overhead fee equal to 15% of the direct hard cost excluding land, financing and sales costs.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "022",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Spec loans will be for 70% to 75% of value and construction loans for pre-sold units, if the construction loan is from the mortgage lender, will be from 80% to 95% of value.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "010",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "I need to see the site plan for Burnet. Remember I must get written approval from Brenda Key Stone before I can sell this property and she has concerns about the way the property will be subdivided. I would also like to review the closing statements as soon as possible.",
+      "source": {
+        "email_id": "29",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: burnet",
+        "timestamp": "Mon, 18 Sep 2000 02:34:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "029",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Enclosed is the preliminary proforma for the Westgate property is Austin that we told you about. As you can tell from the proforma this project should produce a truly exceptional return of over 40% per year over 3 years. This is especially attractive when the project is in a market as strong as Austin and we are introducing new product that in a very low price range for this market. This is the best project in terms of risk and reward that we have uncovered to date in the Austin market.",
+      "source": {
+        "email_id": "35",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate Proforma-Phillip Allen.xls",
+        "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "032",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "The seller accepted our offer Thursday evening with a price of $680,000 and an extended escrow. This will enable us to probably obtain an approved site plan before closing on the contract, which will mean that we can close into an A&D Loan rather than into a land loan and then an improvement loan.",
+      "source": {
+        "email_id": "35",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate Proforma-Phillip Allen.xls",
+        "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "012",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "I know your concerns about the site plan. I will not proceed without getting the details and getting your approval. I will find that amortization schedule and send it soon.",
+      "source": {
+        "email_id": "31",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: Sept 1 Payment",
+        "timestamp": "Tue, 12 Sep 2000 06:42:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "006",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Please use the second check as the October payment. If you have already tossed it, let me know so I can mail you another.",
+      "source": {
+        "email_id": "20",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Tue, 3 Oct 2000 09:13:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "037",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Please see attached file. The margins are lower as compared to last weeks because of a lower fuel index price and lower volumes do to the trail derailment.",
+      "source": {
+        "email_id": "40",
+        "from": "jeanette.doll@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "TW Weekly 10/31/00",
+        "timestamp": "Thu, 2 Nov 2000 05:25:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "033",
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "This analysis shows your investment at $700,000 for a 50% interest in the profits of the project. As we discussed in San Marcos, we can also discuss having you invest only in the lots, sell the lots to the construction entity with your profit in the lot. I believe this would facilitate the use of a 1031 Exchange of the proceeds from this deal into another project that is a rental deal or at least into the land for a rental project that would then be the equity for that project.",
+      "source": {
+        "email_id": "35",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter",
+        "bcc": "",
+        "subject": "Westgate Proforma-Phillip Allen.xls",
+        "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+      }
+    }
+  ]
+}

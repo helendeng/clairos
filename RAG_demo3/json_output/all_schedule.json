@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "subdomain": "All_Schedule",
+    "domain": "Scheduling",
+    "chunk_count": 13,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-24T12:43:08.905239",
+    "export_date": "2026-02-24",
+    "export_time": "12:43:08"
+  },
+  "chunks": [
+    {
+      "chunk_id": "008",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Above meeting is scheduled for Monday, November 6, at 3:00 pm in the Video Conference Room (49C2 - Houston).",
+      "source": {
+        "email_id": "41",
+        "from": "martha.benner@enron.com",
+        "cc": "deb.cappiello@enron.com, teresa@travelpark.com, audrey.robertson@enron.com, sharon.solon@enron.com, linda.wehring@enron.com",
+        "bcc": "",
+        "subject": "Virtual Power Meeting",
+        "timestamp": "Wed, 1 Nov 2000 05:24:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "007",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "I scheduled a meeting with Jean Mrha tomorrow at 3:30",
+      "source": {
+        "email_id": "25",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Wed, 6 Sep 2000 06:04:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "006",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "What are your normal work hours? From: 7:00 AM To: 5:00 PM Will you be out of the office in the near future for vacation, leave, etc? NO",
+      "source": {
+        "email_id": "23",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: 2- SURVEY - PHILLIP ALLEN",
+        "timestamp": "Wed, 2 May 2001 10:27:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "004",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Please plan to attend the below Meeting: Topic: Var, Reporting and Resources Meeting Date: Wednesday, October 11th Time: 2:30 - 3:30 Location: EB30C1",
+      "source": {
+        "email_id": "16",
+        "from": "phillip.allen@enron.com",
+        "cc": "Rita Hennessy/NA/Enron@Enron, Laura Harder/Corp/Enron@Enron, Kimberly Brown/HOU/ECT@ECT, Araceli Romero/NA/Enron@Enron, Kimberly Hillis/HOU/ECT@ect",
+        "bcc": "",
+        "subject": "Var, Reporting and Resources Meeting",
+        "timestamp": "Wed, 4 Oct 2000 09:23:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "011",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Paul Bieniawski's phone number is 713-345-8641. Go ahead and give him a call just as a courtesy to let him what you guys are looking at at Bushton and let him know I put you up to it. If he has some useful off the cuff insights, great. If not, that's fine also. I don't expect you to send him any material or get him deeply involved--just give him a heads up.",
+      "source": {
+        "email_id": "47",
+        "from": "drew.fossum@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Paul B",
+        "timestamp": "Wed, 1 Nov 2000 07:08:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "002",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "How about either next Tuesday or Thursday?",
+      "source": {
+        "email_id": "6",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: Hello",
+        "timestamp": "Thu, 31 Aug 2000 04:17:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "001",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Let's shoot for Tuesday at 11:45.",
+      "source": {
+        "email_id": "5",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: Hello",
+        "timestamp": "Thu, 31 Aug 2000 05:07:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "005",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "There will be a meeting on Tuesday, Oct. 10th at 4:00pm in EB3270 regarding Storage Strategies in the West. Please mark your calendars.",
+      "source": {
+        "email_id": "19",
+        "from": "phillip.allen@enron.com",
+        "cc": "Jean Mrha/NA/Enron@Enron, Monica Jackson/Corp/Enron@ENRON",
+        "bcc": "",
+        "subject": "Meeting re: Storage Strategies in the West",
+        "timestamp": "Tue, 3 Oct 2000 09:15:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "013",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "EEI's State Restructuring Service is proud to present an Internet E-Forum to investigate whether the problems of California could occur in other parts of the country. The California restructuring earthquake is marked by the doubling of some electric bills, multi-billion dollar utility under collections, electric reserve margin problems, and consumer outrage. November 17, 2000 1 p.m. ET. Registration Cut-off and Cancellation Policy: All registrations must be received by November 15, 2000.",
+      "source": {
+        "email_id": "58",
+        "from": "lmiller@eei.org",
+        "cc": "",
+        "bcc": "",
+        "subject": "Will California's Restructuring Tremors Be Felt in Your Region?",
+        "timestamp": "Thu, 2 Nov 2000 05:25:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "010",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "I will be out of the office all day tomorrow, so won't be able to participate.",
+      "source": {
+        "email_id": "43",
+        "from": "bob.chandler@enron.com",
+        "cc": "drew.fossum@enron.com, dan.fancler@enron.com, martha.benner@enron.com",
+        "bcc": "",
+        "subject": "Re: Telephone Conference Call- Thursday 11-02-00, 9:00 am - Trading Policy",
+        "timestamp": "Wed, 1 Nov 2000 05:54:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "012",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "The above meeting has been rescheduled for Thursday, November 9, at 9:00 AM in the video conference room (49C2 in Houston).",
+      "source": {
+        "email_id": "55",
+        "from": "martha.benner@enron.com",
+        "cc": "deb.cappiello@enron.com, audrey.robertson@enron.com, sharon.solon@enron.com, linda.wehring@enron.com",
+        "bcc": "",
+        "subject": "Virtual Power Meeting",
+        "timestamp": "Thu, 2 Nov 2000 00:26:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "003",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "any morning between 10 and 11:30",
+      "source": {
+        "email_id": "8",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: PRC review - phone calls",
+        "timestamp": "Fri, 14 Jul 2000 06:59:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "009",
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "text": "Tony will come to the 42nd floor, whichever of your offices you wish to have the conference call take place in. The subject wil be ET&S Trading Policy. Drew - Tony, Bob and Dan will call you at 9:00 a.m.",
+      "source": {
+        "email_id": "42",
+        "from": "janet.cones@enron.com",
+        "cc": "martha.benner@enron.com",
+        "bcc": "",
+        "subject": "Telephone Conference Call- Thursday 11-02-00, 9:00 am - Trading Policy",
+        "timestamp": "Wed, 1 Nov 2000 05:49:00 -0800 (PST)"
+      }
+    }
+  ]
+}
