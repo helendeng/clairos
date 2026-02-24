@@ -1,0 +1,8 @@
+numpy<2
+faiss-cpu
+sentence-transformers
+rank-bm25
+requests
+ragas
+datasets
+langchain-ollama

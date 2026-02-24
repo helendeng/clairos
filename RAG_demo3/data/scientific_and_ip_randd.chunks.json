@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "scientific_and_ip_randd_001",
+    "domain": "scientific_and_ip_randd",
+    "text": "Patent application drafted for solar panel coating technology. Prior art search complete.",
+    "source": {
+      "email_id": "rd_ip_001",
+      "from": "rnd@company.com",
+      "cc": "legal@company.com",
+      "bcc": "",
+      "subject": "Patent Filing - Solar Tech",
+      "timestamp": "2026-01-24"
+    }
+  },
+  {
+    "chunk_id": "scientific_and_ip_randd_002",
+    "domain": "scientific_and_ip_randd",
+    "text": "Scientific And Ip Randd internal note: patent draft track is PD-31. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "scientific_and_ip_randd_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "scientific_and_ip_randd synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "scientific_and_ip_randd_003",
+    "domain": "scientific_and_ip_randd",
+    "text": "Scientific And Ip Randd internal note: lab notebook retention is 10 years. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "scientific_and_ip_randd_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "scientific_and_ip_randd synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "scientific_and_ip_randd_004",
+    "domain": "scientific_and_ip_randd",
+    "text": "Scientific And Ip Randd internal note: prototype branch is proto-x. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "scientific_and_ip_randd_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "scientific_and_ip_randd synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

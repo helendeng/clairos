@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "vendor_metadata_001",
+    "domain": "vendor_metadata",
+    "text": "Vendor contact updated: New account manager assigned to our account.",
+    "source": {
+      "email_id": "vendor_meta_001",
+      "from": "vendor@supplier.com",
+      "cc": "procurement@company.com",
+      "bcc": "",
+      "subject": "Account Manager Change",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "vendor_metadata_002",
+    "domain": "vendor_metadata",
+    "text": "Vendor Metadata internal note: vendor risk grade is B+. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "vendor_metadata_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "vendor_metadata synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "vendor_metadata_003",
+    "domain": "vendor_metadata",
+    "text": "Vendor Metadata internal note: onboarding packet stage is stage-3. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "vendor_metadata_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "vendor_metadata synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "vendor_metadata_004",
+    "domain": "vendor_metadata",
+    "text": "Vendor Metadata internal note: payment term profile is net-45. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "vendor_metadata_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "vendor_metadata synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

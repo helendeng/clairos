@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "subdomain": "Vendor Metadata",
+    "domain": "Vendor",
+    "chunk_count": 2,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-24T12:43:08.912301",
+    "export_date": "2026-02-24",
+    "export_time": "12:43:08"
+  },
+  "chunks": [
+    {
+      "chunk_id": "001",
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "text": "CREEKSIDE PROCEEDURES CB procedures for dealing with subs, vendors and professionals is not as formal as your question indicates. In the EXTREMELY tight labor market obtaining 3 bids for each labor trade is not feasible. For the professional subs we use those with whom we have developed a previous rapport. Finally, for vendors they are constantly shopped.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "002",
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "text": "PRE-SELECTED PROFESSIONALS, SUBS AND VENDORS Yes there are many different subs that have been identified and I can provide these if you are interested.",
+      "source": {
+        "email_id": "34",
+        "from": "phillip.allen@enron.com",
+        "cc": "Larry Lewter, Claudia L. Crocker",
+        "bcc": "",
+        "subject": "Investment Structure",
+        "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
+      }
+    }
+  ]
+}

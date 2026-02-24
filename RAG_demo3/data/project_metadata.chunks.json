@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "project_metadata_001",
+    "domain": "project_metadata",
+    "text": "Environmental assessment for wind farm approved by state regulators.",
+    "source": {
+      "email_id": "ops_project_002",
+      "from": "regulatory@company.com",
+      "cc": "permits@company.com",
+      "bcc": "",
+      "subject": "Permit Approval - Wind Project",
+      "timestamp": "2026-01-28"
+    }
+  },
+  {
+    "chunk_id": "project_metadata_002",
+    "domain": "project_metadata",
+    "text": "Atlas project timeline extended to Q3 2027. Stakeholder notification required.",
+    "source": {
+      "email_id": "ops_project_001",
+      "from": "pm@company.com",
+      "cc": "team@company.com",
+      "bcc": "",
+      "subject": "Atlas Timeline Update",
+      "timestamp": "2026-01-27"
+    }
+  },
+  {
+    "chunk_id": "project_metadata_003",
+    "domain": "project_metadata",
+    "text": "Project Metadata internal note: delivery checkpoint is milestone-m4. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "project_metadata_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "project_metadata synthetic record 003",
+      "timestamp": "2026-02-03"
+    }
+  },
+  {
+    "chunk_id": "project_metadata_004",
+    "domain": "project_metadata",
+    "text": "Project Metadata internal note: risk registry owner is pm-office. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "project_metadata_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "project_metadata synthetic record 004",
+      "timestamp": "2026-02-05"
+    }
+  }
+]

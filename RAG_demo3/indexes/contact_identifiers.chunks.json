@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "contact_identifiers_001",
+    "domain": "contact_identifiers",
+    "text": "Personal phone: [REDACTED]. Personal email: [REDACTED].",
+    "source": {
+      "email_id": "pii_contact_001",
+      "from": "employee@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Emergency Contact Update",
+      "timestamp": "2026-01-12"
+    }
+  },
+  {
+    "chunk_id": "contact_identifiers_002",
+    "domain": "contact_identifiers",
+    "text": "Contact Identifiers internal note: vendor hotline extension is 7421. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contact_identifiers_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contact_identifiers synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "contact_identifiers_003",
+    "domain": "contact_identifiers",
+    "text": "Contact Identifiers internal note: regional desk alias is west-ops-desk. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contact_identifiers_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contact_identifiers synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "contact_identifiers_004",
+    "domain": "contact_identifiers",
+    "text": "Contact Identifiers internal note: escalation pager is P-118. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contact_identifiers_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contact_identifiers synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

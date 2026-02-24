@@ -1,0 +1,32 @@
+[
+  {
+    "chunk_id": "legal_001",
+    "domain": "legal",
+    "text": "W-9 thread: Our company EIN is 12-3456789. Please submit the W-9 by Friday.",
+    "source": {
+      "email_id": "leg_email_001",
+      "subject": "W-9 request",
+      "timestamp": "2026-01-09"
+    }
+  },
+  {
+    "chunk_id": "legal_002",
+    "domain": "legal",
+    "text": "Contractual: The Master Services Agreement requires 30 days written notice for termination.",
+    "source": {
+      "email_id": "leg_email_002",
+      "subject": "MSA terms",
+      "timestamp": "2026-01-08"
+    }
+  },
+  {
+    "chunk_id": "legal_003",
+    "domain": "legal",
+    "text": "Compliance: retain vendor invoices for 7 years to meet regulatory requirements.",
+    "source": {
+      "email_id": "leg_email_003",
+      "subject": "Retention policy",
+      "timestamp": "2026-01-07"
+    }
+  }
+]

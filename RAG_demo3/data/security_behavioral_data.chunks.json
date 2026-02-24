@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "security_behavioral_data_001",
+    "domain": "security_behavioral_data",
+    "text": "Unusual login pattern detected from employee account. Investigation ongoing.",
+    "source": {
+      "email_id": "security_behavior_001",
+      "from": "security@company.com",
+      "cc": "soc@company.com",
+      "bcc": "",
+      "subject": "Security Alert",
+      "timestamp": "2026-01-21"
+    }
+  },
+  {
+    "chunk_id": "security_behavioral_data_002",
+    "domain": "security_behavioral_data",
+    "text": "Security Behavioral Data internal note: anomaly baseline window is 45 days. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "security_behavioral_data_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "security_behavioral_data synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "security_behavioral_data_003",
+    "domain": "security_behavioral_data",
+    "text": "Security Behavioral Data internal note: insider risk scoreband is amber. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "security_behavioral_data_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "security_behavioral_data synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "security_behavioral_data_004",
+    "domain": "security_behavioral_data",
+    "text": "Security Behavioral Data internal note: behavior policy version is v3.2. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "security_behavioral_data_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "security_behavioral_data synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "financial_identifiers_001",
+    "domain": "financial_identifiers",
+    "text": "Bank account for direct deposit: [REDACTED]. Routing number: [REDACTED].",
+    "source": {
+      "email_id": "pii_financial_001",
+      "from": "employee@company.com",
+      "cc": "payroll@company.com",
+      "bcc": "",
+      "subject": "Payroll Setup",
+      "timestamp": "2026-01-13"
+    }
+  },
+  {
+    "chunk_id": "financial_identifiers_002",
+    "domain": "financial_identifiers",
+    "text": "Financial Identifiers internal note: wire instruction profile is FI-ALPHA-09. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "financial_identifiers_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "financial_identifiers synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "financial_identifiers_003",
+    "domain": "financial_identifiers",
+    "text": "Financial Identifiers internal note: invoice control family is ICF-22. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "financial_identifiers_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "financial_identifiers synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "financial_identifiers_004",
+    "domain": "financial_identifiers",
+    "text": "Financial Identifiers internal note: tax remittance bundle is TRB-5. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "financial_identifiers_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "financial_identifiers synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

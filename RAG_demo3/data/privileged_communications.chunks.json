@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "privileged_communications_001",
+    "domain": "privileged_communications",
+    "text": "Attorney work product regarding regulatory strategy. Do not forward.",
+    "source": {
+      "email_id": "legal_privileged_001",
+      "from": "attorney@lawfirm.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "PRIVILEGED: Legal Strategy",
+      "timestamp": "2026-01-19"
+    }
+  },
+  {
+    "chunk_id": "privileged_communications_002",
+    "domain": "privileged_communications",
+    "text": "Privileged Communications internal note: privilege marker is attorney-client. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "privileged_communications_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "privileged_communications synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "privileged_communications_003",
+    "domain": "privileged_communications",
+    "text": "Privileged Communications internal note: memo routing rule is need-to-know. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "privileged_communications_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "privileged_communications synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "privileged_communications_004",
+    "domain": "privileged_communications",
+    "text": "Privileged Communications internal note: review queue is pc-queue-2. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "privileged_communications_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "privileged_communications synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

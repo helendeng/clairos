@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "business_strategy_001",
+    "domain": "business_strategy",
+    "text": "Q2 acquisition target identified. Board approval pending. HIGHLY CONFIDENTIAL.",
+    "source": {
+      "email_id": "strategy_001",
+      "from": "strategy@company.com",
+      "cc": "ceo@company.com",
+      "bcc": "",
+      "subject": "CONFIDENTIAL: M&A Opportunity",
+      "timestamp": "2026-01-22"
+    }
+  },
+  {
+    "chunk_id": "business_strategy_002",
+    "domain": "business_strategy",
+    "text": "Business Strategy internal note: market entry phase is phase-2. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "business_strategy_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "business_strategy synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "business_strategy_003",
+    "domain": "business_strategy",
+    "text": "Business Strategy internal note: board narrative theme is operational efficiency. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "business_strategy_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "business_strategy synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "business_strategy_004",
+    "domain": "business_strategy",
+    "text": "Business Strategy internal note: planning horizon is 18 months. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "business_strategy_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "business_strategy synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

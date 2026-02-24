@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "technical_randd_001",
+    "domain": "technical_randd",
+    "text": "New turbine blade design shows 15% efficiency improvement in testing. Patent pending.",
+    "source": {
+      "email_id": "rd_tech_001",
+      "from": "rnd@company.com",
+      "cc": "engineering@company.com",
+      "bcc": "",
+      "subject": "Turbine Innovation - Confidential",
+      "timestamp": "2026-01-23"
+    }
+  },
+  {
+    "chunk_id": "technical_randd_002",
+    "domain": "technical_randd",
+    "text": "Technical Randd internal note: model experiment bucket is exp-77. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "technical_randd_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "technical_randd synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "technical_randd_003",
+    "domain": "technical_randd",
+    "text": "Technical Randd internal note: benchmark suite is suite-gamma. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "technical_randd_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "technical_randd synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "technical_randd_004",
+    "domain": "technical_randd",
+    "text": "Technical Randd internal note: compute quota band is q-medium. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "technical_randd_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "technical_randd synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

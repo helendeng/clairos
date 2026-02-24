@@ -1,0 +1,126 @@
+[
+  {
+    "id": "t_new_13",
+    "question": "Summarize the salary negotiation progress and final outcome in HR records.",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_005",
+      "all_hr_006",
+      "all_hr_007",
+      "all_hr_008"
+    ],
+    "expected_answer": "The negotiation progressed from a 7% request to a 4.5% manager counter and ended with a VP-approved 5.5% adjustment effective July 1."
+  },
+  {
+    "id": "t_new_14",
+    "question": "What happened between the initial salary request and the final approval?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_005",
+      "all_hr_006",
+      "all_hr_007",
+      "all_hr_008"
+    ],
+    "expected_answer": "After the initial 7% request, the manager countered at 4.5%, HR set a 5.5% ceiling pending VP review, and final approval was 5.5%."
+  },
+  {
+    "id": "t_new_15",
+    "question": "Before VP approval, what status did HR report for the salary adjustment?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_006",
+      "all_hr_007"
+    ],
+    "expected_answer": "Before VP approval, HR reported a 5.5% ceiling for the salary adjustment pending final sign-off."
+  },
+  {
+    "id": "t_new_16",
+    "question": "For onboarding operations, what is the meeting time and the incident standup timezone?",
+    "domains_to_search": [
+      "all_schedule"
+    ],
+    "relevant_chunk_ids": [
+      "all_schedule_001",
+      "all_schedule_002"
+    ],
+    "expected_answer": "The onboarding meeting is at 3pm PST (6pm EST), and the incident standup timezone is PST."
+  },
+  {
+    "id": "t_new_17",
+    "question": "In company financial strategy, what are the capital allocation ratio and liquidity buffer target?",
+    "domains_to_search": [
+      "company_financial_strategy"
+    ],
+    "relevant_chunk_ids": [
+      "company_financial_strategy_002",
+      "company_financial_strategy_003"
+    ],
+    "expected_answer": "The capital allocation ratio is 55/45, and the liquidity buffer target is 14 months."
+  },
+  {
+    "id": "t_new_18",
+    "question": "For the escalated support ticket, what are the resolution ETA and the priority response target?",
+    "domains_to_search": [
+      "support_and_escalation"
+    ],
+    "relevant_chunk_ids": [
+      "support_and_escalation_001",
+      "support_and_escalation_003"
+    ],
+    "expected_answer": "The escalated support ticket has a 48-hour resolution ETA and a 2-hour priority response target."
+  },
+  {
+    "id": "t_new_19",
+    "question": "In system operations, what is the maintenance window and rollback checkpoint?",
+    "domains_to_search": [
+      "system_operations"
+    ],
+    "relevant_chunk_ids": [
+      "system_operations_001",
+      "system_operations_003"
+    ],
+    "expected_answer": "The maintenance window is February 10 from 2am to 6am EST, and the rollback checkpoint is rbk-14."
+  },
+  {
+    "id": "t_new_20",
+    "question": "For project metadata, what changed about the Atlas timeline and what is the delivery checkpoint?",
+    "domains_to_search": [
+      "project_metadata"
+    ],
+    "relevant_chunk_ids": [
+      "project_metadata_002",
+      "project_metadata_003"
+    ],
+    "expected_answer": "The Atlas timeline was extended to Q3 2027, and the delivery checkpoint is milestone-m4."
+  },
+  {
+    "id": "t_new_21",
+    "question": "Across salary negotiation updates, what was the manager counteroffer and what was the final approved adjustment?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_006",
+      "all_hr_008"
+    ],
+    "expected_answer": "The manager counteroffer was 4.5%, and the final approved salary adjustment was 5.5%."
+  },
+  {
+    "id": "t_new_22",
+    "question": "Before final salary closure, what did HR set and when did final adjustment become effective?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_007",
+      "all_hr_008"
+    ],
+    "expected_answer": "HR set a 5.5% ceiling pending VP approval, and the final adjustment became effective on July 1."
+  }
+]

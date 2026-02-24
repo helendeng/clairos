@@ -1,0 +1,265 @@
+{
+  "metadata": {
+    "subdomain": "Compliance & Regulatory",
+    "domain": "Legal",
+    "chunk_count": 18,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-24T12:43:08.908179",
+    "export_date": "2026-02-24",
+    "export_time": "12:43:08"
+  },
+  "chunks": [
+    {
+      "chunk_id": "011",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "CAM-1, Preservation of Records, RM99-8, expect rehearing order on record retention Discussion RM98-4, Revised Filing Requirements under Part 33, Final Rule (this was on agenda last meeting but was cancelled)",
+      "source": {
+        "email_id": "48",
+        "from": "janet.butler@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Commission Agenda",
+        "timestamp": "Wed, 1 Nov 2000 08:03:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "010",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "You may link to the Commission Agenda by clicking on URL noted below: http://www.ferc.fed.us/public/isd/sunshine.htm Items of interest are: CAG-6, NNG order expected on Carlton Resolution, RP96-347 CAG-7, NNG order expected on VFT filing, RP00-264 CAG-2, Reliant's filing proposing flexible nomination process, RP00-571 CAG-13, Texas Eastern issues concerning production area rates effect on market center (voluntary remand settlement) CAG-14, Standards for Business Practices, RM96-1-014, remaining Order No. 587-L imbalance netting & trading filings",
+      "source": {
+        "email_id": "48",
+        "from": "janet.butler@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Commission Agenda",
+        "timestamp": "Wed, 1 Nov 2000 08:03:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "012",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Attached is the response Data Request #29. In the response is everything. We need to review and agree on the content to be given to in this response. Lee and my concern is the information in the Planning report. This is towards the end of the response.",
+      "source": {
+        "email_id": "49",
+        "from": "keith.petersen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Audit",
+        "timestamp": "Wed, 1 Nov 2000 23:11:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "015",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "The following updates are included in the attached report: IOWA * NOI-98-3 Small volume gas transportation - MidAm urges IUB to drop the idea KANSAS * Kansas Ad Valorem Tax Refunds - Settlement language being finalized MICHIGAN * U-12550 Final order exempts Xcel and Peninsular from customer choice plan filing requirements MINNESOTA * E,G999/DI-99-1073 Keeping the Lights On legislative initiative -- NNG comments filed stressing ability to serve gas fired generation WISCONSIN * 6650-CG-194 Wisconsin Gas' Guardian lateral - PSC approval in economic phase",
+      "source": {
+        "email_id": "54",
+        "from": "lon.stanton@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Government Affairs Report",
+        "timestamp": "Wed, 1 Nov 2000 23:15:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "019",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Here's what FERC's order prescribes: 1). Eliminate the requirement that California's three IOUs (PG&E, SCE and SDG&E) must sell into and buy from the PX. This proposal essentially permits the three IOUs to establish bilateral contracts with energy suppliers, which was previously restricted under AB1890. 2). Require market participants to schedule 95 percent of their transactions in the day-ahead markets. A penalty charge will be affixed for deviations in scheduling in excess of 5 percent of an entity's hourly load requirements. 3). The establishment of independent (non-stakeholder) governing boards for the California ISO and PX. 4). The establishment of generation interconnection procedures.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "014",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Attached is the Weekly Regulatory Report for week ending January 21, 2000. The Commission agenda and two orders are also attached that may be of interest to you.",
+      "source": {
+        "email_id": "51",
+        "from": "janet.butler@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Weekly Regulatory Report",
+        "timestamp": "Fri, 21 Jan 2000 08:52:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "022",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Commissioner Hebert hesitantly concurred with the order, although he believed the commission went too far in its attempt to mitigate prices, something he believes FERC is ill-equipped to do. Specifically, Hebert dissented with the decision to place any sort of price cap on wholesale transactions, preferring instead to entrust market participants with the ability and responsibility to mitigate their price exposure as they deem best.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "003",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "The next round of filings to be accepted electronically will include interventions and protests. Coming on line further down the road are documents with extensive service lists, as Fernanda is intent on cleaning up those lists of duplicate or stale names, companies and parties before going forward with electronic service of parties. That process could be very involved, since each party will have to be contacted with a chance to respond before being removed or changed from a service list.",
+      "source": {
+        "email_id": "36",
+        "from": "Nancy Bagot",
+        "cc": "",
+        "bcc": "",
+        "subject": "IT news from FERC",
+        "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+      }
+    },
+    {
+      "chunk_id": "001",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "On Friday I attended an industry luncheon with Fernanda Young, FERC's Chief Information Officer. She discussed some of the electronic filing and research changes coming to FERC. The crux of the discussion is that within a few years (by 2003), FERC's internet website will include a searchable database that functions very much like Lexus/Nexus (except for the exorbitant fees).",
+      "source": {
+        "email_id": "36",
+        "from": "Nancy Bagot",
+        "cc": "",
+        "bcc": "",
+        "subject": "IT news from FERC",
+        "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+      }
+    },
+    {
+      "chunk_id": "021",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "It's referred to as soft because sellers may bid above this level and receive their bid if they are dispatched, but anything higher than $150/MWh will not set the price that all generators will receive. Also, any generator setting a bid above $150/MWh must report their bid to the Commission, and presumably fall under intense scrutiny.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "023",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "FERC will vote on the proposed order in December, after receiving commentary from industry participants. FERC Chair James Hoecker already knows the position of one major player. He received a letter from Enron CEO Kenneth Lay just this week, in which Lay urged FERC to avoid placing price cap band aids over hemorrhaging wounds. Lay further predicted that installing price caps would plunge markets into greater uncertainty and discourage new supplies and conservation methods, and stated that a capped formula would encourage natural-gas suppliers to deploy their turbines in other states or countries.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "002",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "For electronic filing, the first step begins tomorrow with comments (without service lists) being filed electronically. Filers do not have to duplicate with a paper copy. All filings, which can be received by FERC in almost any format, will be converted to Adobe Acrobat (.pdf files) by FERC for viewing online and available within minutes of being received. The electronic PDF version will be the official copy for pagination citations.",
+      "source": {
+        "email_id": "36",
+        "from": "Nancy Bagot",
+        "cc": "",
+        "bcc": "",
+        "subject": "IT news from FERC",
+        "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+      }
+    },
+    {
+      "chunk_id": "007",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "There is no way this is ready to go. Once you receive, please call and lets go through line by line. Lee as you can see I did send to Drew.",
+      "source": {
+        "email_id": "44",
+        "from": "keith.petersen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Data Request #29",
+        "timestamp": "Wed, 1 Nov 2000 06:06:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "020",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Perhaps most contentious within the order is FERC's decision to set a $150/MWh rate cap so that bids above this amount cannot set the market clearing price that is paid to all bidders. This policy negates a previous proposal from the Cal-ISO, under which it lobbied for a $100/MWh bid cap (reduced from $250/MWh) on electricity purchases in the ISO's spot market. FERC's order freezes the ISO bid cap at its current $250 level for the next 60 days. However, beyond that FERC is instating what is being referred to as a soft price cap of $150/MWh, to remain in place until December 2002.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "005",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "As for internet access and research capabilities, the FERC homepage will be revamped to include better design and more accessible information for non-FERC watchers (ie, the general public). RIMS and CIPS will eventually be combined into one database that will be searchable (by words contained in a document's Abstract) and easy to use for researching and printing documents. All documents will be in PDF format. The timeline for these changes is relatively short, with the full transition of the database and electronic filing requirements completed by 2003.",
+      "source": {
+        "email_id": "36",
+        "from": "Nancy Bagot",
+        "cc": "",
+        "bcc": "",
+        "subject": "IT news from FERC",
+        "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+      }
+    },
+    {
+      "chunk_id": "018",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "FERC based its 77-page draft order on several assumptions. First, FERC wants to hold overall rates to competitive levels that benefit consumers, while at the same time induce sufficient investment in capacity to ensure adequate service. Second, FERC acknowledged that some matters that have adversely impacted the California wholesale market are not under its jurisdiction, but that of the CPUC. Thus, FERC focused on matters within its exclusive jurisdiction, even if some of the proposals preempt prior state decisions.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "016",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "Attached is a draft of an answer to protests received in Docket No. RP01-56. Please let me know your comments before noon tomorrow if possible.",
+      "source": {
+        "email_id": "56",
+        "from": "drew.fossum@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "TW Options: Answer to protests",
+        "timestamp": "Thu, 2 Nov 2000 03:27:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "017",
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "text": "The Federal Energy Regulatory Commission (FERC) issued a draft order outlining a major overhaul of the California wholesale market, including changes to market rules concerning the California ISO (Cal-ISO) and Power Exchange (PX). Conceding that the market rules and structure for wholesale sales of electricity are flawed and have caused unjust and unreasonable rates, FERC has proposed a number of remedies that will become effective in approximately 60 days.",
+      "source": {
+        "email_id": "57",
+        "from": "issuealert@scientech.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+        "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+      }
+    }
+  ]
+}

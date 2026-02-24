@@ -1,0 +1,12 @@
+[
+  {
+    "chunk_id": "hr_001",
+    "domain": "hr",
+    "text": "HR update: performance reviews open next week; managers should submit ratings by Friday.",
+    "source": {
+      "email_id": "hr_email_001",
+      "subject": "Review cycle",
+      "timestamp": "2026-01-05"
+    }
+  }
+]

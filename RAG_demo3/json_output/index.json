@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "collection_name": "clairos_email_chunks",
+    "total_subdomains": 17,
+    "total_chunks": 113,
+    "total_files": 17,
+    "exported_at": "2026-02-24T12:43:08.912560",
+    "export_date": "2026-02-24"
+  },
+  "files": [
+    {
+      "subdomain": "Accounting",
+      "domain": "Financial",
+      "filename": "accounting.json",
+      "chunk_count": 5
+    },
+    {
+      "subdomain": "All_HR",
+      "domain": "HR",
+      "filename": "all_hr.json",
+      "chunk_count": 2
+    },
+    {
+      "subdomain": "All_Schedule",
+      "domain": "Scheduling",
+      "filename": "all_schedule.json",
+      "chunk_count": 13
+    },
+    {
+      "subdomain": "Business Strategy",
+      "domain": "Strategic Confidential",
+      "filename": "business_strategy.json",
+      "chunk_count": 4
+    },
+    {
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "filename": "company_financial_strategy.json",
+      "chunk_count": 36
+    },
+    {
+      "subdomain": "Compliance & Regulatory",
+      "domain": "Legal",
+      "filename": "compliance_and_regulatory.json",
+      "chunk_count": 18
+    },
+    {
+      "subdomain": "Contact Identifiers",
+      "domain": "PII",
+      "filename": "contact_identifiers.json",
+      "chunk_count": 1
+    },
+    {
+      "subdomain": "Contractual",
+      "domain": "Legal",
+      "filename": "contractual.json",
+      "chunk_count": 1
+    },
+    {
+      "subdomain": "Crisis/Sensitive Content",
+      "domain": "Personal Life",
+      "filename": "crisis_sensitive_content.json",
+      "chunk_count": 1
+    },
+    {
+      "subdomain": "Health Disclosures",
+      "domain": "Personal Life",
+      "filename": "health_disclosures.json",
+      "chunk_count": 1
+    },
+    {
+      "subdomain": "Litigation Sensitive",
+      "domain": "Legal",
+      "filename": "litigation_sensitive.json",
+      "chunk_count": 2
+    },
+    {
+      "subdomain": "Operational Security",
+      "domain": "Security",
+      "filename": "operational_security.json",
+      "chunk_count": 4
+    },
+    {
+      "subdomain": "Org-Structure Metadata",
+      "domain": "Operational",
+      "filename": "orgstructure_metadata.json",
+      "chunk_count": 3
+    },
+    {
+      "subdomain": "Project Metadata",
+      "domain": "Operational",
+      "filename": "project_metadata.json",
+      "chunk_count": 2
+    },
+    {
+      "subdomain": "System Operations",
+      "domain": "Operational",
+      "filename": "system_operations.json",
+      "chunk_count": 8
+    },
+    {
+      "subdomain": "Technical R&D",
+      "domain": "Research & Development",
+      "filename": "technical_randd.json",
+      "chunk_count": 10
+    },
+    {
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "filename": "vendor_metadata.json",
+      "chunk_count": 2
+    }
+  ],
+  "summary": {
+    "Accounting": {
+      "domain": "Financial",
+      "chunk_count": 5,
+      "filename": "accounting.json"
+    },
+    "All_HR": {
+      "domain": "HR",
+      "chunk_count": 2,
+      "filename": "all_hr.json"
+    },
+    "All_Schedule": {
+      "domain": "Scheduling",
+      "chunk_count": 13,
+      "filename": "all_schedule.json"
+    },
+    "Business Strategy": {
+      "domain": "Strategic Confidential",
+      "chunk_count": 4,
+      "filename": "business_strategy.json"
+    },
+    "Company Financial Strategy": {
+      "domain": "Financial",
+      "chunk_count": 36,
+      "filename": "company_financial_strategy.json"
+    },
+    "Compliance & Regulatory": {
+      "domain": "Legal",
+      "chunk_count": 18,
+      "filename": "compliance_and_regulatory.json"
+    },
+    "Contact Identifiers": {
+      "domain": "PII",
+      "chunk_count": 1,
+      "filename": "contact_identifiers.json"
+    },
+    "Contractual": {
+      "domain": "Legal",
+      "chunk_count": 1,
+      "filename": "contractual.json"
+    },
+    "Crisis/Sensitive Content": {
+      "domain": "Personal Life",
+      "chunk_count": 1,
+      "filename": "crisis_sensitive_content.json"
+    },
+    "Health Disclosures": {
+      "domain": "Personal Life",
+      "chunk_count": 1,
+      "filename": "health_disclosures.json"
+    },
+    "Litigation Sensitive": {
+      "domain": "Legal",
+      "chunk_count": 2,
+      "filename": "litigation_sensitive.json"
+    },
+    "Operational Security": {
+      "domain": "Security",
+      "chunk_count": 4,
+      "filename": "operational_security.json"
+    },
+    "Org-Structure Metadata": {
+      "domain": "Operational",
+      "chunk_count": 3,
+      "filename": "orgstructure_metadata.json"
+    },
+    "Project Metadata": {
+      "domain": "Operational",
+      "chunk_count": 2,
+      "filename": "project_metadata.json"
+    },
+    "System Operations": {
+      "domain": "Operational",
+      "chunk_count": 8,
+      "filename": "system_operations.json"
+    },
+    "Technical R&D": {
+      "domain": "Research & Development",
+      "chunk_count": 10,
+      "filename": "technical_randd.json"
+    },
+    "Vendor Metadata": {
+      "domain": "Vendor",
+      "chunk_count": 2,
+      "filename": "vendor_metadata.json"
+    }
+  }
+}
