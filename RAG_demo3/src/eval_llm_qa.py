@@ -7,16 +7,18 @@ This is a crude but practical demo metric.
 """
 
 import json
+import os
 import re
 from difflib import SequenceMatcher
 from pathlib import Path
 
 from .retriever import DomainRetriever
-from .ollama_llm import generate
+from .llm_client import generate
 
 ROOT = Path(__file__).resolve().parents[1]
-TESTS_PATH = ROOT / "data" / "tests.json"
+TESTS_PATH = Path(os.getenv("EVAL_TESTS_PATH", str(ROOT / "data" / "tests.json")))
 MODEL = "qwen2.5:14b-instruct"
+PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "deepseek_api")
 TOP_K = 5
 
 PROMPT_TMPL = """You are ClairOS (RAG PoC). Use ONLY the context.
@@ -81,7 +83,8 @@ def main():
             use_vector=False,
         )
         prompt = PROMPT_TMPL.format(context=format_context(hits), question=t["question"])
-        out = generate(prompt, model=MODEL).strip()
+        model = MODEL if PROVIDER.lower() in {"ollama", "local", "local_ollama"} else None
+        out = generate(prompt, provider=PROVIDER, model=model).strip()
 
         ok = _fuzzy_match(t["expected_answer"], out)
         correct += 1 if ok else 0

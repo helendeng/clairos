@@ -11,25 +11,26 @@ function App() {
   const [query, setQuery] = useState('');
   const [queryHistory, setQueryHistory] = useState([]);
   const [docId, setDocId] = useState('');
+  const [llmProvider, setLlmProvider] = useState('deepseek_api');
 
   // Real file upload - calls backend
   const handleFileUpload = async (e) => {
     const uploadedFile = e.target.files[0];
     if (!uploadedFile) return;
-    
+
     setFile(uploadedFile);
     setProcessing(true);
     setShowResults(false);
-    
+
     try {
       const formData = new FormData();
       formData.append('file', uploadedFile);
-      
+
       const response = await fetch('http://localhost:8000/upload', {
         method: 'POST',
         body: formData,
       });
-      
+
       const data = await response.json();
       setDocId(data.doc_id);
 
@@ -46,30 +47,31 @@ function App() {
     }
   };
 
-  // Real query - calls backend with Ollama
+  // Real query - calls backend with provider switch
   const handleQuery = async () => {
     if (!query.trim()) return;
-    
+
     setProcessing(true);
-    
+
     try {
       const formData = new FormData();
       formData.append('question', query);
       formData.append('doc_id', docId);
-      
+      formData.append('llm_provider', llmProvider);
+
       const response = await fetch('http://localhost:8000/query', {
         method: 'POST',
         body: formData,
       });
-      
+
       const data = await response.json();
-      
+
       setQueryHistory([...queryHistory, { question: query, answer: data.answer }]);
       setQuery('');
       setProcessing(false);
     } catch (error) {
       console.error('Query error:', error);
-      alert('Error querying. Make sure backend and Ollama are running!');
+      alert('Error querying. Make sure backend is running and selected provider is available!');
       setProcessing(false);
     }
   };
@@ -100,7 +102,7 @@ function App() {
               <Upload className="w-16 h-16 text-indigo-500 mx-auto mb-4" />
               <h2 className="text-2xl font-semibold mb-4">Upload Document</h2>
               <p className="text-gray-600 mb-6">Upload files containing sensitive information for secure processing</p>
-              
+
               <label className="inline-block">
                 <input
                   type="file"
@@ -112,14 +114,14 @@ function App() {
                   Choose File
                 </span>
               </label>
-              
+
               {file && !processing && !showResults && (
                 <p className="mt-4 text-green-600 flex items-center justify-center gap-2">
                   <CheckCircle className="w-5 h-5" />
                   {file.name} ready to process
                 </p>
               )}
-              
+
               {processing && (
                 <div className="mt-4 flex items-center justify-center gap-2 text-indigo-600">
                   <Loader className="w-5 h-5 animate-spin" />
@@ -190,6 +192,19 @@ function App() {
               )}
 
               {/* Query Input */}
+              <div className="mb-3">
+                <label className="block text-sm font-medium text-gray-700 mb-1">LLM Provider</label>
+                <select
+                  value={llmProvider}
+                  onChange={(e) => setLlmProvider(e.target.value)}
+                  className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  disabled={processing}
+                >
+                  <option value="deepseek_api">DeepSeek API (default)</option>
+                  <option value="ollama">Ollama Local</option>
+                </select>
+              </div>
+
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -215,9 +230,9 @@ function App() {
                   )}
                 </button>
               </div>
-              
+
               <p className="text-sm text-gray-500 mt-2">
-                Ask anything about the document - powered by local AI
+                RAG backend uses rag_demo3 indexes. Generation supports DeepSeek API and local Ollama.
               </p>
             </div>
 
@@ -235,7 +250,7 @@ function App() {
 
         {/* Tech Stack Note */}
         <div className="mt-8 bg-white rounded-lg shadow p-4 text-sm text-gray-600">
-          <p className="font-semibold mb-2">🔧 Tech Stack:</p>
+          <p className="font-semibold mb-2">Tech Stack:</p>
           <ul className="list-disc list-inside space-y-1 ml-4">
             <li><strong>Frontend:</strong> React + Vite + Tailwind CSS</li>
             <li><strong>Backend:</strong> Python FastAPI (localhost:8000)</li>

@@ -24,5 +24,83 @@
       "subject": "Annual Review Notice",
       "timestamp": "2026-01-14"
     }
+  },
+  {
+    "chunk_id": "all_hr_003",
+    "domain": "all_hr",
+    "text": "All Hr internal note: manager calibration cycle is Q2. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "all_hr_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "all_hr synthetic record 003",
+      "timestamp": "2026-02-03"
+    }
+  },
+  {
+    "chunk_id": "all_hr_004",
+    "domain": "all_hr",
+    "text": "All Hr internal note: benefits enrollment window is May 5-19. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "all_hr_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "all_hr synthetic record 004",
+      "timestamp": "2026-02-05"
+    }
+  },
+  {
+    "chunk_id": "all_hr_005",
+    "domain": "all_hr",
+    "text": "Salary negotiation update (round 1): employee requested a 7% adjustment after the Q1 performance review, citing expanded responsibilities and retention risk.",
+    "source": {
+      "email_id": "hr_salary_005",
+      "from": "employee@company.com",
+      "cc": "manager@company.com",
+      "bcc": "",
+      "subject": "Salary adjustment request - initial proposal",
+      "timestamp": "2026-03-04"
+    }
+  },
+  {
+    "chunk_id": "all_hr_006",
+    "domain": "all_hr",
+    "text": "Salary negotiation update (round 2): manager countered at 4.5% and requested measurable impact evidence before final budget approval.",
+    "source": {
+      "email_id": "hr_salary_006",
+      "from": "manager@company.com",
+      "cc": "hr@company.com",
+      "bcc": "",
+      "subject": "Salary adjustment request - manager counteroffer",
+      "timestamp": "2026-03-10"
+    }
+  },
+  {
+    "chunk_id": "all_hr_007",
+    "domain": "all_hr",
+    "text": "Salary negotiation update (round 3): HR review set a 5.5% ceiling, pending VP approval and a July 1 effective-date check.",
+    "source": {
+      "email_id": "hr_salary_007",
+      "from": "hr@company.com",
+      "cc": "manager@company.com",
+      "bcc": "",
+      "subject": "Salary adjustment request - HR ceiling recommendation",
+      "timestamp": "2026-03-16"
+    }
+  },
+  {
+    "chunk_id": "all_hr_008",
+    "domain": "all_hr",
+    "text": "Salary negotiation final decision: VP approved a 5.5% adjustment effective July 1. Negotiation closed after agreement from HR, manager, and employee.",
+    "source": {
+      "email_id": "hr_salary_008",
+      "from": "vp_people@company.com",
+      "cc": "hr@company.com",
+      "bcc": "",
+      "subject": "Salary adjustment request - final approval",
+      "timestamp": "2026-03-20"
+    }
   }
 ]

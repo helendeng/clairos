@@ -24,5 +24,31 @@
       "subject": "Atlas Timeline Update",
       "timestamp": "2026-01-27"
     }
+  },
+  {
+    "chunk_id": "project_metadata_003",
+    "domain": "project_metadata",
+    "text": "Project Metadata internal note: delivery checkpoint is milestone-m4. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "project_metadata_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "project_metadata synthetic record 003",
+      "timestamp": "2026-02-03"
+    }
+  },
+  {
+    "chunk_id": "project_metadata_004",
+    "domain": "project_metadata",
+    "text": "Project Metadata internal note: risk registry owner is pm-office. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "project_metadata_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "project_metadata synthetic record 004",
+      "timestamp": "2026-02-05"
+    }
   }
 ]

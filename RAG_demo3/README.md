@@ -1,189 +1,147 @@
-# ClairOS RAG Demo (Local, Ollama, Qwen2-14B) — Synthetic Data
+# ClairOS RAG Demo3 - Handoff README
 
-This is a **CLI-only** RAG demo aligned with the “deliver-a-demo” assumptions:
+This repo now contains:
+- A RAG backend pipeline (`src/*`)
+- A demo web app (`clairos/src`) + FastAPI bridge (`clairos/backend/server.py`)
+- Evaluation scripts for retrieval, QA, and RAGAS
 
-- **Upstream semantic router provides** `domains_to_search` (RAG does not decide domains).
-- Storage is assumed to be **domain-separated chunks** (pure-by-domain for this demo).
-- **No PII / sensitive-matrix filtering is applied** in this demo. (Planned future step inserted **right before the LLM**.)
-- Uses **local Ollama** with default model **Qwen2-14B**.
+The goal of this README is to help teammates (especially database integration) connect quickly.
 
----
+## 1) Main Files and Responsibilities
 
-## Assumed input to the RAG module
+### Core RAG (`src/`)
+- `src/retriever.py`
+  Hybrid retrieval (FAISS vector + BM25), now with RRF fusion for more stable ranking.
+- `src/rag_service.py`
+  End-to-end RAG service: retrieve context -> build prompt -> call LLM -> return answer + sources.
+- `src/llm_client.py`
+  Unified LLM caller. Supports:
+  - `deepseek_api` (default)
+  - `ollama` (local)
+- `src/ollama_llm.py`
+  Backward-compatible wrapper for local Ollama only.
+- `src/build_indexes.py`
+  Builds FAISS indexes from `data/*.chunks.json` into `indexes/`.
 
-RAG consumes:
+### Evaluation (`src/`)
+- `src/eval_retrieval.py`
+  Retrieval metrics (Precision/Recall/F1), supports `EVAL_TESTS_PATH`.
+- `src/eval_llm_qa.py`
+  Simple QA accuracy check, supports `EVAL_TESTS_PATH`.
+- `src/eval_ragas.py`
+  RAGAS metrics, now supports DeepSeek API and `EVAL_TESTS_PATH`.
 
-```json
-{
-  "question": "...",
-  "domains_to_search": ["financial"],
-  "role": "employee"
-}
-```
+### Web Demo
+- `clairos/backend/server.py`
+  FastAPI bridge for web:
+  - `/upload`: upload file, basic PII regex check, summary generation
+  - `/query`: now calls `src.rag_service.run_rag(...)`
+- `clairos/src/App.jsx`
+  Demo UI for upload + inquiry (query), with LLM provider switch.
 
-Notes:
-- `domains_to_search` comes from the **upstream router** (outside RAG).
-- `role` comes from the **surrounding system/auth** (outside RAG).
-- RAG internally uses a configurable `top_k` (default 5).
+### Data and Indexes
+- `data/*.chunks.json`: source chunks
+- `indexes/*.faiss` and `indexes/*.chunks.json`: retrieval indexes and chunk copies
+- `data/tests.json`: full test set
+- `data/tests_singlehop.json`: single-hop subset
+- `data/tests_multihop.json`: multi-hop subset
 
----
+## 2) How To Run
 
-## What is stored in the domain databases (assumption)
-
-Each domain has a list of already-chunked records (raw text + metadata). Example:
-
-```json
-{
-  "chunk_id": "financial_0003",
-  "domain": "financial",
-  "text": "Please set up ACH for Vendor Z. Routing 021000021 and account 9876543210.",
-  "source": {
-    "email_id": "email_fin_01",
-    "subject": "Vendor payment setup",
-    "timestamp": "2026-01-10"
-  }
-}
-```
-
-### Raw text vs vectors (embeddings)
-
-Conceptually we store **both**:
-- **Raw chunk text**: what we pass to the LLM as context.
-- **Vectors (embeddings)**: numeric “meaning fingerprints” used only for retrieval.
-
-In this demo:
-- Raw chunks are saved in `indexes/<domain>.chunks.json`.
-- Vectors are stored inside a FAISS index file `indexes/<domain>.faiss`.
-
-### What is a vector (embedding) in plain terms?
-
-A vector is just a list of numbers representing the meaning of text.
-- Similar meanings → vectors are close → retrieval finds relevant chunks.
-- Different meanings → vectors are far.
-
----
-
-## Techniques used in this demo
-
-1) **Chunking (assumed upstream)**
-   - Emails/documents are split into smaller chunks before indexing.
-
-2) **Embedding + vector search (FAISS)**
-   - We embed chunks and the user question using `sentence-transformers/all-MiniLM-L6-v2`.
-   - For each selected domain, FAISS retrieves the most similar chunks.
-
-3) **BM25 keyword retrieval (enabled by default)**
-   - BM25 matches literal keywords/tokens.
-   - Helpful when exact strings matter (codes, IDs, vendor names).
-
-4) **Hybrid retrieval (FAISS + BM25)**
-   - We run both retrievers, merge results, dedupe by `chunk_id`, and keep the best score.
-
-5) **Top-K selection**
-   - `top_k` (default 5) is a RAG-side parameter controlling how many chunks are sent to the LLM.
-   - Databases do not store “top-k”; they store chunks and indexes.
-
-6) **Grounded generation (local Ollama, Qwen2-14B)**
-   - Retrieved chunks are formatted as compact context.
-   - The prompt instructs the LLM to answer using only the provided context.
-
-7) **Sources / traceability**
-   - The CLI prints retrieved sources (domain, chunk_id, score, preview).
-
----
-
-## Setup
-
-### 1) Start Ollama and ensure model exists
-
-```bash
-ollama pull qwen2.5:14b
-ollama serve
-```
-
-### 2) Install dependencies
-
+## 2.1 Install
 ```bash
 pip install -r requirements.txt
 ```
 
-> Note: `numpy<2` is pinned to avoid common binary incompatibility issues on Windows.
-
-### 3) Build indexes from the synthetic chunk data
-
+## 2.2 Build indexes
 ```bash
 python -m src.build_indexes
 ```
 
-### 4) Run the interactive CLI demo
-
+## 2.3 CLI RAG
 ```bash
 python -m src.rag_cli
 ```
 
-You will be prompted for:
-- role (string)
-- domains_to_search (comma-separated)
-- question
-
----
-
-## Evaluation
-
-### Retrieval metrics (Precision/Recall/F1@K)
-
-Evaluates whether the expected `chunk_id` appears in the retrieved top K list.
-
+## 2.4 Web demo backend
 ```bash
-python -m src.eval_retrieval
+cd clairos/backend
+uvicorn server:app --reload --port 8000
 ```
 
-### End-to-end QA check (LLM output contains expected value)
-
-Calls **Ollama** and checks whether the answer contains the expected target value (routing number / EIN / API key, etc.).
-
+## 2.5 Web demo frontend
 ```bash
-python -m src.eval_llm_qa
+cd clairos
+npm install
+npm run dev
 ```
 
----
+## 2.6 Evaluation examples
+```bash
+# single-hop ragas
+set EVAL_TESTS_PATH=C:\path\to\rag_demo3\data\tests_singlehop.json
+set EVAL_LLM_PROVIDER=deepseek_api
+python -m src.eval_ragas
 
-## Synthetic domains used (derived from the matrix)
+# multi-hop ragas
+set EVAL_TESTS_PATH=C:\path\to\rag_demo3\data\tests_multihop.json
+set EVAL_LLM_PROVIDER=deepseek_api
+python -m src.eval_ragas
+```
 
-- financial, legal, security, hr, strategic, rnd, operational, vendor, scheduling, personal, pii
+PowerShell form:
+```powershell
+$env:EVAL_TESTS_PATH="C:\path\to\rag_demo3\data\tests_multihop.json"
+$env:EVAL_LLM_PROVIDER="deepseek_api"
+python -m src.eval_ragas
+```
 
----
+## 3) What Changed Compared to the Original Baseline
 
-## Next steps (accuracy boosters)
+1. Added DeepSeek API support for inquiry and evaluation
+- Inquiry path supports `deepseek_api` and `ollama` via unified LLM client.
+- RAGAS script also supports DeepSeek API.
 
-### A) Add re-ranking (recommended)
+2. Website inquiry path now uses RAG pipeline
+- Web `/query` now uses `src/rag_service.py` instead of plain direct document prompting.
 
-**Idea:** retrieve more candidates, then re-score them with a stronger model/algorithm.
+3. Added a demo website integration path and documented current limits
+- Demo UI and backend are runnable for end-to-end demo.
+- Current limitations are listed below.
 
-Typical flow:
-1. Retrieve candidate set (`candidate_k = 20`) using FAISS + BM25.
-2. Re-rank candidates.
-3. Keep final `top_k`.
+4. Expanded dataset and tests
+- Increased chunk counts across categories.
+- Expanded total tests and split into single-hop vs multi-hop.
+- Improved low RAGAS metrics by tuning retrieval and evaluation prompts.
 
-Two practical rerank options:
-- **RRF (Reciprocal Rank Fusion)**: cheap, uses ranks from FAISS/BM25, no extra model.
-- **CrossEncoder re-ranker** (SentenceTransformers): more accurate, slower, needs a reranker model.
+## 4) Current Limitations (Important)
 
-**Do we need code changes? Yes.** Minimal file-level changes:
-- `src/retriever.py`: retrieve `candidate_k` and add a rerank step before returning.
-- Add `src/reranker.py`: implement RRF or CrossEncoder scoring.
-- `src/rag_cli.py`: optional flag to toggle rerank.
-- (Optional) `src/eval_retrieval.py`: A/B compare no-rerank vs rerank.
+1. Uploaded file inquiry is not fully indexed into persistent retrieval storage yet
+- Upload currently stores file content in memory (`document_storage`), not database.
+- RAG retrieval primarily uses prebuilt `indexes/*`.
 
-### B) Add MMR diversification
+2. No upstream DB connection yet
+- No persistent doc/chunk storage in SQL/NoSQL.
+- No production ingestion pipeline.
 
-Reduces near-duplicate chunks in top_k (post-processing step in `src/retriever.py`).
+3. `domains_to_search` is not yet connected to real upstream router
+- Current web path can pass/derive categories, but upstream integration is still pending.
 
-### C) Improve chunking strategy (upstream)
+## 5) Integration Notes for Database Teammates
 
-Chunk size and overlap often change recall a lot.
+Recommended integration points:
+- Ingestion: replace in-memory upload flow with DB-backed chunk persistence.
+- Index update: add incremental index build/update after new chunk inserts.
+- Query: map upstream router output to `categories_to_search` before calling `run_rag`.
 
-### D) Insert sensitive-matrix / PII policy gate (security step)
+Useful function signatures:
+- `src.rag_service.run_rag(question, categories_to_search, top_k, llm_provider, llm_model)`
+- `src.retriever.DomainRetriever.search(question, domains_to_search, top_k, use_bm25, use_vector, fusion)`
 
-Planned placement: **after retrieval, before LLM**.
-Uses Stage 1 spans + your role×sensitive matrix to redact or drop disallowed content.
+## 6) Next Steps
+
+1. Connect upstream database and router (`domains_to_search`) end-to-end.
+2. Enable real-world email ingestion and chunking pipeline.
+3. Run larger-scale evaluation (100+ tests) on real data.
+4. Add production-safe observability (latency, retrieval hit quality, failure reasons).
+

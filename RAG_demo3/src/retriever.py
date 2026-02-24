@@ -34,6 +34,44 @@ class DomainRetriever:
         self._faiss = None
         self._vector_ready = False
 
+    @staticmethod
+    def _dedupe_keep_best(hits: list[Hit]) -> list[Hit]:
+        best = {}
+        for h in hits:
+            if h.chunk_id not in best or h.score > best[h.chunk_id].score:
+                best[h.chunk_id] = h
+        return list(best.values())
+
+    @staticmethod
+    def _rrf_fuse(vector_hits: list[Hit], bm25_hits: list[Hit], rrf_k: int = 60) -> list[Hit]:
+        vector_ranked = sorted(DomainRetriever._dedupe_keep_best(vector_hits), key=lambda h: h.score, reverse=True)
+        bm25_ranked = sorted(DomainRetriever._dedupe_keep_best(bm25_hits), key=lambda h: h.score, reverse=True)
+
+        score_map = {}
+        hit_map = {}
+
+        for rank, h in enumerate(vector_ranked, start=1):
+            score_map[h.chunk_id] = score_map.get(h.chunk_id, 0.0) + 1.0 / (rrf_k + rank)
+            hit_map[h.chunk_id] = h
+
+        for rank, h in enumerate(bm25_ranked, start=1):
+            score_map[h.chunk_id] = score_map.get(h.chunk_id, 0.0) + 1.0 / (rrf_k + rank)
+            hit_map[h.chunk_id] = h
+
+        fused = []
+        for cid, h in hit_map.items():
+            fused.append(
+                Hit(
+                    domain=h.domain,
+                    chunk_id=h.chunk_id,
+                    score=score_map.get(cid, 0.0),
+                    method="hybrid_rrf",
+                    text=h.text,
+                    source=h.source,
+                )
+            )
+        return sorted(fused, key=lambda h: h.score, reverse=True)
+
     def _ensure_vector_backend(self):
         if self._vector_ready:
             return
@@ -107,6 +145,7 @@ class DomainRetriever:
         top_k: int = 5,
         use_bm25: bool = True,
         use_vector: bool = True,
+        fusion: str = "rrf",
     ) -> list[Hit]:
         # Query vector (optional)
         if use_vector:
@@ -116,7 +155,8 @@ class DomainRetriever:
         else:
             qv = None
 
-        raw_hits = []
+        vector_hits = []
+        bm25_hits = []
 
         for domain in domains_to_search:
             index, chunks = self._load_domain(domain, need_index=use_vector)
@@ -128,17 +168,14 @@ class DomainRetriever:
                     if i == -1:
                         continue
                     c = chunks[int(i)]
-                    raw_hits.append(
-                        (
-                            c["chunk_id"],
-                            Hit(
-                                domain=domain,
-                                chunk_id=c["chunk_id"],
-                                score=float(s),
-                                method="vector",
-                                text=c["text"],
-                                source=c.get("source", {}),
-                            ),
+                    vector_hits.append(
+                        Hit(
+                            domain=domain,
+                            chunk_id=c["chunk_id"],
+                            score=float(s),
+                            method="vector",
+                            text=c["text"],
+                            source=c.get("source", {}),
                         )
                     )
 
@@ -149,25 +186,19 @@ class DomainRetriever:
                 top_ids = sorted(range(len(bm_scores)), key=lambda i: bm_scores[i], reverse=True)[:top_k]
                 for i in top_ids:
                     c = chunks[int(i)]
-                    raw_hits.append(
-                        (
-                            c["chunk_id"],
-                            Hit(
-                                domain=domain,
-                                chunk_id=c["chunk_id"],
-                                score=float(bm_scores[int(i)]),
-                                method="bm25",
-                                text=c["text"],
-                                source=c.get("source", {}),
-                            ),
+                    bm25_hits.append(
+                        Hit(
+                            domain=domain,
+                            chunk_id=c["chunk_id"],
+                            score=float(bm_scores[int(i)]),
+                            method="bm25",
+                            text=c["text"],
+                            source=c.get("source", {}),
                         )
                     )
 
-        # Dedupe by chunk_id, keep best score
-        best = {}
-        for cid, hit in raw_hits:
-            if cid not in best or hit.score > best[cid].score:
-                best[cid] = hit
+        if use_vector and use_bm25 and fusion.lower() == "rrf":
+            return self._rrf_fuse(vector_hits, bm25_hits)[:top_k]
 
-        merged = sorted(best.values(), key=lambda h: h.score, reverse=True)[:top_k]
-        return merged
+        merged = self._dedupe_keep_best(vector_hits + bm25_hits)
+        return sorted(merged, key=lambda h: h.score, reverse=True)[:top_k]

@@ -11,5 +11,44 @@
       "subject": "Updated Security Codes",
       "timestamp": "2026-01-20"
     }
+  },
+  {
+    "chunk_id": "operational_security_002",
+    "domain": "operational_security",
+    "text": "Operational Security internal note: zone access tier is tier-3. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "operational_security_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "operational_security synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "operational_security_003",
+    "domain": "operational_security",
+    "text": "Operational Security internal note: credential rotation period is 30 days. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "operational_security_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "operational_security synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "operational_security_004",
+    "domain": "operational_security",
+    "text": "Operational Security internal note: incident severity map is sev-matrix-b. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "operational_security_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "operational_security synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

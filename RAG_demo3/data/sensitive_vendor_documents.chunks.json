@@ -11,5 +11,44 @@
       "subject": "CONFIDENTIAL: Pricing Proposal",
       "timestamp": "2026-01-31"
     }
+  },
+  {
+    "chunk_id": "sensitive_vendor_documents_002",
+    "domain": "sensitive_vendor_documents",
+    "text": "Sensitive Vendor Documents internal note: vendor packet class is confidential-b. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "sensitive_vendor_documents_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "sensitive_vendor_documents synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "sensitive_vendor_documents_003",
+    "domain": "sensitive_vendor_documents",
+    "text": "Sensitive Vendor Documents internal note: redline owner is procurement-legal. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "sensitive_vendor_documents_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "sensitive_vendor_documents synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "sensitive_vendor_documents_004",
+    "domain": "sensitive_vendor_documents",
+    "text": "Sensitive Vendor Documents internal note: renewal packet id is RV-204. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "sensitive_vendor_documents_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "sensitive_vendor_documents synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

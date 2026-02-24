@@ -11,5 +11,44 @@
       "subject": "Org Structure Changes",
       "timestamp": "2026-01-29"
     }
+  },
+  {
+    "chunk_id": "org_structure_metadata_002",
+    "domain": "org_structure_metadata",
+    "text": "Org Structure Metadata internal note: reporting layer name is platform-core. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "org_structure_metadata_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "org_structure_metadata synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "org_structure_metadata_003",
+    "domain": "org_structure_metadata",
+    "text": "Org Structure Metadata internal note: span-of-control cap is 8. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "org_structure_metadata_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "org_structure_metadata synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "org_structure_metadata_004",
+    "domain": "org_structure_metadata",
+    "text": "Org Structure Metadata internal note: org snapshot cadence is quarterly. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "org_structure_metadata_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "org_structure_metadata synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

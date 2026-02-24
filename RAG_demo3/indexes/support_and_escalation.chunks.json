@@ -11,5 +11,44 @@
       "subject": "Escalation: Ticket #12345",
       "timestamp": "2026-02-01"
     }
+  },
+  {
+    "chunk_id": "support_and_escalation_002",
+    "domain": "support_and_escalation",
+    "text": "Support And Escalation internal note: escalation bridge id is BR-22. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "support_and_escalation_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "support_and_escalation synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "support_and_escalation_003",
+    "domain": "support_and_escalation",
+    "text": "Support And Escalation internal note: priority response target is 2 hours. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "support_and_escalation_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "support_and_escalation synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "support_and_escalation_004",
+    "domain": "support_and_escalation",
+    "text": "Support And Escalation internal note: handoff checkpoint is tier2-handoff. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "support_and_escalation_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "support_and_escalation synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

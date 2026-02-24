@@ -11,5 +11,44 @@
       "subject": "CONFIDENTIAL: Funding Round",
       "timestamp": "2026-01-26"
     }
+  },
+  {
+    "chunk_id": "company_financial_strategy_002",
+    "domain": "company_financial_strategy",
+    "text": "Company Financial Strategy internal note: capital allocation ratio is 55/45. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "company_financial_strategy_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "company_financial_strategy synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "company_financial_strategy_003",
+    "domain": "company_financial_strategy",
+    "text": "Company Financial Strategy internal note: liquidity buffer target is 14 months. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "company_financial_strategy_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "company_financial_strategy synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "company_financial_strategy_004",
+    "domain": "company_financial_strategy",
+    "text": "Company Financial Strategy internal note: cost optimization target is 11%. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "company_financial_strategy_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "company_financial_strategy synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

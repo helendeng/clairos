@@ -11,5 +11,44 @@
       "subject": "Contract Renewal - Confidential",
       "timestamp": "2026-01-18"
     }
+  },
+  {
+    "chunk_id": "contractual_002",
+    "domain": "contractual",
+    "text": "Contractual internal note: msa renewal notice is 60 days. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contractual_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contractual synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "contractual_003",
+    "domain": "contractual",
+    "text": "Contractual internal note: sla credit threshold is 99.5%. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contractual_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contractual synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "contractual_004",
+    "domain": "contractual",
+    "text": "Contractual internal note: termination review gate is legal-signoff. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "contractual_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "contractual synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

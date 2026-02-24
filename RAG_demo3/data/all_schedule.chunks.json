@@ -11,5 +11,44 @@
       "subject": "Onboarding meeting",
       "timestamp": "2026-01-18"
     }
+  },
+  {
+    "chunk_id": "all_schedule_002",
+    "domain": "all_schedule",
+    "text": "All Schedule internal note: incident standup timezone is PST. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "all_schedule_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "all_schedule synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "all_schedule_003",
+    "domain": "all_schedule",
+    "text": "All Schedule internal note: maintenance blackout date is 2026-06-12. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "all_schedule_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "all_schedule synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "all_schedule_004",
+    "domain": "all_schedule",
+    "text": "All Schedule internal note: exec review slot is 09:30 AM. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "all_schedule_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "all_schedule synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

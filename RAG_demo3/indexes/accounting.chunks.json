@@ -11,5 +11,44 @@
       "subject": "Q4 Forecast Update",
       "timestamp": "2026-01-25"
     }
+  },
+  {
+    "chunk_id": "accounting_002",
+    "domain": "accounting",
+    "text": "Accounting internal note: forecast variance cap is 6%. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "accounting_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "accounting synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "accounting_003",
+    "domain": "accounting",
+    "text": "Accounting internal note: expense audit cutoff is 2026-04-15. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "accounting_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "accounting synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "accounting_004",
+    "domain": "accounting",
+    "text": "Accounting internal note: ledger freeze hour is 18:00 UTC. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "accounting_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "accounting synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
   }
 ]

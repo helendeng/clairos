@@ -1,26 +1,34 @@
 """RAGAS evaluation for RAG QA (retrieval + generation quality).
 
 This script builds a small dataset from data/tests.json, retrieves contexts,
-generates answers via local Ollama, then runs RAGAS metrics.
+generates natural-language answers via configurable LLM provider, then runs RAGAS metrics.
 """
 
 import json
 import os
+import math
 from typing import Optional
 from pathlib import Path
 
 from .retriever import DomainRetriever
-from .ollama_llm import generate
+from .llm_client import generate
 
 ROOT = Path(__file__).resolve().parents[1]
-TESTS_PATH = ROOT / "data" / "tests.json"
+TESTS_PATH = Path(os.getenv("EVAL_TESTS_PATH", str(ROOT / "data" / "tests.json")))
 
 MODEL = "qwen2.5:14b-instruct"
-TOP_K = 5
+PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "deepseek_api")
+API_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
+API_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")
+API_KEY = os.getenv("LLM_API_KEY", "sk-acb050a499c64547b5a5af2321aee72d")
+TOP_K = int(os.getenv("RAGAS_TOP_K", "4"))
+ENABLE_ANSWER_RELEVANCY = os.getenv("RAGAS_ENABLE_ANSWER_RELEVANCY", "1").strip() not in {"0", "false", "False"}
+RAISE_EXCEPTIONS = os.getenv("RAGAS_RAISE_EXCEPTIONS", "0").strip() in {"1", "true", "True"}
 
 PROMPT_TMPL = """You are ClairOS (RAG PoC). Use ONLY the context.
-Return ONLY the exact answer value, with no extra words.
-If not found, return: NOT_FOUND
+Answer in one concise sentence.
+Keep wording natural and explicit so it directly answers the question.
+If the answer is not present in context, return exactly: NOT_FOUND
 
 CONTEXT:
 {context}
@@ -28,7 +36,7 @@ CONTEXT:
 QUESTION:
 {question}
 
-ANSWER VALUE:
+ANSWER:
 """
 
 
@@ -46,7 +54,7 @@ def _check_ollama(base_url: str) -> bool:
         return False
 
 
-def _build_llm(model: str, base_url: Optional[str]):
+def _build_ollama_llm(model: str, base_url: Optional[str]):
     try:
         from langchain_ollama import OllamaLLM
 
@@ -61,6 +69,17 @@ def _build_llm(model: str, base_url: Optional[str]):
                 "Missing LangChain Ollama integration. Install langchain-ollama "
                 "(preferred) or langchain-community."
             ) from exc
+
+
+def _build_openai_compatible_chat(model: str, base_url: str, api_key: str):
+    try:
+        from langchain_openai import ChatOpenAI
+    except Exception as exc:
+        raise RuntimeError(
+            "Missing langchain-openai dependency. Install langchain-openai to use deepseek/api provider."
+        ) from exc
+
+    return ChatOpenAI(model=model, base_url=base_url, api_key=api_key, temperature=0)
 
 
 def main():
@@ -103,7 +122,10 @@ def main():
         )
         contexts = [h.text for h in hits]
         prompt = PROMPT_TMPL.format(context=format_context(hits), question=t["question"])
-        answer = generate(prompt, model=MODEL).strip()
+        selected_model = MODEL if PROVIDER.lower() in {"ollama", "local", "local_ollama"} else API_MODEL
+        answer = generate(prompt, provider=PROVIDER, model=selected_model).strip()
+        if not answer:
+            answer = "NOT_FOUND"
 
         # RAGAS expects specific field names and formats
         row = {
@@ -119,15 +141,23 @@ def main():
         return
 
     dataset = Dataset.from_list(rows)
-    base_url = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
-    if not _check_ollama(base_url):
-        print(
-            "Ollama is not reachable at "
-            f"{base_url}. Start Ollama or set OLLAMA_BASE_URL."
-        )
-        return
+    provider_name = PROVIDER.lower()
 
-    llm = _build_llm(MODEL, base_url)
+    if provider_name in {"ollama", "local", "local_ollama"}:
+        base_url = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
+        if not _check_ollama(base_url):
+            print(
+                "Ollama is not reachable at "
+                f"{base_url}. Start Ollama or set OLLAMA_BASE_URL."
+            )
+            return
+        llm = _build_ollama_llm(MODEL, base_url)
+    elif provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible"}:
+        llm = _build_openai_compatible_chat(API_MODEL, API_BASE_URL, API_KEY)
+    else:
+        raise ValueError(
+            f"Unsupported EVAL_LLM_PROVIDER '{PROVIDER}'. Use deepseek_api or ollama."
+        )
 
     # Use LangChain's HuggingFace embeddings (has embed_query method needed by answer_relevancy)
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
@@ -141,10 +171,18 @@ def main():
     # These are already initialized and will use the llm/embeddings passed to evaluate()
     metrics = [
         faithfulness,
-        answer_relevancy,
         context_precision,
         context_recall,
     ]
+    if ENABLE_ANSWER_RELEVANCY:
+        # DeepSeek OpenAI-compatible endpoint supports only n=1.
+        # answer_relevancy may request multiple generations via strictness>1.
+        if provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible"}:
+            try:
+                answer_relevancy.strictness = 1
+            except Exception:
+                pass
+        metrics.insert(1, answer_relevancy)
 
     # Print all data points for debugging
     print("\n" + "=" * 70)
@@ -176,12 +214,24 @@ def main():
         llm=llm,
         embeddings=embeddings,
         run_config=run_config,
+        raise_exceptions=RAISE_EXCEPTIONS,
     )
 
     print("\n" + "=" * 70)
     print("RAGAS RESULTS")
     print("=" * 70)
     print(results)
+    try:
+        result_dict = dict(results)
+        v = result_dict.get("answer_relevancy")
+        if isinstance(v, float) and math.isnan(v):
+            print(
+                "NOTE: answer_relevancy is NaN. Metric computation failed for most/all samples "
+                "(often evaluator LLM output-format mismatch or parsing failure). "
+                "Set RAGAS_RAISE_EXCEPTIONS=1 to see exact exceptions."
+            )
+    except Exception:
+        pass
     print("=" * 70)
 
 

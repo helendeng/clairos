@@ -1,17 +1,17 @@
-"""CLI demo for category-constrained RAG using local Ollama (Qwen2.5:14b-instruct).
+"""CLI demo for category-constrained RAG using selectable LLM provider.
 
 This is the 'deliverable' demo version of RAG integration:
 - Assume categories_to_search provided upstream
 - Retrieve top_k chunks within those categories
 - (No PII filtering in this demo)
-- Send context to Ollama and print answer + sources
+- Send context to selected LLM and print answer + sources
 
 Run:
   python -m src.rag_cli
 """
 
 from .retriever import DomainRetriever
-from .ollama_llm import generate
+from .llm_client import generate
 
 MODEL = "qwen2.5:14b-instruct"
 TOP_K = 5
@@ -41,6 +41,8 @@ def main():
     categories = input("categories_to_search (comma-separated, e.g., financial,legal): ").strip()
     categories_to_search = [d.strip() for d in categories.split(",") if d.strip()]
     question = input("question: ").strip()
+    llm_provider = input("llm_provider [deepseek_api/ollama] (default: deepseek_api): ").strip() or "deepseek_api"
+    llm_model = input("llm_model (blank for provider default): ").strip() or None
 
     retriever = DomainRetriever()
     hits = retriever.search(question, categories_to_search, top_k=TOP_K, use_bm25=True)
@@ -48,7 +50,8 @@ def main():
     context = format_context(hits)
     prompt = PROMPT_TMPL.format(context=context, question=question)
 
-    answer = generate(prompt, model=MODEL)
+    selected_model = llm_model or (MODEL if llm_provider.lower() in {"ollama", "local", "local_ollama"} else None)
+    answer = generate(prompt, provider=llm_provider, model=selected_model)
 
     print("\n=== SOURCES (top-k) ===")
     for h in hits:

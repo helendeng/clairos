@@ -1,16 +1,10 @@
-"""Minimal Ollama client (local) for generation.
+"""Backward-compatible Ollama wrapper.
 
-Requires:
-  ollama serve
-  ollama pull qwen2.5:14b
+Prefer importing `generate` from `llm_client` for provider switching.
 """
 
-import requests
+from .llm_client import generate as _generate
 
 
 def generate(prompt: str, model: str = "qwen2.5:14b", timeout_s: int = 120) -> str:
-    url = "http://localhost:11434/api/generate"
-    payload = {"model": model, "prompt": prompt, "stream": False}
-    r = requests.post(url, json=payload, timeout=timeout_s)
-    r.raise_for_status()
-    return r.json().get("response", "")
+    return _generate(prompt=prompt, provider="ollama", model=model, timeout_s=timeout_s)

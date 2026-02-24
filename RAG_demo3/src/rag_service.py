@@ -1,7 +1,7 @@
 # backend/rag/rag_service.py
 from typing import Any, Dict, List
 from .retriever import DomainRetriever
-from .ollama_llm import generate
+from .llm_client import generate
 
 DEFAULT_TOP_K = 5
 
@@ -15,7 +15,13 @@ def _format_context(hits) -> str:
     return "\n\n".join(parts)
 
 
-def run_rag(question: str, categories_to_search: List[str], top_k: int = DEFAULT_TOP_K) -> Dict[str, Any]:
+def run_rag(
+    question: str,
+    categories_to_search: List[str],
+    top_k: int = DEFAULT_TOP_K,
+    llm_provider: str = "deepseek_api",
+    llm_model: str | None = None,
+) -> Dict[str, Any]:
     retriever = DomainRetriever()  # uses backend/indexes automatically
 
     hits = retriever.search(
@@ -41,7 +47,7 @@ QUESTION:
 ANSWER:
 """
 
-    answer = generate(prompt)
+    answer = generate(prompt, provider=llm_provider, model=llm_model)
 
     sources = []
     for h in hits:
