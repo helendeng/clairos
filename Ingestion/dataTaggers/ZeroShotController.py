@@ -5,7 +5,8 @@ def process_email_with_zero_shot(
                             subject: str,
                             label_groups: dict,  # dict of group_name -> {category_name: description}
                             zero_shot_classify_fn,
-                            threshold: float = 0.5,
+                            category_thresholds: dict = None,  # dict of category_name -> threshold
+                            default_threshold: float = 0.5,
                             split_by: str = "sentence"  # "sentence" or "paragraph"
                         ) -> dict:
     """
@@ -15,12 +16,21 @@ def process_email_with_zero_shot(
 
     Parameters:
     -----------
-    email_text : str: The full email body text
-    subject : str: Email subject line
-    label_groups : dict: Groups of labels {group_name: {category_name: description}}
-    zero_shot_classify_fn : function: Your zero_shot_classify function
-    threshold : float: Confidence threshold for predictions (default 0.5)
-    split_by : str: How to split text: "sentence" or "paragraph"
+    email_text : str
+        The full email body text
+    subject : str
+        Email subject line
+    label_groups : dict
+        Groups of labels {group_name: {category_name: description}}
+    zero_shot_classify_fn : function
+        Your zero_shot_classify function
+    category_thresholds : dict, optional
+        Per-category thresholds {category_name: threshold_value}
+        Example: {'Strategic.M&A': 0.5, 'Operational.Project.Technical_Blockers': 0.35}
+    default_threshold : float
+        Default threshold for categories not in category_thresholds (default 0.5)
+    split_by : str
+        How to split text: "sentence" or "paragraph"
 
     Returns:
     --------
@@ -32,6 +42,10 @@ def process_email_with_zero_shot(
             'aggregated_tags': [unique tags across all chunks]
         }
     """
+
+    # Initialize category_thresholds if not provided
+    if category_thresholds is None:
+        category_thresholds = {}
 
     # Combine subject and body
     full_text = f"Subject: {subject}\n\n{email_text}"
@@ -74,11 +88,15 @@ def process_email_with_zero_shot(
                 multi_label=True
             )
 
-            # Map descriptions back to category names and apply threshold
+            # Map descriptions back to category names and apply per-category threshold
             for label_desc, score in zip(result['labels'], result['scores']):
                 for cat_name, cat_desc in group_labels.items():
                     if cat_desc == label_desc:
                         chunk_scores[cat_name] = score
+                        
+                        # Use category-specific threshold if available, otherwise use default
+                        threshold = category_thresholds.get(cat_name, default_threshold)
+                        
                         if score >= threshold:
                             chunk_tags.append(cat_name)
                             all_tags.add(cat_name)

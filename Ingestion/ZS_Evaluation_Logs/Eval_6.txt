@@ -1,0 +1,132 @@
+================================================================================
+PARALLEL-GROUP ZERO-SHOT CLASSIFIER EVALUATION REPORT
+================================================================================
+
+OVERALL METRICS
+--------------------------------------------------------------------------------
+Micro Precision:              0.183
+Micro Recall:                 0.757
+Micro F1:                     0.295
+Macro Precision:              0.601
+Macro Recall:                 0.745
+Macro F1:                     0.556
+Exact Match Accuracy:         0.000
+Hamming Loss:                 0.256
+
+THRESHOLD CONFIGURATION
+--------------------------------------------------------------------------------
+Default threshold: 0.5
+Custom thresholds: 16 categories
+Custom threshold categories:
+  Financial.Accounting.Bonuses: 0.5
+  Financial.Accounting.Firing_Hiring: 0.25
+  Financial.Accounting.Salary_Negotiations: 0.5
+  Financial.Strategy.Budget_Forecasting: 0.35
+  HR.Internal_Disputes: 0.55
+  HR.Performance_Reviews: 0.5
+  Operational.Project.Progress_Updates: 0.4
+  Operational.Project.Technical_Blockers: 0.35
+  R&D.IP.Patentable_Ideas: 0.6
+  R&D.Technical.Experiments: 0.6
+  R&D.Technical.Models: 0.35
+  Strategic.Board_Communications: 0.35
+  Strategic.Customer_Acquisition: 0.35
+  Strategic.M&A: 0.5
+  Strategic.Market_Expansion: 0.5
+  Strategic.Pricing_Models: 0.3
+
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Examples:                    240
+Avg True Labels per Example:       1.70
+Avg Predicted Labels per Example:  7.00
+Examples with Zero Predictions:    0
+Examples with Perfect Match:       0
+Processing Time:                   44.01s
+Avg Time per Example:              0.183s
+
+TOP 24 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Thresh   Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Bonuses                       0.897    0.929    0.867    0.50     15      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    0.50     11      
+R&D.IP.Proprietary_Formulas                        0.815    0.786    0.846    0.50     13      
+Strategic.Market_Expansion                         0.743    0.650    0.867    0.50     15      
+Strategic.M&A                                      0.733    0.786    0.688    0.50     16      
+HR.Performance_Reviews                             0.733    0.846    0.647    0.50     17      
+Strategic.Board_Communications                     0.722    0.929    0.591    0.35     22      
+Financial.Strategy.Revenue_Projections             0.710    0.846    0.611    0.50     18      
+Personal_Life.Health_Disclosures                   0.706    0.857    0.600    0.50     10      
+R&D.IP.Patentable_Ideas                            0.687    0.550    0.917    0.60     12      
+HR.Internal_Disputes                               0.683    0.636    0.737    0.55     19      
+Strategic.Competitive_Analysis                     0.667    1.000    0.500    0.50     16      
+R&D.Technical.Prototypes                           0.667    0.600    0.750    0.50     16      
+Personal_Life.Crisis_Content                       0.667    0.750    0.600    0.50     10      
+Financial.Strategy.Investment_Strategies           0.562    0.529    0.600    0.50     15      
+Strategic.Customer_Acquisition                     0.552    0.800    0.421    0.35     19      
+Operational.Project.Progress_Updates               0.541    0.588    0.500    0.40     20      
+Financial.Accounting.Firing_Hiring                 0.476    1.000    0.312    0.25     16      
+Operational.Project.Technical_Blockers             0.216    0.121    1.000    0.35     29      
+Financial.Strategy.Budget_Forecasting              0.176    0.096    1.000    0.35     23      
+R&D.Technical.Experiments                          0.154    0.084    1.000    0.60     20      
+R&D.Technical.Models                               0.154    0.083    1.000    0.35     20      
+Strategic.Pricing_Models                           0.147    0.079    1.000    0.30     19      
+R&D.Technical.Algorithms                           0.127    0.068    1.000    0.50     16      
+
+BOTTOM 24 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Thresh   Support 
+--------------------------------------------------------------------------------
+R&D.Technical.Algorithms                           0.127    0.068    1.000    0.50     16      
+Strategic.Pricing_Models                           0.147    0.079    1.000    0.30     19      
+R&D.Technical.Models                               0.154    0.083    1.000    0.35     20      
+R&D.Technical.Experiments                          0.154    0.084    1.000    0.60     20      
+Financial.Strategy.Budget_Forecasting              0.176    0.096    1.000    0.35     23      
+Operational.Project.Technical_Blockers             0.216    0.121    1.000    0.35     29      
+Financial.Accounting.Firing_Hiring                 0.476    1.000    0.312    0.25     16      
+Operational.Project.Progress_Updates               0.541    0.588    0.500    0.40     20      
+Strategic.Customer_Acquisition                     0.552    0.800    0.421    0.35     19      
+Financial.Strategy.Investment_Strategies           0.562    0.529    0.600    0.50     15      
+Personal_Life.Crisis_Content                       0.667    0.750    0.600    0.50     10      
+R&D.Technical.Prototypes                           0.667    0.600    0.750    0.50     16      
+Strategic.Competitive_Analysis                     0.667    1.000    0.500    0.50     16      
+HR.Internal_Disputes                               0.683    0.636    0.737    0.55     19      
+R&D.IP.Patentable_Ideas                            0.687    0.550    0.917    0.60     12      
+Personal_Life.Health_Disclosures                   0.706    0.857    0.600    0.50     10      
+Financial.Strategy.Revenue_Projections             0.710    0.846    0.611    0.50     18      
+Strategic.Board_Communications                     0.722    0.929    0.591    0.35     22      
+HR.Performance_Reviews                             0.733    0.846    0.647    0.50     17      
+Strategic.M&A                                      0.733    0.786    0.688    0.50     16      
+Strategic.Market_Expansion                         0.743    0.650    0.867    0.50     15      
+R&D.IP.Proprietary_Formulas                        0.815    0.786    0.846    0.50     13      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    0.50     11      
+Financial.Accounting.Bonuses                       0.897    0.929    0.867    0.50     15      
+
+MOST CONFUSED CATEGORY PAIRS
+--------------------------------------------------------------------------------
+Predicted                                Should Be                                Count   
+--------------------------------------------------------------------------------
+R&D.Technical.Algorithms                 Operational.Project.Technical_Blockers   28      
+Strategic.Pricing_Models                 Operational.Project.Technical_Blockers   28      
+R&D.Technical.Experiments                Operational.Project.Technical_Blockers   27      
+Financial.Strategy.Budget_Forecasting    Operational.Project.Technical_Blockers   26      
+R&D.Technical.Models                     Operational.Project.Technical_Blockers   26      
+
+MOST FREQUENT FALSE POSITIVES
+--------------------------------------------------------------------------------
+  Strategic.Pricing_Models                           (221 times)
+  R&D.Technical.Algorithms                           (220 times)
+  R&D.Technical.Models                               (220 times)
+  R&D.Technical.Experiments                          (219 times)
+  Financial.Strategy.Budget_Forecasting              (216 times)
+
+MOST FREQUENT FALSE NEGATIVES (Missed)
+--------------------------------------------------------------------------------
+  Financial.Accounting.Firing_Hiring                 (11 times)
+  Strategic.Customer_Acquisition                     (11 times)
+  Operational.Project.Progress_Updates               (10 times)
+  Strategic.Board_Communications                     (9 times)
+  Strategic.Competitive_Analysis                     (8 times)
+
+================================================================================

@@ -200,36 +200,17 @@ class CategoryKey(Enum):
 # The labels and their descriptions that will be fed into the Zero-Shot model
 """
 1. HR: Performance Reviews, Internal Disputes
-2. Legal.Litigation: Legal disputes, Notice of Claims, Pre-litigation
-3. Legal.Compliance: SOX, Safety, Reporting Obligations
-4. Legal.Privileged: To/from counsel, Referencing legal advice
-5. Strategic: M&A, Market expansion, Pricing models, Customer acquisition, Competitive Analysis, Board Communications
-6. R&D.Technical: Experiments, Algorithms, Models, Prototypes
-7. R&D.IP: Patentable ideas, Proprietary formulas
-8. Financial.Accounting: Salary negotiations, Firing/hiring, Bonuses
-9. Financial.Strategy: Budget forecasting, Revenue projections, Investment strategies
-10. Operational.Project: Technical blockers, Progress updates
-11. Personal Life: Health disclosures, Crisis content
+2. Strategic: M&A, Market expansion, Pricing models, Customer acquisition, Competitive Analysis, Board Communications
+3. R&D.Technical: Experiments, Algorithms, Models, Prototypes
+4. R&D.IP: Patentable ideas, Proprietary formulas
+5. Financial.Accounting: Salary negotiations, Firing/hiring, Bonuses
+6. Financial.Strategy: Budget forecasting, Revenue projections, Investment strategies
+7. Operational.Project: Technical blockers, Progress updates
+8. Personal Life: Health disclosures, Crisis content
 """
 
 ## We are tagging in groups, thus we need to split up the labels into groups of 10 each
 ZERO_SHOT_LABEL_GROUPS = {
-    #### Legal
-    # "Legal": {
-    #     "Legal.Litigation.Legal_Disputes": "Legal dispute, lawsuit, litigation, or court proceeding",
-    #     "Legal.Litigation.Notice_of_Claims": "Notice of claim, formal complaint, or legal demand letter",
-    #     "Legal.Litigation.Pre_Litigation": "Pre-litigation discussion, potential lawsuit, or threatened legal action",
-    #     "Legal.Compliance.SOX": "Sarbanes-Oxley compliance, financial controls, or audit requirements",
-    #     "Legal.Compliance.Safety": "Safety compliance, OSHA requirements, or workplace safety violations",
-    #     "Legal.Compliance.Reporting_Obligations": "Regulatory reporting obligation, compliance deadline, or mandatory disclosure",
-    #     "Legal.Privileged.To_From_Counsel": "Communication with attorney, legal counsel, or lawyer providing legal advice",
-    #     "Legal.Privileged.Referencing_Legal_Advice": "Discussion referencing attorney advice, legal counsel recommendation, or privileged communication",
-    # },
-
-    "Legal": {
-        'Legal.All': 'Legal matter including lawsuits, compliance requirements, contracts, NDAs, attorney communications, or regulatory issues'
-    },
-
     #### Strategic and HR
     "Strategic_&_HR": {
         "Strategic.M&A": "Merger, acquisition, company purchase, or buyout discussion",
@@ -269,4 +250,31 @@ ZERO_SHOT_LABEL_GROUPS = {
         "Personal_Life.Health_Disclosures": "Personal health issue, medical condition, or doctor appointment",
         "Personal_Life.Crisis_Content": "Personal crisis, family emergency, or sensitive life event"
     },
+}
+
+
+###############################################################################
+######################## Threshold Values for Zero-Shot #######################
+CATEGORY_THRESHOLDS = {
+    # High precision, low recall → LOWER threshold
+    'Strategic.Board_Communications': 0.35,
+    'Operational.Project.Technical_Blockers': 0.35,
+    'Financial.Accounting.Firing_Hiring': 0.25,
+    'Strategic.Pricing_Models': 0.30,
+    'Strategic.Customer_Acquisition': 0.35,
+    'R&D.Technical.Models': 0.35,
+    'Financial.Strategy.Budget_Forecasting': 0.35,
+    'Operational.Project.Progress_Updates': 0.40,
+    
+    # Balanced → Keep at 0.5
+    'Strategic.M&A': 0.5,
+    'Strategic.Market_Expansion': 0.5,
+    'HR.Performance_Reviews': 0.5,
+    'Financial.Accounting.Salary_Negotiations': 0.5,
+    'Financial.Accounting.Bonuses': 0.5,
+    
+    # High recall, lower precision → RAISE threshold (reduce false positives)
+    'R&D.Technical.Experiments': 0.6,  # 20 false positives
+    'R&D.IP.Patentable_Ideas': 0.6,    # 15 false positives
+    'HR.Internal_Disputes': 0.55,      # 8 false positives
 }

@@ -7,13 +7,14 @@ import pandas as pd
 # temporary import the testing examples list
 from ZeroShot import zero_shot_classify
 from ZeroShotTestExamples import zero_shot_test_examples
-from Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS
+from Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS, CATEGORY_THRESHOLDS
 
 def evaluate_zero_shot_classifier_parallel(
                     test_examples: List[Dict[str, Any]],
                     label_groups: Dict[str, Dict[str, str]],
                     zero_shot_classify_fn,
-                    threshold: float = 0.5,
+                    category_thresholds: Dict[str, float] = None,
+                    default_threshold: float = 0.5,
                     multi_label: bool = True
                                 ) -> Dict[str, Any]:
     """
@@ -36,8 +37,12 @@ def evaluate_zero_shot_classifier_parallel(
     zero_shot_classify_fn : function
         Your zero_shot_classify function
 
-    threshold : float
-        Confidence threshold for predictions
+    category_thresholds : dict, optional
+        Per-category thresholds {category_name: threshold_value}
+        Example: {'Strategic.M&A': 0.5, 'Operational.Project.Technical_Blockers': 0.35}
+
+    default_threshold : float
+        Default threshold for categories not in category_thresholds (default 0.5)
 
     multi_label : bool
         Whether to use multi-label mode
@@ -47,6 +52,10 @@ def evaluate_zero_shot_classifier_parallel(
     results : dict
         Comprehensive evaluation metrics
     """
+
+    # Initialize category_thresholds if not provided
+    if category_thresholds is None:
+        category_thresholds = {}
 
     # Build flat dict of all subcategories across all groups
     all_subcategories = {}
@@ -63,6 +72,7 @@ def evaluate_zero_shot_classifier_parallel(
     print(f"Evaluating on {len(test_examples)} examples with parallel-group classification...")
     print(f"Label groups: {list(label_groups.keys())}")
     print(f"Total subcategories: {len(all_subcategories)}")
+    print(f"Using per-category thresholds: {len(category_thresholds)} custom, default={default_threshold}")
 
     # Process each test example
     for idx, example in enumerate(test_examples):
@@ -86,11 +96,15 @@ def evaluate_zero_shot_classifier_parallel(
                     multi_label=multi_label
                 )
 
-                # Map descriptions back to category names and apply threshold
+                # Map descriptions back to category names and apply per-category threshold
                 for label_desc, score in zip(result['labels'], result['scores']):
                     for cat_name, cat_desc in group_labels.items():
                         if cat_desc == label_desc:
                             all_subcat_scores[cat_name] = score
+                            
+                            # Use category-specific threshold if available, otherwise use default
+                            threshold = category_thresholds.get(cat_name, default_threshold)
+                            
                             if score >= threshold:
                                 predicted_subcategories.add(cat_name)
                             break
@@ -174,7 +188,8 @@ def evaluate_zero_shot_classifier_parallel(
             'support': support,
             'tp': tp,
             'fp': fp,
-            'fn': fn
+            'fn': fn,
+            'threshold_used': category_thresholds.get(label, default_threshold)  # Track which threshold was used
         }
 
         if support > 0:
@@ -233,38 +248,8 @@ def evaluate_zero_shot_classifier_parallel(
         elif len(pred['predicted_labels']) == 0 and len(pred['true_labels']) > 0:
             missed_completely.append(pred)
 
-    # Threshold analysis
-    threshold_values = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
-    threshold_analysis = {}
-
-    for thresh in threshold_values:
-        thresh_tp = 0
-        thresh_fp = 0
-        thresh_fn = 0
-
-        for pred in all_predictions:
-            if 'error' in pred:
-                continue
-
-            predicted_at_thresh = set([
-                label for label, score in pred['all_scores'].items()
-                if score >= thresh
-            ])
-            true_labels_set = set(pred['true_labels'])
-
-            thresh_tp += len(predicted_at_thresh & true_labels_set)
-            thresh_fp += len(predicted_at_thresh - true_labels_set)
-            thresh_fn += len(true_labels_set - predicted_at_thresh)
-
-        thresh_prec = thresh_tp / (thresh_tp + thresh_fp) if (thresh_tp + thresh_fp) > 0 else 0
-        thresh_rec = thresh_tp / (thresh_tp + thresh_fn) if (thresh_tp + thresh_fn) > 0 else 0
-        thresh_f1 = 2 * thresh_prec * thresh_rec / (thresh_prec + thresh_rec) if (thresh_prec + thresh_rec) > 0 else 0
-
-        threshold_analysis[thresh] = {
-            'precision': thresh_prec,
-            'recall': thresh_rec,
-            'f1': thresh_f1
-        }
+    # NOTE: Threshold analysis removed since we're using per-category thresholds
+    # The global threshold sweep doesn't make sense anymore
 
     # Calculate summary statistics
     avg_true_labels = np.mean([len(pred['true_labels']) for pred in all_predictions if 'error' not in pred])
@@ -302,7 +287,8 @@ def evaluate_zero_shot_classifier_parallel(
             'high_confidence_wrong': high_confidence_wrong[:5],
             'missed_completely': missed_completely[:5]
         },
-        'threshold_analysis': threshold_analysis,
+        'category_thresholds_used': category_thresholds,
+        'default_threshold': default_threshold,
         'summary_statistics': {
             'total_examples': len(test_examples),
             'avg_true_labels_per_example': avg_true_labels,
@@ -341,6 +327,16 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
     print(f"Exact Match Accuracy:         {om['exact_match_accuracy']:.3f}")
     print(f"Hamming Loss:                 {om['hamming_loss']:.3f}")
 
+    # Threshold info
+    print(f"\nTHRESHOLD CONFIGURATION")
+    print("-" * 80)
+    print(f"Default threshold: {results['default_threshold']}")
+    print(f"Custom thresholds: {len(results['category_thresholds_used'])} categories")
+    if results['category_thresholds_used']:
+        print("Custom threshold categories:")
+        for cat, thresh in sorted(results['category_thresholds_used'].items()):
+            print(f"  {cat}: {thresh}")
+
     # Summary statistics
     print("\nSUMMARY STATISTICS")
     print("-" * 80)
@@ -362,20 +358,20 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
         reverse=True
     )
 
-    print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Support':<8}")
+    print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Thresh':<8} {'Support':<8}")
     print("-" * 80)
     for cat, metrics in sorted_categories[:top_n]:
         if metrics['support'] > 0:
-            print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['support']:<8}")
+            print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['threshold_used']:.2f}     {metrics['support']:<8}")
 
     # Bottom performing categories
     print(f"\nBOTTOM {top_n} PERFORMING CATEGORIES (by F1)")
     print("-" * 80)
-    print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Support':<8}")
+    print(f"{'Category':<50} {'F1':<8} {'Prec':<8} {'Rec':<8} {'Thresh':<8} {'Support':<8}")
     print("-" * 80)
     bottom_categories = [x for x in reversed(sorted_categories) if x[1]['support'] > 0][:top_n]
     for cat, metrics in bottom_categories:
-        print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['support']:<8}")
+        print(f"{cat:<50} {metrics['f1']:.3f}    {metrics['precision']:.3f}    {metrics['recall']:.3f}    {metrics['threshold_used']:.2f}     {metrics['support']:<8}")
 
     # Categories never predicted
     if ss['categories_never_predicted']:
@@ -404,18 +400,6 @@ def print_evaluation_report(results: Dict[str, Any], top_n: int = 10):
     for cat, count in results['confusion_analysis']['frequent_false_negatives'][:5]:
         print(f"  {cat:<50} ({count} times)")
 
-    # Threshold analysis
-    print(f"\nTHRESHOLD ANALYSIS")
-    print("-" * 80)
-    print(f"{'Threshold':<12} {'Precision':<12} {'Recall':<12} {'F1':<12}")
-    print("-" * 80)
-    for thresh, metrics in sorted(results['threshold_analysis'].items()):
-        print(f"{thresh:<12.1f} {metrics['precision']:<12.3f} {metrics['recall']:<12.3f} {metrics['f1']:<12.3f}")
-
-    # Recommendation for best threshold
-    best_thresh = max(results['threshold_analysis'].items(), key=lambda x: x[1]['f1'])
-    print(f"\nRecommended threshold: {best_thresh[0]} (F1: {best_thresh[1]['f1']:.3f})")
-
     print("\n" + "=" * 80)
 
 
@@ -430,22 +414,16 @@ def export_results_to_csv(results: Dict[str, Any], output_prefix: str = "zero_sh
     predictions_df.to_csv(f"{output_prefix}_predictions.csv", index=False)
     print(f"Saved predictions to {output_prefix}_predictions.csv")
 
-    threshold_df = pd.DataFrame(results['threshold_analysis']).T
-    threshold_df.to_csv(f"{output_prefix}_threshold_analysis.csv")
-    print(f"Saved threshold analysis to {output_prefix}_threshold_analysis.csv")
-
 
 # ===== RUN EVALUATION =====
 results = evaluate_zero_shot_classifier_parallel(
     test_examples=zero_shot_test_examples,
     label_groups=ZERO_SHOT_LABEL_GROUPS,
     zero_shot_classify_fn=zero_shot_classify,
-    threshold=0.5,
+    category_thresholds=CATEGORY_THRESHOLDS,
+    default_threshold=0.5,
     multi_label=True
 )
 
 # Print report
-print_evaluation_report(results, top_n=10)
-
-# Optionally export to CSV
-# export_results_to_csv(results, output_prefix="parallel_zero_shot_eval")
+print_evaluation_report(results, top_n=24)
