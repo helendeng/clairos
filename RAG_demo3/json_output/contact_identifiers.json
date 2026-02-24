@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "subdomain": "Contact Identifiers",
+    "domain": "PII",
+    "chunk_count": 1,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-24T12:43:08.909058",
+    "export_date": "2026-02-24",
+    "export_time": "12:43:08"
+  },
+  "chunks": [
+    {
+      "chunk_id": "001",
+      "subdomain": "Contact Identifiers",
+      "domain": "PII",
+      "text": "Full Name: Phillip Allen Login ID: pallen Extension: 3-7041 Office Location: EB3210C",
+      "source": {
+        "email_id": "23",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: 2- SURVEY - PHILLIP ALLEN",
+        "timestamp": "Wed, 2 May 2001 10:27:00 -0700 (PDT)"
+      }
+    }
+  ]
+}

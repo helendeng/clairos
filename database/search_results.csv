@@ -1,0 +1,5 @@
+query,description,results_count,avg_relevance,top_score
+meeting schedule,Scheduling query,3,11.111111111111109,0.5765072
+employee salary,HR/Financial query,3,25.0,0.3308409
+security incident,Security query,3,0.0,0.3619862
+contract terms,Legal query,3,41.666666666666664,0.5286847

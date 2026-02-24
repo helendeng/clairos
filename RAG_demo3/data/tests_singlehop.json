@@ -1,0 +1,222 @@
+[
+  {
+    "id": "t1",
+    "question": "When is the onboarding meeting scheduled?",
+    "domains_to_search": [
+      "all_schedule"
+    ],
+    "relevant_chunk_ids": [
+      "all_schedule_001"
+    ],
+    "expected_answer": "3pm PST"
+  },
+  {
+    "id": "t2",
+    "question": "What are the new access codes for the data center?",
+    "domains_to_search": [
+      "operational_security"
+    ],
+    "relevant_chunk_ids": [
+      "operational_security_001"
+    ],
+    "expected_answer": "REDACTED"
+  },
+  {
+    "id": "t3",
+    "question": "What is the resolution ETA for the escalated support ticket?",
+    "domains_to_search": [
+      "support_and_escalation"
+    ],
+    "relevant_chunk_ids": [
+      "support_and_escalation_001"
+    ],
+    "expected_answer": "48 hours"
+  },
+  {
+    "id": "t4",
+    "question": "When is the EPA compliance review due?",
+    "domains_to_search": [
+      "compliance_and_regulatory"
+    ],
+    "relevant_chunk_ids": [
+      "compliance_and_regulatory_001"
+    ],
+    "expected_answer": "March 1st"
+  },
+  {
+    "id": "t5",
+    "question": "What information was included in the parking pass application?",
+    "domains_to_search": [
+      "direct_identifiers"
+    ],
+    "relevant_chunk_ids": [
+      "direct_identifiers_001"
+    ],
+    "expected_answer": "Driver's license"
+  },
+  {
+    "id": "t6",
+    "question": "When is the performance review scheduled?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_002"
+    ],
+    "expected_answer": "Q1"
+  },
+  {
+    "id": "t7",
+    "question": "What was the Q4 revenue projection change?",
+    "domains_to_search": [
+      "accounting"
+    ],
+    "relevant_chunk_ids": [
+      "accounting_001"
+    ],
+    "expected_answer": "downward by 8%"
+  },
+  {
+    "id": "t8",
+    "question": "What HR matter was discussed with the manager?",
+    "domains_to_search": [
+      "all_hr"
+    ],
+    "relevant_chunk_ids": [
+      "all_hr_001"
+    ],
+    "expected_answer": "Disciplinary action"
+  },
+  {
+    "id": "t_new_1",
+    "question": "What is the market entry phase in business strategy notes?",
+    "domains_to_search": [
+      "business_strategy"
+    ],
+    "relevant_chunk_ids": [
+      "business_strategy_002"
+    ],
+    "expected_answer": "phase-2"
+  },
+  {
+    "id": "t_new_2",
+    "question": "What is the capital allocation ratio in company financial strategy?",
+    "domains_to_search": [
+      "company_financial_strategy"
+    ],
+    "relevant_chunk_ids": [
+      "company_financial_strategy_002"
+    ],
+    "expected_answer": "55/45"
+  },
+  {
+    "id": "t_new_3",
+    "question": "What is the vendor hotline extension listed in contact identifiers?",
+    "domains_to_search": [
+      "contact_identifiers"
+    ],
+    "relevant_chunk_ids": [
+      "contact_identifiers_002"
+    ],
+    "expected_answer": "7421"
+  },
+  {
+    "id": "t_new_4",
+    "question": "What is the MSA renewal notice period in contractual records?",
+    "domains_to_search": [
+      "contractual"
+    ],
+    "relevant_chunk_ids": [
+      "contractual_002"
+    ],
+    "expected_answer": "60 days"
+  },
+  {
+    "id": "t_new_5",
+    "question": "What is the wire instruction profile in financial identifiers?",
+    "domains_to_search": [
+      "financial_identifiers"
+    ],
+    "relevant_chunk_ids": [
+      "financial_identifiers_002"
+    ],
+    "expected_answer": "FI-ALPHA-09"
+  },
+  {
+    "id": "t_new_6",
+    "question": "What is the hold notice class in litigation sensitive records?",
+    "domains_to_search": [
+      "litigation_sensitive"
+    ],
+    "relevant_chunk_ids": [
+      "litigation_sensitive_002"
+    ],
+    "expected_answer": "L2-preserve"
+  },
+  {
+    "id": "t_new_7",
+    "question": "What is the reporting layer name in org structure metadata?",
+    "domains_to_search": [
+      "org_structure_metadata"
+    ],
+    "relevant_chunk_ids": [
+      "org_structure_metadata_002"
+    ],
+    "expected_answer": "platform-core"
+  },
+  {
+    "id": "t_new_8",
+    "question": "What is the delivery checkpoint in project metadata?",
+    "domains_to_search": [
+      "project_metadata"
+    ],
+    "relevant_chunk_ids": [
+      "project_metadata_003"
+    ],
+    "expected_answer": "milestone-m4"
+  },
+  {
+    "id": "t_new_9",
+    "question": "What is the patent draft track in scientific and IP R&D?",
+    "domains_to_search": [
+      "scientific_and_ip_randd"
+    ],
+    "relevant_chunk_ids": [
+      "scientific_and_ip_randd_002"
+    ],
+    "expected_answer": "PD-31"
+  },
+  {
+    "id": "t_new_10",
+    "question": "What is the anomaly baseline window in security behavioral data?",
+    "domains_to_search": [
+      "security_behavioral_data"
+    ],
+    "relevant_chunk_ids": [
+      "security_behavioral_data_002"
+    ],
+    "expected_answer": "45 days"
+  },
+  {
+    "id": "t_new_11",
+    "question": "What is the deployment ring default in system operations?",
+    "domains_to_search": [
+      "system_operations"
+    ],
+    "relevant_chunk_ids": [
+      "system_operations_002"
+    ],
+    "expected_answer": "ring-1"
+  },
+  {
+    "id": "t_new_12",
+    "question": "What is the vendor risk grade in vendor metadata?",
+    "domains_to_search": [
+      "vendor_metadata"
+    ],
+    "relevant_chunk_ids": [
+      "vendor_metadata_002"
+    ],
+    "expected_answer": "B+"
+  }
+]

@@ -21,24 +21,27 @@ function App() {
   // Employee/Chat state
   const [query, setQuery] = useState('');
   const [queryHistory, setQueryHistory] = useState([]);
+  const [docId, setDocId] = useState('');
+  const [llmProvider, setLlmProvider] = useState('deepseek_api');
 
   // Manager: Upload & Process
   const handleFileUpload = async (e) => {
     const uploadedFile = e.target.files[0];
     if (!uploadedFile) return;
-    
+
     setFile(uploadedFile);
     setProcessing(true);
-    
+    setShowResults(false);
+
     try {
       const formData = new FormData();
       formData.append('file', uploadedFile);
-      
+
       const response = await fetch('http://localhost:8000/upload', {
         method: 'POST',
         body: formData,
       });
-      
+
       const data = await response.json();
       
       setPiiResults(data.pii);
@@ -94,17 +97,18 @@ function App() {
     if (!query.trim() || !docId) return;
     
     setProcessing(true);
-    
+
     try {
       const formData = new FormData();
       formData.append('question', query);
       formData.append('doc_id', docId);
-      
+      formData.append('llm_provider', llmProvider);
+
       const response = await fetch('http://localhost:8000/query', {
         method: 'POST',
         body: formData,
       });
-      
+
       const data = await response.json();
       
       setQueryHistory([...queryHistory, {
@@ -117,7 +121,7 @@ function App() {
       setProcessing(false);
     } catch (error) {
       console.error('Query error:', error);
-      alert('Error querying. Make sure backend and Ollama are running!');
+      alert('Error querying. Make sure backend is running and selected provider is available!');
       setProcessing(false);
     }
   };
@@ -155,7 +159,7 @@ function App() {
           </div>
         </div>
 
-        {/* Tabs */}
+   {/* Tabs */}
         <div className="bg-white border-b">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex gap-8">
@@ -185,7 +189,7 @@ function App() {
                     {approvalItems.filter(i => i.approved === null).length}
                   </span>
                 )}
-              </button>
+              </button>'''
             </div>
           </div>
         </div>
@@ -542,7 +546,20 @@ function App() {
               )}
             </div>
 
-            <div className="border-t pt-4">
+              {/* Query Input */}
+              <div className="mb-3">
+                <label className="block text-sm font-medium text-gray-700 mb-1">LLM Provider</label>
+                <select
+                  value={llmProvider}
+                  onChange={(e) => setLlmProvider(e.target.value)}
+                  className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  disabled={processing}
+                >
+                  <option value="deepseek_api">DeepSeek API (default)</option>
+                  <option value="ollama">Ollama Local</option>
+                </select>
+              </div>
+
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -561,9 +578,34 @@ function App() {
                   {processing ? <Loader className="w-4 h-4 animate-spin" /> : 'Ask'}
                 </button>
               </div>
+
+              <p className="text-sm text-gray-500 mt-2">
+                RAG backend uses rag_demo3 indexes. Generation supports DeepSeek API and local Ollama.
+              </p>
+            </div>
+
+            {/* Reset Button */}
+            <div className="text-center">
+              <button
+                onClick={handleReset}
+                className="text-indigo-600 hover:text-indigo-800 underline"
+              >
+                Upload New Document
+              </button>
             </div>
           </div>
         )}
+
+        {/* Tech Stack Note */}
+        <div className="mt-8 bg-white rounded-lg shadow p-4 text-sm text-gray-600">
+          <p className="font-semibold mb-2">Tech Stack:</p>
+          <ul className="list-disc list-inside space-y-1 ml-4">
+            <li><strong>Frontend:</strong> React + Vite + Tailwind CSS</li>
+            <li><strong>Backend:</strong> Python FastAPI (localhost:8000)</li>
+            <li><strong>AI:</strong> Ollama (localhost:11434) with llama3.2</li>
+            <li><strong>Privacy:</strong> 100% local processing, no data leaves your machine</li>
+          </ul>
+        </div>
       </div>
 
       {/* View Toggle Button */}

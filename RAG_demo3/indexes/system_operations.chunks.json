@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "system_operations_001",
+    "domain": "system_operations",
+    "text": "Planned system maintenance window: February 10, 2am-6am EST. All services offline.",
+    "source": {
+      "email_id": "ops_systems_001",
+      "from": "ops@company.com",
+      "cc": "it@company.com",
+      "bcc": "",
+      "subject": "Maintenance Notice",
+      "timestamp": "2026-01-30"
+    }
+  },
+  {
+    "chunk_id": "system_operations_002",
+    "domain": "system_operations",
+    "text": "System Operations internal note: deployment ring default is ring-1. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "system_operations_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "system_operations synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "system_operations_003",
+    "domain": "system_operations",
+    "text": "System Operations internal note: rollback checkpoint is rbk-14. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "system_operations_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "system_operations synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "system_operations_004",
+    "domain": "system_operations",
+    "text": "System Operations internal note: service heartbeat interval is 60 seconds. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "system_operations_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "system_operations synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

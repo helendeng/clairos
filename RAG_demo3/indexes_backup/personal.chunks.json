@@ -1,0 +1,12 @@
+[
+  {
+    "chunk_id": "personal_001",
+    "domain": "personal",
+    "text": "Team picnic planned for Saturday at noon; bring snacks and blankets.",
+    "source": {
+      "email_id": "per_email_001",
+      "subject": "Picnic",
+      "timestamp": "2026-01-03"
+    }
+  }
+]

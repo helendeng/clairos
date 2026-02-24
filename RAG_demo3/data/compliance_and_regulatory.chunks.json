@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "compliance_and_regulatory_001",
+    "domain": "compliance_and_regulatory",
+    "text": "Environmental permit compliance review due by March 1st per EPA regulations.",
+    "source": {
+      "email_id": "legal_compliance_001",
+      "from": "compliance@company.com",
+      "cc": "project@company.com",
+      "bcc": "",
+      "subject": "EPA Compliance Deadline",
+      "timestamp": "2026-01-17"
+    }
+  },
+  {
+    "chunk_id": "compliance_and_regulatory_002",
+    "domain": "compliance_and_regulatory",
+    "text": "Compliance And Regulatory internal note: sox attestation batch is batch-7. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "compliance_and_regulatory_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "compliance_and_regulatory synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "compliance_and_regulatory_003",
+    "domain": "compliance_and_regulatory",
+    "text": "Compliance And Regulatory internal note: gdpr article focus is article-30. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "compliance_and_regulatory_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "compliance_and_regulatory synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "compliance_and_regulatory_004",
+    "domain": "compliance_and_regulatory",
+    "text": "Compliance And Regulatory internal note: filing evidence retention is 7 years. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "compliance_and_regulatory_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "compliance_and_regulatory synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]

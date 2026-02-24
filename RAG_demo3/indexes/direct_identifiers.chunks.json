@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "direct_identifiers_001",
+    "domain": "direct_identifiers",
+    "text": "Driver's license number for David Smith: [REDACTED]. Home address: [REDACTED].",
+    "source": {
+      "email_id": "pii_direct_002",
+      "from": "facilities@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Parking Pass Application",
+      "timestamp": "2026-01-11"
+    }
+  },
+  {
+    "chunk_id": "direct_identifiers_002",
+    "domain": "direct_identifiers",
+    "text": "Employee SSN: [REDACTED]. Date of birth: [REDACTED]. Passport number [REDACTED].",
+    "source": {
+      "email_id": "pii_direct_001",
+      "from": "admin@company.com",
+      "cc": "hr@company.com",
+      "bcc": "",
+      "subject": "Employee Verification",
+      "timestamp": "2026-01-10"
+    }
+  },
+  {
+    "chunk_id": "direct_identifiers_003",
+    "domain": "direct_identifiers",
+    "text": "Direct Identifiers internal note: badge reissue trigger is photo mismatch. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "direct_identifiers_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "direct_identifiers synthetic record 003",
+      "timestamp": "2026-02-03"
+    }
+  },
+  {
+    "chunk_id": "direct_identifiers_004",
+    "domain": "direct_identifiers",
+    "text": "Direct Identifiers internal note: id verification queue is queue-4. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "direct_identifiers_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "direct_identifiers synthetic record 004",
+      "timestamp": "2026-02-05"
+    }
+  }
+]

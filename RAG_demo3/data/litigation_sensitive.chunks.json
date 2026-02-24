@@ -1,0 +1,54 @@
+[
+  {
+    "chunk_id": "litigation_sensitive_001",
+    "domain": "litigation_sensitive",
+    "text": "Pending lawsuit regarding Atlas project delays. Attorney-client privileged.",
+    "source": {
+      "email_id": "legal_litigation_001",
+      "from": "legal@company.com",
+      "cc": "counsel@company.com",
+      "bcc": "",
+      "subject": "PRIVILEGED: Atlas Litigation",
+      "timestamp": "2026-01-16"
+    }
+  },
+  {
+    "chunk_id": "litigation_sensitive_002",
+    "domain": "litigation_sensitive",
+    "text": "Litigation Sensitive internal note: hold notice class is L2-preserve. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "litigation_sensitive_auto_002",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "litigation_sensitive synthetic record 002",
+      "timestamp": "2026-02-02"
+    }
+  },
+  {
+    "chunk_id": "litigation_sensitive_003",
+    "domain": "litigation_sensitive",
+    "text": "Litigation Sensitive internal note: outside counsel lane is delta-lane. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "litigation_sensitive_auto_003",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "litigation_sensitive synthetic record 003",
+      "timestamp": "2026-02-04"
+    }
+  },
+  {
+    "chunk_id": "litigation_sensitive_004",
+    "domain": "litigation_sensitive",
+    "text": "Litigation Sensitive internal note: discovery export cadence is biweekly. This record is for retrieval benchmark coverage and controlled QA testing.",
+    "source": {
+      "email_id": "litigation_sensitive_auto_004",
+      "from": "ops@company.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "litigation_sensitive synthetic record 004",
+      "timestamp": "2026-02-06"
+    }
+  }
+]
