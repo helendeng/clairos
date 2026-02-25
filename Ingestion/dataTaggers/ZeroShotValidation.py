@@ -4,10 +4,10 @@ import time
 from typing import List, Dict, Tuple, Any
 import pandas as pd
 
-# temporary import the testing examples list
-from ZeroShot import zero_shot_classify
-from ZeroShotTestExamples import zero_shot_test_examples
-from Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS, CATEGORY_THRESHOLDS
+# Import the testing examples list and other needed libraries
+from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
+from Ingestion.dataTaggers.ZeroShotTestExamples import zero_shot_test_examples
+from Ingestion.Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS, CATEGORY_THRESHOLDS
 
 def evaluate_zero_shot_classifier_parallel(
                     test_examples: List[Dict[str, Any]],

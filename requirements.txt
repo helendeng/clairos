@@ -1,4 +1,33 @@
-transformers==5.2.0
+# ── Core ML / NLP ─────────────────────────────────────────────────────────────
 torch==2.10.0
-pandas==3.0.1
+transformers==5.2.0
+sentence-transformers==3.3.1
+
+# ── Data ──────────────────────────────────────────────────────────────────────
 numpy==2.4.2
+pandas==3.0.1
+
+# ── Backend API ───────────────────────────────────────────────────────────────
+fastapi==0.115.5
+uvicorn==0.32.1
+python-multipart==0.0.9
+requests==2.32.3
+
+# ── RAG / Retrieval ───────────────────────────────────────────────────────────
+faiss-cpu==1.9.0
+rank-bm25==0.2.2
+
+# ── Vector Database ───────────────────────────────────────────────────────────
+qdrant-client==1.12.1
+
+# ── RAG Evaluation (eval_ragas.py) ────────────────────────────────────────────
+ragas==0.2.14
+datasets==3.2.0
+langchain-ollama==0.3.2
+langchain-community==0.3.13
+langchain-openai==0.3.1
+langchain-huggingface==0.1.2
+
+# ── Visualization (database/) ─────────────────────────────────────────────────
+matplotlib==3.8.2
+seaborn==0.13.0

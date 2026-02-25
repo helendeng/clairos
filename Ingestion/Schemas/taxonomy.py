@@ -78,25 +78,25 @@ TAXONOMY = {
 
     ########################## Strategic Confidential ############################
     ### Company Level Business Strategy
-    "Business_Strategy.M&A_Discussions": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
-    "Business_Strategy.Market_Expansion_Plans": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
-    "Business_Strategy.Pricing_Models": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
-    "Business_Strategy.Customer_Acquisition_Strategy": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
-    "Business_Strategy.Competitive_Analysis": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
-    "Business_Strategy.Board_Level_Communication": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.M&A": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.Market_Expansion": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.Pricing_Models": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.Customer_Acquisition": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.Competitive_Analysis": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
+    "Strategic.Board_Communications": {"domain": "Strategic Confidential", "subdomain": "Business_Strategy"},
 
 
     ########################## R&D ############################
     ### Technical
-    "Technical_R&D.Experiments": {"domain": "R&D", "subdomain": "Technical"},
-    "Technical_R&D.Algorithms": {"domain": "R&D", "subdomain": "Technical"},
-    "Technical_R&D.Models": {"domain": "R&D", "subdomain": "Technical"},
-    "Technical_R&D.Prototype": {"domain": "R&D", "subdomain": "Technical"},
+    "R&D.Technical.Experiments": {"domain": "R&D", "subdomain": "Technical"},
+    "R&D.Technical.Algorithms": {"domain": "R&D", "subdomain": "Technical"},
+    "R&D.Technical.Models": {"domain": "R&D", "subdomain": "Technical"},
+    "R&D.Technical.Prototypes": {"domain": "R&D", "subdomain": "Technical"},
     "Technical_R&D.Hardware_Specifications": {"domain": "R&D", "subdomain": "Technical"},
 
     ### Scientific and IP
-    "Scientific_&_IP.Patentable_Ideas": {"domain": "R&D", "subdomain": "Scientific_&_IP"},
-    "Scientific_&_IP.Proprietary_Formulas": {"domain": "R&D", "subdomain": "Scientific_&_IP"},
+    "R&D.IP.Patentable_Ideas": {"domain": "R&D", "subdomain": "Scientific_&_IP"},
+    "R&D.IP.Proprietary_Formulas": {"domain": "R&D", "subdomain": "Scientific_&_IP"},
     "Scientific_&_IP.Novel_Engineering_Concepts": {"domain": "R&D", "subdomain": "Scientific_&_IP"},
 
 
@@ -109,18 +109,18 @@ TAXONOMY = {
     "Accounting.1099_Info": {"domain": "Financial", "subdomain": "Accounting"}, 
     "Accounting.Payroll_Attachments": {"domain": "Financial", "subdomain": "Accounting"}, 
     "Accounting.Salary_Information": {"domain": "Financial", "subdomain": "Accounting"}, 
-    "Accounting.Salary_Negotiations": {"domain": "Financial", "subdomain": "Accounting"}, 
-    "Accounting.Firing_Info": {"domain": "Financial", "subdomain": "Accounting"}, 
+    "Financial.Accounting.Salary_Negotiations": {"domain": "Financial", "subdomain": "Accounting"},
+    "Financial.Accounting.Firing_Hiring": {"domain": "Financial", "subdomain": "Accounting"},
     "Accounting.Hiring_Info": {"domain": "Financial", "subdomain": "Accounting"}, 
-    "Accounting.Bonus_Info": {"domain": "Financial", "subdomain": "Accounting"}, 
+    "Financial.Accounting.Bonuses": {"domain": "Financial", "subdomain": "Accounting"},
     "Accounting.Raise_Info": {"domain": "Financial", "subdomain": "Accounting"}, 
 
     ### Financial Strategy
-    "Financial_Strategy.Budget_Forecasting": {"domain": "Financial", "subdomain": "Financial_Strategy"}, 
-    "Financial_Strategy.Revenue_Projections": {"domain": "Financial", "subdomain": "Financial_Strategy"}, 
-    "Financial_Strategy.Financial_Risk_Models": {"domain": "Financial", "subdomain": "Financial_Strategy"}, 
-    "Financial_Strategy.Investment_Strategies": {"domain": "Financial", "subdomain": "Financial_Strategy"}, 
-    "Financial_Strategy.Pricing_Models": {"domain": "Financial", "subdomain": "Financial_Strategy"}, 
+    "Financial.Strategy.Budget_Forecasting": {"domain": "Financial", "subdomain": "Financial_Strategy"},
+    "Financial.Strategy.Revenue_Projections": {"domain": "Financial", "subdomain": "Financial_Strategy"},
+    "Financial_Strategy.Financial_Risk_Models": {"domain": "Financial", "subdomain": "Financial_Strategy"},
+    "Financial.Strategy.Investment_Strategies": {"domain": "Financial", "subdomain": "Financial_Strategy"},
+    "Financial_Strategy.Pricing_Models": {"domain": "Financial", "subdomain": "Financial_Strategy"},
 
 
     ########################## Operational ############################
@@ -128,8 +128,8 @@ TAXONOMY = {
     "Project_Metadata.Project_Deadlines": {"domain": "Operational", "subdomain": "Project_Metadata"}, 
     "Project_Metadata.Deliverables": {"domain": "Operational", "subdomain": "Project_Metadata"}, 
     "Project_Metadata.Handoff_Notes": {"domain": "Operational", "subdomain": "Project_Metadata"}, 
-    "Project_Metadata.Progress_Updates": {"domain": "Operational", "subdomain": "Project_Metadata"}, 
-    "Project_Metadata.Technocal_Blockers": {"domain": "Operational", "subdomain": "Project_Metadata"}, 
+    "Operational.Project.Progress_Updates": {"domain": "Operational", "subdomain": "Project_Metadata"},
+    "Operational.Project.Technical_Blockers": {"domain": "Operational", "subdomain": "Project_Metadata"},
 
     ### Organization Structure Metadata
     "Org_Structure_Metadata.Coworker_Name": {"domain": "Operational", "subdomain": "Org_Structure_Metadata"}, 
@@ -173,12 +173,12 @@ TAXONOMY = {
 
     ########################## Personal Life ############################
     ### Health Disclosures
-    "Health_Disclosures.Health_Disclosures": {"domain": "Personal", "subdomain": "Health_Disclosures"}, 
+    "Personal_Life.Health_Disclosures": {"domain": "Personal", "subdomain": "Health_Disclosures"},
 
     ### Crisis/Sensitive Content 
     "Crisis_&_Sensitive.Breakups": {"domain": "Personal", "subdomain": "Crisis_&_Sensitive"}, 
     "Crisis_&_Sensitive.Family_Emergency": {"domain": "Personal", "subdomain": "Crisis_&_Sensitive"}, 
-    "Crisis_&_Sensitive.Personal_Crisis": {"domain": "Personal", "subdomain": "Crisis_&_Sensitive"}, 
+    "Personal_Life.Crisis_Content": {"domain": "Personal", "subdomain": "Crisis_&_Sensitive"},
 
     ########################## Other ############################
     "Other.Other": {"domain": "Other", "subdomain": "Other"}, 
@@ -249,6 +249,47 @@ ZERO_SHOT_LABEL_GROUPS = {
         "Operational.Project.Progress_Updates": "Project progress update, status report, or milestone achievement",
         "Personal_Life.Health_Disclosures": "Personal health issue, medical condition, or doctor appointment",
         "Personal_Life.Crisis_Content": "Personal crisis, family emergency, or sensitive life event"
+    },
+}
+
+
+## Shuffled version: labels mixed across domains within each group
+## Use to test whether cross-domain variety per batch improves model metrics
+ZERO_SHOT_LABEL_GROUPS_SHUFFLED = {
+    "Mixed_Group_1": {
+        "Strategic.M&A": "Merger, acquisition, company purchase, or buyout discussion",
+        "R&D.Technical.Experiments": "Scientific experiment, technical test, or research trial",
+        "Financial.Accounting.Salary_Negotiations": "Salary negotiation, compensation discussion, or pay raise conversation",
+        "Operational.Project.Technical_Blockers": "Technical blocker, project impediment, or development dependency",
+        "Personal_Life.Health_Disclosures": "Personal health issue, medical condition, or doctor appointment",
+        "HR.Performance_Reviews": "Employee performance review, evaluation, or feedback discussion",
+    },
+
+    "Mixed_Group_2": {
+        "Strategic.Market_Expansion": "Market expansion plan, new geographic territory, or business growth strategy",
+        "R&D.Technical.Algorithms": "Algorithm design, computational method, or optimization technique",
+        "Financial.Accounting.Firing_Hiring": "Employee termination, hiring decision, or staffing change",
+        "Operational.Project.Progress_Updates": "Project progress update, status report, or milestone achievement",
+        "Personal_Life.Crisis_Content": "Personal crisis, family emergency, or sensitive life event",
+        "HR.Internal_Disputes": "Internal workplace conflict, disagreement, or dispute between employee",
+    },
+
+    "Mixed_Group_3": {
+        "Strategic.Pricing_Models": "Pricing strategy, pricing model, or margin analysis",
+        "R&D.Technical.Models": "Machine learning model, predictive model, or statistical modeling approach",
+        "Financial.Accounting.Bonuses": "Bonus payment, incentive compensation, or performance-based reward",
+        "R&D.IP.Patentable_Ideas": "Patentable invention, patent application, or novel intellectual property",
+        "Strategic.Customer_Acquisition": "Customer acquisition strategy, sales funnel, or user growth tactics",
+        "Financial.Strategy.Budget_Forecasting": "Budget forecast, financial planning, or spending projection",
+    },
+
+    "Mixed_Group_4": {
+        "Strategic.Competitive_Analysis": "Competitive analysis, competitor research, or market positioning study",
+        "R&D.Technical.Prototypes": "Prototype development, proof of concept, or experimental design",
+        "Financial.Strategy.Revenue_Projections": "Revenue projection, sales forecast, or income estimate",
+        "R&D.IP.Proprietary_Formulas": "Proprietary formula, trade secret, or confidential technical method",
+        "Strategic.Board_Communications": "Board of directors meeting, board-level decision, or executive leadership communication",
+        "Financial.Strategy.Investment_Strategies": "Investment strategy, capital allocation, or funding decision",
     },
 }
 

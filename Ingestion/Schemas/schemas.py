@@ -2,14 +2,14 @@ from dataclasses import dataclass, field
 from typing import List
 from enum import Enum
 
-from taxonomy import CategoryKey
+from Ingestion.Schemas.taxonomy import CategoryKey
 
 ###############################################################################
 ############################## Output Schemas #################################
 @dataclass
 class SourceInfo:
     """The source variable in class OutputSchema"""
-    email_id: int
+    email_id: str
     sender: List[str]
     subject: str
     cc: List[str]
