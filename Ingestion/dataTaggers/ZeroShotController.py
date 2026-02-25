@@ -40,7 +40,7 @@ def process_email_with_zero_shot(
 
     if split_by == "sentence":
         chunks = re.split(r"[.!?]+", full_text)
-        chunks = [c.strip() for c in chunks if c.strip() and len(c.strip()) > 10]
+        chunks = [c.strip() for c in chunks if c.strip() and len(c.strip()) > 50]
     elif split_by == "paragraph":
         chunks = [p.strip() for p in full_text.split("\n\n") if p.strip()]
     else:

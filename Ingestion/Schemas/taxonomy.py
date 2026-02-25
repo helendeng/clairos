@@ -253,47 +253,6 @@ ZERO_SHOT_LABEL_GROUPS = {
 }
 
 
-## Shuffled version: labels mixed across domains within each group
-## Use to test whether cross-domain variety per batch improves model metrics
-ZERO_SHOT_LABEL_GROUPS_SHUFFLED = {
-    "Mixed_Group_1": {
-        "Strategic.M&A": "Merger, acquisition, company purchase, or buyout discussion",
-        "R&D.Technical.Experiments": "Scientific experiment, technical test, or research trial",
-        "Financial.Accounting.Salary_Negotiations": "Salary negotiation, compensation discussion, or pay raise conversation",
-        "Operational.Project.Technical_Blockers": "Technical blocker, project impediment, or development dependency",
-        "Personal_Life.Health_Disclosures": "Personal health issue, medical condition, or doctor appointment",
-        "HR.Performance_Reviews": "Employee performance review, evaluation, or feedback discussion",
-    },
-
-    "Mixed_Group_2": {
-        "Strategic.Market_Expansion": "Market expansion plan, new geographic territory, or business growth strategy",
-        "R&D.Technical.Algorithms": "Algorithm design, computational method, or optimization technique",
-        "Financial.Accounting.Firing_Hiring": "Employee termination, hiring decision, or staffing change",
-        "Operational.Project.Progress_Updates": "Project progress update, status report, or milestone achievement",
-        "Personal_Life.Crisis_Content": "Personal crisis, family emergency, or sensitive life event",
-        "HR.Internal_Disputes": "Internal workplace conflict, disagreement, or dispute between employee",
-    },
-
-    "Mixed_Group_3": {
-        "Strategic.Pricing_Models": "Pricing strategy, pricing model, or margin analysis",
-        "R&D.Technical.Models": "Machine learning model, predictive model, or statistical modeling approach",
-        "Financial.Accounting.Bonuses": "Bonus payment, incentive compensation, or performance-based reward",
-        "R&D.IP.Patentable_Ideas": "Patentable invention, patent application, or novel intellectual property",
-        "Strategic.Customer_Acquisition": "Customer acquisition strategy, sales funnel, or user growth tactics",
-        "Financial.Strategy.Budget_Forecasting": "Budget forecast, financial planning, or spending projection",
-    },
-
-    "Mixed_Group_4": {
-        "Strategic.Competitive_Analysis": "Competitive analysis, competitor research, or market positioning study",
-        "R&D.Technical.Prototypes": "Prototype development, proof of concept, or experimental design",
-        "Financial.Strategy.Revenue_Projections": "Revenue projection, sales forecast, or income estimate",
-        "R&D.IP.Proprietary_Formulas": "Proprietary formula, trade secret, or confidential technical method",
-        "Strategic.Board_Communications": "Board of directors meeting, board-level decision, or executive leadership communication",
-        "Financial.Strategy.Investment_Strategies": "Investment strategy, capital allocation, or funding decision",
-    },
-}
-
-
 ###############################################################################
 ######################## Threshold Values for Zero-Shot #######################
 CATEGORY_THRESHOLDS = {
