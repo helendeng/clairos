@@ -1,4 +1,4 @@
-"""RAGAS evaluation for RAG QA (retrieval + generation quality).
+﻿"""RAGAS evaluation for RAG QA (retrieval + generation quality).
 
 This script builds a small dataset from data/tests.json, retrieves contexts,
 generates natural-language answers via configurable LLM provider, then runs RAGAS metrics.
@@ -21,13 +21,23 @@ PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "deepseek_api")
 API_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
 API_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")
 API_KEY = os.getenv("LLM_API_KEY", "sk-acb050a499c64547b5a5af2321aee72d")
-TOP_K = int(os.getenv("RAGAS_TOP_K", "4"))
+TOP_K = int(os.getenv("RAGAS_TOP_K", "5"))        # wider candidate pool for reranker
+_rerank_top_k_env = os.getenv("RERANK_TOP_K")
+if _rerank_top_k_env is not None:
+    RERANK_TOP_K = int(_rerank_top_k_env)
+else:
+    # Multi-hop usually needs two supporting chunks; keep one extra for stability.
+    RERANK_TOP_K = 3 if "multihop" in TESTS_PATH.name.lower() else 2
+USE_BM25 = os.getenv("RAGAS_USE_BM25", "1").strip() not in {"0", "false", "False"}
+USE_VECTOR = os.getenv("RAGAS_USE_VECTOR", "1").strip() not in {"0", "false", "False"}
 ENABLE_ANSWER_RELEVANCY = os.getenv("RAGAS_ENABLE_ANSWER_RELEVANCY", "1").strip() not in {"0", "false", "False"}
 RAISE_EXCEPTIONS = os.getenv("RAGAS_RAISE_EXCEPTIONS", "0").strip() in {"1", "true", "True"}
 
-PROMPT_TMPL = """You are ClairOS (RAG PoC). Use ONLY the context.
-Answer in one concise sentence.
-Keep wording natural and explicit so it directly answers the question.
+PROMPT_TMPL = """You are ClairOS (RAG PoC). Use ONLY the context below.
+Answer in one or two complete, concise sentences.
+Your answer must be self-contained: restate the key subject from the question, then provide all requested facts.
+If multiple facts are needed, connect them naturally (e.g., "X is A and Y is B").
+Do not add background knowledge or details not present in the context.
 If the answer is not present in context, return exactly: NOT_FOUND
 
 CONTEXT:
@@ -38,6 +48,48 @@ QUESTION:
 
 ANSWER:
 """
+
+_cross_encoder = None
+_cross_encoder_tried = False
+
+
+def _get_cross_encoder():
+    """Lazy-load the cross-encoder reranker (singleton).
+
+    Uses a separate boolean flag so that _cross_encoder stays typed as
+    CrossEncoder | None, avoiding spurious 'Literal[True]' type-checker errors.
+    """
+    global _cross_encoder, _cross_encoder_tried
+    if not _cross_encoder_tried:
+        _cross_encoder_tried = True
+        try:
+            from sentence_transformers import CrossEncoder
+            _cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        except Exception:
+            _cross_encoder = None
+    return _cross_encoder
+
+
+def rerank_hits(hits, question: str, keep_top_k: int = RERANK_TOP_K):
+    """Rerank hits with a cross-encoder and return the top *keep_top_k* results.
+
+    Strategy: score every (question, chunk) pair and keep only the highest-scoring
+    ones.  This removes low-relevance "noise" chunks that survive BM25/vector fusion
+    (e.g. a scheduling fragment retrieved for an unrelated scheduling question) while
+    still preserving multiple relevant chunks for multi-hop questions (each of which
+    answers a different sub-question and may score differently).
+
+    Falls back to hits[:keep_top_k] when the cross-encoder is unavailable.
+    """
+    if len(hits) <= keep_top_k:
+        return hits
+    reranker = _get_cross_encoder()
+    if reranker is None:
+        return hits[:keep_top_k]
+    pairs = [(question, h.text) for h in hits]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(scores, hits), key=lambda x: x[0], reverse=True)
+    return [h for _, h in ranked[:keep_top_k]]
 
 
 def format_context(hits):
@@ -108,6 +160,9 @@ def main():
 
     tests = json.load(open(TESTS_PATH, "r", encoding="utf-8"))
     retriever = DomainRetriever()
+    print(
+        f"Eval config: top_k={TOP_K}, rerank_top_k={RERANK_TOP_K}, use_bm25={USE_BM25}, use_vector={USE_VECTOR}, provider={PROVIDER}"
+    )
 
     rows = []
     for t in tests:
@@ -117,13 +172,15 @@ def main():
             t["question"],
             t["domains_to_search"],
             top_k=TOP_K,
-            use_bm25=True,
-            use_vector=False,
+            use_bm25=USE_BM25,
+            use_vector=USE_VECTOR,
         )
+        hits = rerank_hits(hits, t["question"])
         contexts = [h.text for h in hits]
         prompt = PROMPT_TMPL.format(context=format_context(hits), question=t["question"])
         selected_model = MODEL if PROVIDER.lower() in {"ollama", "local", "local_ollama"} else API_MODEL
         answer = generate(prompt, provider=PROVIDER, model=selected_model).strip()
+        answer = " ".join(answer.split())
         if not answer:
             answer = "NOT_FOUND"
 
@@ -237,3 +294,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

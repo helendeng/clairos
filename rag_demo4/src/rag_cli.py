@@ -12,6 +12,7 @@ Run:
 
 from .retriever import DomainRetriever
 from .llm_client import generate
+from .domain_router import get_domains_to_search
 
 MODEL = "qwen2.5:14b-instruct"
 TOP_K = 5
@@ -38,9 +39,13 @@ def format_context(hits):
 
 
 def main():
-    categories = input("categories_to_search (comma-separated, e.g., financial,legal): ").strip()
-    categories_to_search = [d.strip() for d in categories.split(",") if d.strip()]
     question = input("question: ").strip()
+    categories_to_search = get_domains_to_search(question)
+    print(f"domains_to_search (auto): {categories_to_search}")
+    if not categories_to_search:
+        print("No routed domains. Unable to retrieve context.")
+        return
+
     llm_provider = input("llm_provider [deepseek_api/ollama] (default: deepseek_api): ").strip() or "deepseek_api"
     llm_model = input("llm_model (blank for provider default): ").strip() or None
 

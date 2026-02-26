@@ -38,8 +38,9 @@ class DomainRetriever:
     def _dedupe_keep_best(hits: list[Hit]) -> list[Hit]:
         best = {}
         for h in hits:
-            if h.chunk_id not in best or h.score > best[h.chunk_id].score:
-                best[h.chunk_id] = h
+            key = (h.domain, h.chunk_id)
+            if key not in best or h.score > best[key].score:
+                best[key] = h
         return list(best.values())
 
     @staticmethod
@@ -51,20 +52,22 @@ class DomainRetriever:
         hit_map = {}
 
         for rank, h in enumerate(vector_ranked, start=1):
-            score_map[h.chunk_id] = score_map.get(h.chunk_id, 0.0) + 1.0 / (rrf_k + rank)
-            hit_map[h.chunk_id] = h
+            key = (h.domain, h.chunk_id)
+            score_map[key] = score_map.get(key, 0.0) + 1.0 / (rrf_k + rank)
+            hit_map[key] = h
 
         for rank, h in enumerate(bm25_ranked, start=1):
-            score_map[h.chunk_id] = score_map.get(h.chunk_id, 0.0) + 1.0 / (rrf_k + rank)
-            hit_map[h.chunk_id] = h
+            key = (h.domain, h.chunk_id)
+            score_map[key] = score_map.get(key, 0.0) + 1.0 / (rrf_k + rank)
+            hit_map[key] = h
 
         fused = []
-        for cid, h in hit_map.items():
+        for key, h in hit_map.items():
             fused.append(
                 Hit(
                     domain=h.domain,
                     chunk_id=h.chunk_id,
-                    score=score_map.get(cid, 0.0),
+                    score=score_map.get(key, 0.0),
                     method="hybrid_rrf",
                     text=h.text,
                     source=h.source,

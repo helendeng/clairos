@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "subdomain": "Litigation Sensitive",
+    "domain": "Legal",
+    "chunk_count": 2,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-18T20:53:03.421001",
+    "export_date": "2026-02-18",
+    "export_time": "20:53:03"
+  },
+  "chunks": [
+    {
+      "chunk_id": "009",
+      "subdomain": "Litigation Sensitive",
+      "domain": "Legal",
+      "text": "There were no changes this week to Enron Transporation Services Company's Weekly Report.",
+      "source": {
+        "email_id": "46",
+        "from": "emily.sellers@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Weekly Significant Litigation Report",
+        "timestamp": "Wed, 1 Nov 2000 07:00:00 -0800 (PST)"
+      }
+    },
+    {
+      "chunk_id": "008",
+      "subdomain": "Litigation Sensitive",
+      "domain": "Legal",
+      "text": "Attached is October's monthly report and the weekly report. Please send me your new items and/or updates as soon as possible.",
+      "source": {
+        "email_id": "45",
+        "from": "emily.sellers@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Monthly & Weekly Significant Litigation Reports",
+        "timestamp": "Wed, 1 Nov 2000 06:56:00 -0800 (PST)"
+      }
+    }
+  ]
+}
