@@ -1,3 +1,35 @@
+You need 3 terminal windows running at the same time. 
+# Terminal 1: Ollama (The AI Brain)
+What it does: Runs the local AI model that answers questions and summarizes documents
+How to start:  
+bash  
+ollama serve  
+
+What you'll see: Messages about the server starting Leave it running! Don't close this window
+
+# Terminal 2: Backend (The Middleman)
+What it does: Receives files from your website, detects PII, talks to Ollama, sends results back.  
+How to start:  
+bash  
+export PATH="/usr/local/bin:$PATH"  
+cd ~/clairos/pii-demo-project/backend  
+uvicorn server:app --reload --port 8000  
+What you'll see: "Uvicorn running on http://127.0.0.1:8000" Leave it running! Don't close this window
+
+# Terminal 3: Frontend (The Website)
+What it does: Shows the pretty interface you see in your browser.  
+How to start:  
+bash  
+export PATH="/usr/local/bin:$PATH"  
+cd ~/clairos/pii-demo-project  
+npm run dev  
+What you'll see: "Local: http://localhost:5173/" Leave it running! Don't close this window
+
+# Step 4: Open Your Browser
+Go to: http://localhost:5173/  
+Now you can upload files and ask questions!
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

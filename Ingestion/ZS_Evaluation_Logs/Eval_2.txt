@@ -1,0 +1,107 @@
+================================================================================
+HIERARCHICAL ZERO-SHOT CLASSIFIER EVALUATION REPORT
+================================================================================
+
+📊 OVERALL METRICS
+--------------------------------------------------------------------------------
+Stage 1 (Top-Level) Accuracy: 0.144
+Micro Precision:              0.511
+Micro Recall:                 0.288
+Micro F1:                     0.368
+Macro Precision:              0.475
+Macro Recall:                 0.306
+Macro F1:                     0.331
+Exact Match Accuracy:         0.094
+Hamming Loss:                 0.057
+
+📈 SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Examples:                    320
+Avg True Labels per Example:       1.84
+Avg Predicted Labels per Example:  1.04
+Examples with Zero Predictions:    167
+Examples with Perfect Match:       30
+Processing Time:                   20.80s
+Avg Time per Example:              0.065s
+
+✅ TOP 10 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Bonuses                       0.857    0.923    0.800    15      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    11      
+Personal_Life.Crisis_Content                       0.706    0.857    0.600    10      
+R&D.Technical.Prototypes                           0.552    0.615    0.500    16      
+Legal.Compliance.Reporting_Obligations             0.531    0.722    0.419    31      
+Legal.Privileged.Referencing_Legal_Advice          0.524    0.478    0.579    19      
+HR.Performance_Reviews                             0.519    0.778    0.389    18      
+Legal.Litigation.Pre_Litigation                    0.481    0.351    0.765    17      
+Legal.Litigation.Notice_of_Claims                  0.457    0.364    0.615    13      
+Financial.Strategy.Investment_Strategies           0.435    0.625    0.333    15      
+
+❌ BOTTOM 10 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Firing_Hiring                 0.000    0.000    0.000    19      
+Strategic.Board_Communications                     0.000    0.000    0.000    26      
+Strategic.Competitive_Analysis                     0.000    0.000    0.000    16      
+Strategic.Customer_Acquisition                     0.000    0.000    0.000    19      
+Strategic.Pricing_Models                           0.000    0.000    0.000    21      
+Strategic.Market_Expansion                         0.000    0.000    0.000    15      
+Strategic.M&A                                      0.000    0.000    0.000    16      
+Legal.Compliance.Safety                            0.069    0.077    0.062    16      
+R&D.Technical.Algorithms                           0.111    0.500    0.062    16      
+R&D.IP.Proprietary_Formulas                        0.125    0.333    0.077    13      
+
+⚠️  CATEGORIES NEVER PREDICTED
+--------------------------------------------------------------------------------
+  - Strategic.M&A
+  - Strategic.Market_Expansion
+  - Strategic.Pricing_Models
+  - Strategic.Customer_Acquisition
+  - Strategic.Competitive_Analysis
+  - Strategic.Board_Communications
+  - Financial.Accounting.Firing_Hiring
+
+🔀 MOST CONFUSED CATEGORY PAIRS
+--------------------------------------------------------------------------------
+Predicted                                Should Be                                Count   
+--------------------------------------------------------------------------------
+Legal.Privileged.To_From_Counsel         Legal.Privileged.Referencing_Legal_Advice 12      
+Legal.Litigation.Legal_Disputes          Legal.Litigation.Notice_of_Claims        11      
+Legal.Litigation.Legal_Disputes          Legal.Litigation.Pre_Litigation          11      
+Legal.Litigation.Legal_Disputes          Legal.Privileged.To_From_Counsel         10      
+Legal.Litigation.Pre_Litigation          Legal.Litigation.Notice_of_Claims        9       
+
+🚫 MOST FREQUENT FALSE POSITIVES
+--------------------------------------------------------------------------------
+  Legal.Litigation.Legal_Disputes                    (34 times)
+  Legal.Litigation.Pre_Litigation                    (24 times)
+  Legal.Privileged.To_From_Counsel                   (17 times)
+  Legal.Litigation.Notice_of_Claims                  (14 times)
+  Legal.Privileged.Referencing_Legal_Advice          (12 times)
+
+⚠️  MOST FREQUENT FALSE NEGATIVES (Missed)
+--------------------------------------------------------------------------------
+  Strategic.Board_Communications                     (26 times)
+  Operational.Project.Technical_Blockers             (23 times)
+  Legal.Compliance.SOX                               (21 times)
+  Strategic.Pricing_Models                           (21 times)
+  Financial.Accounting.Firing_Hiring                 (19 times)
+
+🎯 THRESHOLD ANALYSIS (Subcategory Threshold)
+--------------------------------------------------------------------------------
+Threshold    Precision    Recall       F1          
+--------------------------------------------------------------------------------
+0.3          0.428        0.327        0.371       
+0.4          0.463        0.308        0.370       
+0.5          0.511        0.288        0.368       
+0.6          0.559        0.273        0.367       
+0.7          0.615        0.231        0.335       
+0.8          0.651        0.193        0.298       
+0.9          0.699        0.146        0.241       
+
+💡 Recommended subcategory threshold: 0.3 (F1: 0.371)
+
+================================================================================

@@ -1,0 +1,124 @@
+================================================================================
+PARALLEL-GROUP ZERO-SHOT CLASSIFIER EVALUATION REPORT
+================================================================================
+
+OVERALL METRICS
+--------------------------------------------------------------------------------
+Micro Precision:              0.692
+Micro Recall:                 0.518
+Micro F1:                     0.593
+Macro Precision:              0.770
+Macro Recall:                 0.554
+Macro F1:                     0.594
+Exact Match Accuracy:         0.175
+Hamming Loss:                 0.058
+
+SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Examples:                    240
+Avg True Labels per Example:       1.88
+Avg Predicted Labels per Example:  1.27
+Examples with Zero Predictions:    58
+Examples with Perfect Match:       42
+Processing Time:                   23.92s
+Avg Time per Example:              0.100s
+
+TOP 24 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Bonuses                       0.897    0.929    0.867    15      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    11      
+R&D.IP.Proprietary_Formulas                        0.815    0.786    0.846    13      
+Strategic.Market_Expansion                         0.743    0.650    0.867    15      
+Strategic.M&A                                      0.733    0.786    0.688    16      
+HR.Performance_Reviews                             0.733    0.846    0.647    17      
+Financial.Strategy.Revenue_Projections             0.710    0.846    0.611    18      
+Personal_Life.Health_Disclosures                   0.706    0.857    0.600    10      
+HR.Internal_Disputes                               0.683    0.636    0.737    19      
+Strategic.Competitive_Analysis                     0.667    1.000    0.500    16      
+R&D.Technical.Prototypes                           0.667    0.600    0.750    16      
+Personal_Life.Crisis_Content                       0.667    0.750    0.600    10      
+R&D.IP.Patentable_Ideas                            0.615    0.444    1.000    12      
+Financial.Strategy.Investment_Strategies           0.562    0.529    0.600    15      
+R&D.Technical.Algorithms                           0.519    0.636    0.438    16      
+Strategic.Board_Communications                     0.483    1.000    0.318    22      
+Operational.Project.Technical_Blockers             0.474    1.000    0.310    29      
+Strategic.Customer_Acquisition                     0.462    0.857    0.316    19      
+Financial.Strategy.Budget_Forecasting              0.452    0.875    0.304    23      
+Operational.Project.Progress_Updates               0.452    0.636    0.350    20      
+R&D.Technical.Experiments                          0.400    0.333    0.500    20      
+Strategic.Pricing_Models                           0.400    0.833    0.263    19      
+R&D.Technical.Models                               0.385    0.833    0.250    20      
+Financial.Accounting.Firing_Hiring                 0.222    1.000    0.125    16      
+
+BOTTOM 24 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Firing_Hiring                 0.222    1.000    0.125    16      
+R&D.Technical.Models                               0.385    0.833    0.250    20      
+Strategic.Pricing_Models                           0.400    0.833    0.263    19      
+R&D.Technical.Experiments                          0.400    0.333    0.500    20      
+Operational.Project.Progress_Updates               0.452    0.636    0.350    20      
+Financial.Strategy.Budget_Forecasting              0.452    0.875    0.304    23      
+Strategic.Customer_Acquisition                     0.462    0.857    0.316    19      
+Operational.Project.Technical_Blockers             0.474    1.000    0.310    29      
+Strategic.Board_Communications                     0.483    1.000    0.318    22      
+R&D.Technical.Algorithms                           0.519    0.636    0.438    16      
+Financial.Strategy.Investment_Strategies           0.562    0.529    0.600    15      
+R&D.IP.Patentable_Ideas                            0.615    0.444    1.000    12      
+Personal_Life.Crisis_Content                       0.667    0.750    0.600    10      
+R&D.Technical.Prototypes                           0.667    0.600    0.750    16      
+Strategic.Competitive_Analysis                     0.667    1.000    0.500    16      
+HR.Internal_Disputes                               0.683    0.636    0.737    19      
+Personal_Life.Health_Disclosures                   0.706    0.857    0.600    10      
+Financial.Strategy.Revenue_Projections             0.710    0.846    0.611    18      
+HR.Performance_Reviews                             0.733    0.846    0.647    17      
+Strategic.M&A                                      0.733    0.786    0.688    16      
+Strategic.Market_Expansion                         0.743    0.650    0.867    15      
+R&D.IP.Proprietary_Formulas                        0.815    0.786    0.846    13      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    11      
+Financial.Accounting.Bonuses                       0.897    0.929    0.867    15      
+
+MOST CONFUSED CATEGORY PAIRS
+--------------------------------------------------------------------------------
+Predicted                                Should Be                                Count   
+--------------------------------------------------------------------------------
+R&D.IP.Patentable_Ideas                  Operational.Project.Progress_Updates     5       
+R&D.Technical.Experiments                R&D.IP.Proprietary_Formulas              5       
+R&D.IP.Patentable_Ideas                  Legal.All                                5       
+R&D.Technical.Experiments                Legal.All                                4       
+Financial.Strategy.Investment_Strategies Financial.Strategy.Budget_Forecasting    4       
+
+MOST FREQUENT FALSE POSITIVES
+--------------------------------------------------------------------------------
+  R&D.Technical.Experiments                          (20 times)
+  R&D.IP.Patentable_Ideas                            (15 times)
+  Financial.Strategy.Investment_Strategies           (8 times)
+  R&D.Technical.Prototypes                           (8 times)
+  HR.Internal_Disputes                               (8 times)
+
+MOST FREQUENT FALSE NEGATIVES (Missed)
+--------------------------------------------------------------------------------
+  Legal.All                                          (44 times)
+  Operational.Project.Technical_Blockers             (20 times)
+  Financial.Strategy.Budget_Forecasting              (16 times)
+  Strategic.Board_Communications                     (15 times)
+  R&D.Technical.Models                               (15 times)
+
+THRESHOLD ANALYSIS
+--------------------------------------------------------------------------------
+Threshold    Precision    Recall       F1          
+--------------------------------------------------------------------------------
+0.3          0.511        0.554        0.532       
+0.4          0.604        0.514        0.556       
+0.5          0.692        0.468        0.558       
+0.6          0.761        0.424        0.544       
+0.7          0.813        0.366        0.505       
+0.8          0.856        0.304        0.448       
+0.9          0.917        0.222        0.357       
+
+Recommended threshold: 0.5 (F1: 0.558)
+
+================================================================================

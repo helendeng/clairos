@@ -1,0 +1,96 @@
+================================================================================
+ZERO-SHOT CLASSIFIER EVALUATION REPORT
+================================================================================
+
+📊 OVERALL METRICS
+--------------------------------------------------------------------------------
+Micro Precision:        0.550
+Micro Recall:           0.524
+Micro F1:               0.536
+Macro Precision:        0.679
+Macro Recall:           0.569
+Macro F1:               0.554
+Exact Match Accuracy:   0.153
+Hamming Loss:           0.052
+
+📈 SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Examples:                    320
+Avg True Labels per Example:       1.84
+Avg Predicted Labels per Example:  1.76
+Examples with Zero Predictions:    64
+Examples with Perfect Match:       49
+Processing Time:                   27.96s
+Avg Time per Example:              0.087s
+
+✅ TOP 10 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Financial.Accounting.Bonuses                       0.897    0.929    0.867    15      
+Financial.Accounting.Salary_Negotiations           0.818    0.818    0.818    11      
+Strategic.Market_Expansion                         0.743    0.650    0.867    15      
+Strategic.M&A                                      0.733    0.786    0.688    16      
+R&D.IP.Proprietary_Formulas                        0.733    0.647    0.846    13      
+HR.Performance_Reviews                             0.710    0.846    0.611    18      
+Financial.Strategy.Revenue_Projections             0.688    0.846    0.579    19      
+Strategic.Competitive_Analysis                     0.667    1.000    0.500    16      
+Personal_Life.Health_Disclosures                   0.667    0.857    0.545    11      
+Personal_Life.Crisis_Content                       0.667    0.750    0.600    10      
+
+❌ BOTTOM 10 PERFORMING CATEGORIES (by F1)
+--------------------------------------------------------------------------------
+Category                                           F1       Prec     Rec      Support 
+--------------------------------------------------------------------------------
+Legal.Litigation.Legal_Disputes                    0.361    0.224    0.917    12      
+Strategic.Pricing_Models                           0.370    0.833    0.238    21      
+R&D.Technical.Models                               0.385    0.833    0.250    20      
+Financial.Accounting.Firing_Hiring                 0.400    0.833    0.263    19      
+Operational.Project.Progress_Updates               0.400    0.636    0.292    24      
+R&D.Technical.Experiments                          0.400    0.333    0.500    20      
+Financial.Strategy.Budget_Forecasting              0.412    0.875    0.269    26      
+Legal.Privileged.To_From_Counsel                   0.431    0.393    0.478    23      
+Legal.Compliance.SOX                               0.432    0.889    0.286    28      
+Operational.Project.Technical_Blockers             0.450    1.000    0.290    31      
+
+🔀 MOST CONFUSED CATEGORY PAIRS
+--------------------------------------------------------------------------------
+Predicted                                Should Be                                Count   
+--------------------------------------------------------------------------------
+Legal.Litigation.Legal_Disputes          Legal.Litigation.Notice_of_Claims        13      
+Legal.Privileged.To_From_Counsel         Legal.Privileged.Referencing_Legal_Advice 12      
+Legal.Litigation.Pre_Litigation          Legal.Litigation.Notice_of_Claims        11      
+Legal.Litigation.Legal_Disputes          Legal.Litigation.Pre_Litigation          11      
+Legal.Litigation.Legal_Disputes          Legal.Privileged.To_From_Counsel         10      
+
+🚫 MOST FREQUENT FALSE POSITIVES
+--------------------------------------------------------------------------------
+  Legal.Litigation.Legal_Disputes                    (38 times)
+  Legal.Litigation.Pre_Litigation                    (30 times)
+  R&D.IP.Patentable_Ideas                            (22 times)
+  HR.Internal_Disputes                               (22 times)
+  R&D.Technical.Experiments                          (20 times)
+
+⚠️  MOST FREQUENT FALSE NEGATIVES (Missed)
+--------------------------------------------------------------------------------
+  Operational.Project.Technical_Blockers             (22 times)
+  Legal.Compliance.SOX                               (20 times)
+  Financial.Strategy.Budget_Forecasting              (19 times)
+  Strategic.Board_Communications                     (18 times)
+  Operational.Project.Progress_Updates               (17 times)
+
+🎯 THRESHOLD ANALYSIS
+--------------------------------------------------------------------------------
+Threshold    Precision    Recall       F1          
+--------------------------------------------------------------------------------
+0.3          0.418        0.619        0.499       
+0.4          0.484        0.569        0.523       
+0.5          0.550        0.524        0.536       
+0.6          0.615        0.480        0.539       
+0.7          0.669        0.412        0.510       
+0.8          0.711        0.337        0.457       
+0.9          0.762        0.244        0.370       
+
+💡 Recommended threshold: 0.6 (F1: 0.539)
+
+================================================================================
