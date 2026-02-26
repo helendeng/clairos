@@ -26,30 +26,38 @@ from Ingestion.Schemas.taxonomy import CATEGORY_THRESHOLDS, ZERO_SHOT_LABEL_GROU
 _DEFAULT_THRESHOLD = 0.5
 
 LABEL_TO_RAG_DOMAIN: dict[str, list[str]] = {
-    "Strategic.M&A": ["business_strategy"],
-    "Strategic.Market_Expansion": ["business_strategy"],
-    "Strategic.Pricing_Models": ["business_strategy", "company_financial_strategy"],
-    "Strategic.Customer_Acquisition": ["business_strategy"],
-    "Strategic.Competitive_Analysis": ["business_strategy"],
-    "Strategic.Board_Communications": ["business_strategy"],
-    "HR.Performance_Reviews": ["all_hr"],
-    "HR.Internal_Disputes": ["all_hr"],
-    "R&D.Technical.Experiments": ["technical_randd"],
-    "R&D.Technical.Algorithms": ["technical_randd"],
-    "R&D.Technical.Models": ["technical_randd"],
-    "R&D.Technical.Prototypes": ["technical_randd"],
-    "R&D.IP.Patentable_Ideas": ["scientific_and_ip_randd"],
-    "R&D.IP.Proprietary_Formulas": ["scientific_and_ip_randd"],
-    "Financial.Accounting.Salary_Negotiations": ["accounting"],
-    "Financial.Accounting.Firing_Hiring": ["accounting"],
-    "Financial.Accounting.Bonuses": ["accounting"],
-    "Financial.Strategy.Budget_Forecasting": ["company_financial_strategy"],
-    "Financial.Strategy.Revenue_Projections": ["company_financial_strategy"],
-    "Financial.Strategy.Investment_Strategies": ["company_financial_strategy"],
-    "Operational.Project.Technical_Blockers": ["project_metadata"],
-    "Operational.Project.Progress_Updates": ["project_metadata"],
-    "Personal_Life.Health_Disclosures": [],
-    "Personal_Life.Crisis_Content": [],
+    # Strategic
+    "Strategic.M&A":                            ["Business_Strategy"],
+    "Strategic.Market_Expansion":               ["Business_Strategy"],
+    "Strategic.Pricing_Models":                 ["Business_Strategy", "Financial_Strategy"],
+    "Strategic.Customer_Acquisition":           ["Business_Strategy"],
+    "Strategic.Competitive_Analysis":           ["Business_Strategy"],
+    "Strategic.Board_Communications":           ["Business_Strategy"],
+    # HR
+    "HR.Performance_Reviews":                   ["HR"],
+    "HR.Internal_Disputes":                     ["HR"],
+    # R&D — Technical
+    "R&D.Technical.Experiments":                ["Technical"],
+    "R&D.Technical.Algorithms":                 ["Technical"],
+    "R&D.Technical.Models":                     ["Technical"],
+    "R&D.Technical.Prototypes":                 ["Technical"],
+    # R&D — IP
+    "R&D.IP.Patentable_Ideas":                  ["Scientific_&_IP"],
+    "R&D.IP.Proprietary_Formulas":              ["Scientific_&_IP"],
+    # Financial — Accounting
+    "Financial.Accounting.Salary_Negotiations": ["Accounting"],
+    "Financial.Accounting.Firing_Hiring":       ["Accounting"],
+    "Financial.Accounting.Bonuses":             ["Accounting"],
+    # Financial — Strategy
+    "Financial.Strategy.Budget_Forecasting":    ["Financial_Strategy"],
+    "Financial.Strategy.Revenue_Projections":   ["Financial_Strategy"],
+    "Financial.Strategy.Investment_Strategies": ["Financial_Strategy"],
+    # Operational
+    "Operational.Project.Technical_Blockers":   ["Project_Metadata"],
+    "Operational.Project.Progress_Updates":     ["Project_Metadata"],
+    # Personal Life — no dedicated RAG index
+    "Personal_Life.Health_Disclosures":         [],
+    "Personal_Life.Crisis_Content":             [],
 }
 
 

@@ -16,76 +16,79 @@ EMBEDDING_DIM = 384  # Update when you switch to Qwen3
 # Domain is metadata only, SUBDOMAIN is the main searchable tag
 SUBDOMAINS = [
     # PII
-    "Direct Identifiers",
-    "Contact Identifiers", 
-    "Financial Identifiers",
-    
+    "Direct Identifier",
+    "Contact Identifier",
+    "Financial Identifier",
+
     # HR
-    "All_HR",  # HR subdomain
-    
+    "HR",
+
     # Legal
     "Litigation Sensitive",
-    "Compliance & Regulatory",
+    "Compliance&Regulatory",
     "Contractual",
-    "Privileged Communications",
-    
+    "Privileged_Communications",
+
     # Security
-    "Operational Security",
-    "Security Behavioral Data",
-    
+    "Operational_Security",
+    "Behavioral Data",
+
     # Strategic Confidential
-    "Business Strategy",
-    
+    "Business_Strategy",
+
     # Research & Development
-    "Technical R&D",
-    "Scientific and IP R&D",
-    
+    "Technical",
+    "Scientific_&_IP",
+
     # Financial
     "Accounting",
-    "Company Financial Strategy",
-    
+    "Financial_Strategy",
+
     # Operational
-    "Project Metadata",
-    "Org-Structure Metadata",
-    "System Operations",
-    
+    "Project_Metadata",
+    "Org_Structure_Metadata",
+    "System_Operations",
+
     # Vendor
-    "Sensitive Vendor Documents",
-    "Support & Escalation",
-    "Vendor Metadata",
-    
+    "Sensitive_Vendor_Docs",
+    "Support_&_Escalation",
+    "Vendor_Metadata",
+
     # Scheduling
-    "All_Schedule",  # Scheduling subdomain (note: duplicate name with HR, but different domain)
-    
-    # Personal Life
-    "Health Disclosures",
-    "Crisis/Sensitive Content"
+    "Scheduling",
+
+    # Personal
+    "Health_Disclosures",
+    "Crisis_&_Sensitive",
+
+    # Other
+    "Other",
 ]
 
-# Domain mapping (kept as metadata for context only)
 SUBDOMAIN_TO_DOMAIN = {
-    "Direct Identifiers": "PII",
-    "Contact Identifiers": "PII",
-    "Financial Identifiers": "PII",
-    "All_HR": "HR",  # Note: This will be overwritten by Scheduling's "All"
+    "Direct Identifier": "PII",
+    "Contact Identifier": "PII",
+    "Financial Identifier": "PII",
+    "HR": "HR",
     "Litigation Sensitive": "Legal",
-    "Compliance & Regulatory": "Legal",
+    "Compliance&Regulatory": "Legal",
     "Contractual": "Legal",
-    "Privileged Communications": "Legal",
-    "Operational Security": "Security",
-    "Security Behavioral Data": "Security",
-    "Business Strategy": "Strategic Confidential",
-    "Technical R&D": "Research & Development",
-    "Scientific and IP R&D": "Research & Development",
+    "Privileged_Communications": "Legal",
+    "Operational_Security": "Security",
+    "Behavioral Data": "Security",
+    "Business_Strategy": "Strategic Confidential",
+    "Technical": "R&D",
+    "Scientific_&_IP": "R&D",
     "Accounting": "Financial",
-    "Company Financial Strategy": "Financial",
-    "Project Metadata": "Operational",
-    "Org-Structure Metadata": "Operational",
-    "System Operations": "Operational",
-    "Sensitive Vendor Documents": "Vendor",
-    "Support & Escalation": "Vendor",
-    "Vendor Metadata": "Vendor",
-    "All_Schedule": "Scheduling",  # Commented: conflicts with HR
-    "Health Disclosures": "Personal Life",
-    "Crisis/Sensitive Content": "Personal Life"
+    "Financial_Strategy": "Financial",
+    "Project_Metadata": "Operational",
+    "Org_Structure_Metadata": "Operational",
+    "System_Operations": "Operational",
+    "Sensitive_Vendor_Docs": "Vendor",
+    "Support_&_Escalation": "Vendor",
+    "Vendor_Metadata": "Vendor",
+    "Scheduling": "Scheduling",
+    "Health_Disclosures": "Personal",
+    "Crisis_&_Sensitive": "Personal",
+    "Other": "Other",
 }

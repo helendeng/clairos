@@ -5,7 +5,7 @@ Output: ../RAG_demo3/json_output/
 """
 
 from qdrant_client import QdrantClient
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
 import json
 import os
 import shutil
