@@ -1,0 +1,16 @@
+[
+  {
+    "chunk_id": "001",
+    "subdomain": "Contact Identifiers",
+    "domain": "PII",
+    "text": "Full Name: Phillip Allen Login ID: pallen Extension: 3-7041 Office Location: EB3210C",
+    "source": {
+      "email_id": "23",
+      "from": "phillip.allen@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Re: 2- SURVEY - PHILLIP ALLEN",
+      "timestamp": "Wed, 2 May 2001 10:27:00 -0700 (PDT)"
+    }
+  }
+]

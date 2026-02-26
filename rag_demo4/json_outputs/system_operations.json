@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "System Operations",
+    "domain": "Operational",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.343740",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "System Operations",
+      "domain": "Operational",
+      "text": "Planned system maintenance window: February 10, 2am-6am EST. All services offline.",
+      "source": {
+        "email_id": "ops_systems_001",
+        "from": "ops@company.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Maintenance Notice",
+        "timestamp": "2026-01-30"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "System Operations",
+      "domain": "Operational",
+      "text": "Planned system maintenance window: February 10, 2am-6am EST. All services offline.",
+      "source": {
+        "email_id": "ops_systems_001",
+        "from": "ops@company.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Maintenance Notice",
+        "timestamp": "2026-01-30"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "System Operations",
+      "domain": "Operational",
+      "text": "Planned system maintenance window: February 10, 2am-6am EST. All services offline.",
+      "source": {
+        "email_id": "ops_systems_001",
+        "from": "ops@company.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Maintenance Notice",
+        "timestamp": "2026-01-30"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Business Strategy",
+    "domain": "Strategic Confidential",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.340602",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Business Strategy",
+      "domain": "Strategic Confidential",
+      "text": "Q2 acquisition target identified. Board approval pending. HIGHLY CONFIDENTIAL.",
+      "source": {
+        "email_id": "strategy_001",
+        "from": "strategy@company.com",
+        "cc": "ceo@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: M&A Opportunity",
+        "timestamp": "2026-01-22"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Business Strategy",
+      "domain": "Strategic Confidential",
+      "text": "Q2 acquisition target identified. Board approval pending. HIGHLY CONFIDENTIAL.",
+      "source": {
+        "email_id": "strategy_001",
+        "from": "strategy@company.com",
+        "cc": "ceo@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: M&A Opportunity",
+        "timestamp": "2026-01-22"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Business Strategy",
+      "domain": "Strategic Confidential",
+      "text": "Q2 acquisition target identified. Board approval pending. HIGHLY CONFIDENTIAL.",
+      "source": {
+        "email_id": "strategy_001",
+        "from": "strategy@company.com",
+        "cc": "ceo@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: M&A Opportunity",
+        "timestamp": "2026-01-22"
+      }
+    }
+  ]
+}

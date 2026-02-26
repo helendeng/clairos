@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Company Financial Strategy",
+    "domain": "Financial",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.340826",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Board approved $50M capital raise. Term sheet negotiations with investors ongoing.",
+      "source": {
+        "email_id": "finance_strategy_001",
+        "from": "cfo@company.com",
+        "cc": "board@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: Funding Round",
+        "timestamp": "2026-01-26"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Board approved $50M capital raise. Term sheet negotiations with investors ongoing.",
+      "source": {
+        "email_id": "finance_strategy_001",
+        "from": "cfo@company.com",
+        "cc": "board@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: Funding Round",
+        "timestamp": "2026-01-26"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Company Financial Strategy",
+      "domain": "Financial",
+      "text": "Board approved $50M capital raise. Term sheet negotiations with investors ongoing.",
+      "source": {
+        "email_id": "finance_strategy_001",
+        "from": "cfo@company.com",
+        "cc": "board@company.com",
+        "bcc": "",
+        "subject": "CONFIDENTIAL: Funding Round",
+        "timestamp": "2026-01-26"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.339047",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Accounting",
+      "domain": "Financial",
+      "text": "Q4 revenue projections revised downward by 8%. Earnings call scheduled.",
+      "source": {
+        "email_id": "finance_accounting_001",
+        "from": "accounting@company.com",
+        "cc": "cfo@company.com",
+        "bcc": "",
+        "subject": "Q4 Forecast Update",
+        "timestamp": "2026-01-25"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Accounting",
+      "domain": "Financial",
+      "text": "Q4 revenue projections revised downward by 8%. Earnings call scheduled.",
+      "source": {
+        "email_id": "finance_accounting_001",
+        "from": "accounting@company.com",
+        "cc": "cfo@company.com",
+        "bcc": "",
+        "subject": "Q4 Forecast Update",
+        "timestamp": "2026-01-25"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Accounting",
+      "domain": "Financial",
+      "text": "Q4 revenue projections revised downward by 8%. Earnings call scheduled.",
+      "source": {
+        "email_id": "finance_accounting_001",
+        "from": "accounting@company.com",
+        "cc": "cfo@company.com",
+        "bcc": "",
+        "subject": "Q4 Forecast Update",
+        "timestamp": "2026-01-25"
+      }
+    }
+  ]
+}
