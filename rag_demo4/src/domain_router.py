@@ -1,7 +1,6 @@
-"""Domain routing bridge for RAG CLI.
+﻿"""Domain routing bridge for RAG CLI.
 
-This module delegates domain selection to the product router:
-`Ingestion.util.get_domains_RAG.get_domains_for_rag`.
+Resolve domain routing locally first, then fallback to external Ingestion path.
 """
 
 from __future__ import annotations
@@ -14,7 +13,16 @@ from typing import Callable
 
 
 def _load_router_func() -> Callable[[str], list[str]]:
-    # Preferred: import by module path if Ingestion package is available.
+    # Preferred: local router shipped with rag_demo4.
+    try:
+        from .get_domains_rag import get_domains_for_rag as local_router
+
+        if callable(local_router):
+            return local_router
+    except Exception:
+        pass
+
+    # Secondary: import by module path if Ingestion package is available.
     try:
         mod = importlib.import_module("Ingestion.util.get_domains_RAG")
         fn = getattr(mod, "get_domains_for_rag", None)
@@ -37,7 +45,8 @@ def _load_router_func() -> Callable[[str], list[str]]:
                     return fn
 
     raise RuntimeError(
-        "Cannot load domain router. Expected `Ingestion.util.get_domains_RAG.get_domains_for_rag` "
+        "Cannot load domain router. Expected local src.get_domains_rag.get_domains_for_rag, "
+        "or Ingestion.util.get_domains_RAG.get_domains_for_rag, "
         "or set env GET_DOMAINS_RAG_PATH to that file."
     )
 
@@ -48,4 +57,3 @@ def get_domains_to_search(query: str) -> list[str]:
     if not isinstance(domains, list):
         raise TypeError("get_domains_for_rag must return list[str].")
     return [str(d) for d in domains if str(d).strip()]
-
