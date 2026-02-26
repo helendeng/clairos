@@ -1,0 +1,142 @@
+[
+  {
+    "id": "s1",
+    "question": "In the monthly spending note, how did Materials and Labor change?",
+    "domains_to_search": ["accounting"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "Materials increased; Labor decreased."
+  },
+  {
+    "id": "s2",
+    "question": "In the August bank statement questions, which check numbers are marked Walmart?",
+    "domains_to_search": ["accounting"],
+    "relevant_chunk_ids": ["002"],
+    "expected_answer": "1406 and 1438."
+  },
+  {
+    "id": "s3",
+    "question": "What was requested for the scheduling group and Patti S in HR?",
+    "domains_to_search": ["all_hr"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "A salary and level schedule for everyone in scheduling, plus change recommendations including Patti S."
+  },
+  {
+    "id": "s4",
+    "question": "What normal work hours were reported in the survey response?",
+    "domains_to_search": ["all_schedule"],
+    "relevant_chunk_ids": ["006"],
+    "expected_answer": "7:00 AM to 5:00 PM."
+  },
+  {
+    "id": "s5",
+    "question": "When and where was the Storage Strategies in the West meeting scheduled?",
+    "domains_to_search": ["all_schedule"],
+    "relevant_chunk_ids": ["005"],
+    "expected_answer": "Tuesday, October 10 at 4:00 PM in EB3270."
+  },
+  {
+    "id": "s6",
+    "question": "What business-meeting format was recommended to improve discussion?",
+    "domains_to_search": ["business_strategy"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "Round-table discussion format."
+  },
+  {
+    "id": "s7",
+    "question": "What amount was accepted for the 2001 margin plan?",
+    "domains_to_search": ["company_financial_strategy"],
+    "relevant_chunk_ids": ["002"],
+    "expected_answer": "35 million."
+  },
+  {
+    "id": "s8",
+    "question": "What monthly amount was listed for early land extension costs?",
+    "domains_to_search": ["company_financial_strategy"],
+    "relevant_chunk_ids": ["017"],
+    "expected_answer": "$4,000 per month."
+  },
+  {
+    "id": "s9",
+    "question": "Under FERC's California order, what soft cap level was described?",
+    "domains_to_search": ["compliance_and_regulatory"],
+    "relevant_chunk_ids": ["020"],
+    "expected_answer": "$150/MWh."
+  },
+  {
+    "id": "s10",
+    "question": "What are Phillip Allen's login ID, extension, and office location?",
+    "domains_to_search": ["contact_identifiers"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "pallen; 3-7041; EB3210C."
+  },
+  {
+    "id": "s11",
+    "question": "The attached draft policy was for which employee group?",
+    "domains_to_search": ["contractual"],
+    "relevant_chunk_ids": ["006"],
+    "expected_answer": "EOL/ENA employees."
+  },
+  {
+    "id": "s12",
+    "question": "What destination was suggested for the trip and what activity was suggested?",
+    "domains_to_search": ["crisis_sensitive_content"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "Austin; golf."
+  },
+  {
+    "id": "s13",
+    "question": "What unusual event delayed the response in the health disclosure message?",
+    "domains_to_search": ["health_disclosures"],
+    "relevant_chunk_ids": ["002"],
+    "expected_answer": "A freakish wind storm knocked down a roof under construction."
+  },
+  {
+    "id": "s14",
+    "question": "What update was given in the ETS weekly report?",
+    "domains_to_search": ["litigation_sensitive"],
+    "relevant_chunk_ids": ["009"],
+    "expected_answer": "There were no changes."
+  },
+  {
+    "id": "s15",
+    "question": "Who had permission to access the sender's Email/Calendar?",
+    "domains_to_search": ["operational_security"],
+    "relevant_chunk_ids": ["003"],
+    "expected_answer": "INA RANGEL."
+  },
+  {
+    "id": "s16",
+    "question": "Who was included on the updates distribution list?",
+    "domains_to_search": ["orgstructure_metadata"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "Phillip Allen, Mike Grigsby, Keith Holst, Monique Sanchez, Frank Ermis, and John Lavorato."
+  },
+  {
+    "id": "s17",
+    "question": "What recommendation was made for how business meetings should run?",
+    "domains_to_search": ["project_metadata"],
+    "relevant_chunk_ids": ["002"],
+    "expected_answer": "Run meetings as round-table discussions instead of one-way presentations."
+  },
+  {
+    "id": "s18",
+    "question": "What static IP address was listed in the high-speed internet details?",
+    "domains_to_search": ["system_operations"],
+    "relevant_chunk_ids": ["002"],
+    "expected_answer": "64.216.90.105."
+  },
+  {
+    "id": "s19",
+    "question": "Which company planned to nearly double its co-location space by year-end?",
+    "domains_to_search": ["technical_randd"],
+    "relevant_chunk_ids": ["012"],
+    "expected_answer": "Exodus."
+  },
+  {
+    "id": "s20",
+    "question": "Why did the vendor note say three bids for each labor trade were not feasible?",
+    "domains_to_search": ["vendor_metadata"],
+    "relevant_chunk_ids": ["001"],
+    "expected_answer": "Because the labor market was extremely tight."
+  }
+]

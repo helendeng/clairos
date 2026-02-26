@@ -1,0 +1,30 @@
+[
+  {
+    "chunk_id": "001",
+    "subdomain": "Project Metadata",
+    "domain": "Operational",
+    "text": "Here is our forecast",
+    "source": {
+      "email_id": "1",
+      "from": "phillip.allen@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "",
+      "timestamp": "Mon, 14 May 2001 16:39:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "002",
+    "subdomain": "Project Metadata",
+    "domain": "Operational",
+    "text": "As far as the business meetings, I think it would be more productive to try and stimulate discussions across the different groups about what is working and what is not. Too often the presenter speaks and the others are quiet just waiting for their turn. The meetings might be better if held in a round table discussion format.",
+    "source": {
+      "email_id": "2",
+      "from": "phillip.allen@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Re:",
+      "timestamp": "Fri, 4 May 2001 13:51:00 -0700 (PDT)"
+    }
+  }
+]

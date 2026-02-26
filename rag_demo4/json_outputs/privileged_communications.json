@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Privileged Communications",
+    "domain": "Legal",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.342580",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Privileged Communications",
+      "domain": "Legal",
+      "text": "Attorney work product regarding regulatory strategy. Do not forward.",
+      "source": {
+        "email_id": "legal_privileged_001",
+        "from": "attorney@lawfirm.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "PRIVILEGED: Legal Strategy",
+        "timestamp": "2026-01-19"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Privileged Communications",
+      "domain": "Legal",
+      "text": "Attorney work product regarding regulatory strategy. Do not forward.",
+      "source": {
+        "email_id": "legal_privileged_001",
+        "from": "attorney@lawfirm.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "PRIVILEGED: Legal Strategy",
+        "timestamp": "2026-01-19"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Privileged Communications",
+      "domain": "Legal",
+      "text": "Attorney work product regarding regulatory strategy. Do not forward.",
+      "source": {
+        "email_id": "legal_privileged_001",
+        "from": "attorney@lawfirm.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "PRIVILEGED: Legal Strategy",
+        "timestamp": "2026-01-19"
+      }
+    }
+  ]
+}

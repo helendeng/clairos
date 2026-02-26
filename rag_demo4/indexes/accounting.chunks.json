@@ -1,0 +1,72 @@
+[
+  {
+    "chunk_id": "003",
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "text": "I had assumed that the cost of service underlying the 11-1-99 rates was the most recent data we have handy, but I guess clarification-- do we want the latest cost of service or based on the settlement??",
+    "source": {
+      "email_id": "39",
+      "from": "drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "Re: Memo - Field-Market Cost Analysis",
+      "timestamp": "Fri, 21 Jan 2000 05:48:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "004",
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "text": "Here are the paragraphs in the 3QTR 10Q relative to ETS that contain references to our base gas sales. We have suggested the change shown to de-emphasize the fact that there were sales in both years. Do you want to suggest any further changes in the next draft we receive for review?",
+    "source": {
+      "email_id": "52",
+      "from": "bob.chandler@enron.com",
+      "cc": "harry.walters@enron.com",
+      "bcc": "",
+      "subject": "Enron 3rd Qtr 00- 10Q",
+      "timestamp": "Thu, 2 Nov 2000 23:48:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "005",
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "text": "Ugh. Do we need to say from storage inventory or can we just mention gas sales? I seem to recall that we already discussed that and the accountants wanted to mention the source of the sold gas, but if I'm wrong, lets make the reference less specific.",
+    "source": {
+      "email_id": "53",
+      "from": "drew.fossum@enron.com",
+      "cc": "rod.hayslett@enron.com, tracy.geaccone@enron.com, harry.walters@enron.com, dave.neubauer@enron.com, kent.miller@enron.com, mary.miller@enron.com",
+      "bcc": "",
+      "subject": "Re: Enron 3rd Qtr 00- 10Q",
+      "timestamp": "Fri, 3 Nov 2000 00:31:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "002",
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "text": "Here are my questions on the August bank statement (attached): 1. Check 1406 Walmart Description and unit? 2. Check 1410 Crumps Detail description and unit? 3. Check 1411 Lucy What is this? 4. Check 1415 Papes Detail description and units? 5. Checks 1416, 1417, and 1425 Why overtime? 6. Check 1428 Ralph's What unit? 7. Check 1438 Walmart? Description and unit? Try and pull together the support for these items and get back to me.",
+    "source": {
+      "email_id": "32",
+      "from": "phillip.allen@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "",
+      "timestamp": "Tue, 12 Sep 2000 06:06:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "001",
+    "subdomain": "Accounting",
+    "domain": "Financial",
+    "text": "You wrote fewer checks this month. Spent more money on Materials and less on Labor. June July August Total Materials 2929 4085 4801 Services 53 581 464 Labor 3187 3428 2770",
+    "source": {
+      "email_id": "32",
+      "from": "phillip.allen@enron.com",
+      "cc": "",
+      "bcc": "",
+      "subject": "",
+      "timestamp": "Tue, 12 Sep 2000 06:06:00 -0700 (PDT)"
+    }
+  }
+]

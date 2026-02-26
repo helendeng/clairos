@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Org-Structure Metadata",
+    "domain": "Operational",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.342394",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Org-Structure Metadata",
+      "domain": "Operational",
+      "text": "Organizational restructure announced. Three departments merging into Energy Division.",
+      "source": {
+        "email_id": "ops_org_001",
+        "from": "ceo@company.com",
+        "cc": "all@company.com",
+        "bcc": "",
+        "subject": "Org Structure Changes",
+        "timestamp": "2026-01-29"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Org-Structure Metadata",
+      "domain": "Operational",
+      "text": "Organizational restructure announced. Three departments merging into Energy Division.",
+      "source": {
+        "email_id": "ops_org_001",
+        "from": "ceo@company.com",
+        "cc": "all@company.com",
+        "bcc": "",
+        "subject": "Org Structure Changes",
+        "timestamp": "2026-01-29"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Org-Structure Metadata",
+      "domain": "Operational",
+      "text": "Organizational restructure announced. Three departments merging into Energy Division.",
+      "source": {
+        "email_id": "ops_org_001",
+        "from": "ceo@company.com",
+        "cc": "all@company.com",
+        "bcc": "",
+        "subject": "Org Structure Changes",
+        "timestamp": "2026-01-29"
+      }
+    }
+  ]
+}

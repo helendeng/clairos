@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Support & Escalation",
+    "domain": "Vendor",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.343548",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Support & Escalation",
+      "domain": "Vendor",
+      "text": "Critical support ticket escalated to vendor engineering team. Resolution ETA 48 hours.",
+      "source": {
+        "email_id": "vendor_support_001",
+        "from": "support@vendor.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Escalation: Ticket #12345",
+        "timestamp": "2026-02-01"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Support & Escalation",
+      "domain": "Vendor",
+      "text": "Critical support ticket escalated to vendor engineering team. Resolution ETA 48 hours.",
+      "source": {
+        "email_id": "vendor_support_001",
+        "from": "support@vendor.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Escalation: Ticket #12345",
+        "timestamp": "2026-02-01"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Support & Escalation",
+      "domain": "Vendor",
+      "text": "Critical support ticket escalated to vendor engineering team. Resolution ETA 48 hours.",
+      "source": {
+        "email_id": "vendor_support_001",
+        "from": "support@vendor.com",
+        "cc": "it@company.com",
+        "bcc": "",
+        "subject": "Escalation: Ticket #12345",
+        "timestamp": "2026-02-01"
+      }
+    }
+  ]
+}

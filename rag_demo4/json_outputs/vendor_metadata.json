@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Vendor Metadata",
+    "domain": "Vendor",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.344123",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "text": "Vendor contact updated: New account manager assigned to our account.",
+      "source": {
+        "email_id": "vendor_meta_001",
+        "from": "vendor@supplier.com",
+        "cc": "procurement@company.com",
+        "bcc": "",
+        "subject": "Account Manager Change",
+        "timestamp": "2026-02-02"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "text": "Vendor contact updated: New account manager assigned to our account.",
+      "source": {
+        "email_id": "vendor_meta_001",
+        "from": "vendor@supplier.com",
+        "cc": "procurement@company.com",
+        "bcc": "",
+        "subject": "Account Manager Change",
+        "timestamp": "2026-02-02"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Vendor Metadata",
+      "domain": "Vendor",
+      "text": "Vendor contact updated: New account manager assigned to our account.",
+      "source": {
+        "email_id": "vendor_meta_001",
+        "from": "vendor@supplier.com",
+        "cc": "procurement@company.com",
+        "bcc": "",
+        "subject": "Account Manager Change",
+        "timestamp": "2026-02-02"
+      }
+    }
+  ]
+}

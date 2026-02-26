@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Security Behavioral Data",
+    "domain": "Security",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.343165",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Security Behavioral Data",
+      "domain": "Security",
+      "text": "Unusual login pattern detected from employee account. Investigation ongoing.",
+      "source": {
+        "email_id": "security_behavior_001",
+        "from": "security@company.com",
+        "cc": "soc@company.com",
+        "bcc": "",
+        "subject": "Security Alert",
+        "timestamp": "2026-01-21"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Security Behavioral Data",
+      "domain": "Security",
+      "text": "Unusual login pattern detected from employee account. Investigation ongoing.",
+      "source": {
+        "email_id": "security_behavior_001",
+        "from": "security@company.com",
+        "cc": "soc@company.com",
+        "bcc": "",
+        "subject": "Security Alert",
+        "timestamp": "2026-01-21"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Security Behavioral Data",
+      "domain": "Security",
+      "text": "Unusual login pattern detected from employee account. Investigation ongoing.",
+      "source": {
+        "email_id": "security_behavior_001",
+        "from": "security@company.com",
+        "cc": "soc@company.com",
+        "bcc": "",
+        "subject": "Security Alert",
+        "timestamp": "2026-01-21"
+      }
+    }
+  ]
+}

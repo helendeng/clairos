@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "subdomain": "Contact Identifiers",
+    "domain": "PII",
+    "chunk_count": 3,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-04T20:18:51.341214",
+    "export_date": "2026-02-04",
+    "export_time": "20:18:51"
+  },
+  "chunks": [
+    {
+      "chunk_id": 1,
+      "subdomain": "Contact Identifiers",
+      "domain": "PII",
+      "text": "Personal phone: [REDACTED]. Personal email: [REDACTED].",
+      "source": {
+        "email_id": "pii_contact_001",
+        "from": "employee@company.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Emergency Contact Update",
+        "timestamp": "2026-01-12"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Contact Identifiers",
+      "domain": "PII",
+      "text": "Personal phone: [REDACTED]. Personal email: [REDACTED].",
+      "source": {
+        "email_id": "pii_contact_001",
+        "from": "employee@company.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Emergency Contact Update",
+        "timestamp": "2026-01-12"
+      }
+    },
+    {
+      "chunk_id": 1,
+      "subdomain": "Contact Identifiers",
+      "domain": "PII",
+      "text": "Personal phone: [REDACTED]. Personal email: [REDACTED].",
+      "source": {
+        "email_id": "pii_contact_001",
+        "from": "employee@company.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Emergency Contact Update",
+        "timestamp": "2026-01-12"
+      }
+    }
+  ]
+}
