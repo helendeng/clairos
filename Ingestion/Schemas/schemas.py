@@ -2,8 +2,6 @@ from dataclasses import dataclass, field
 from typing import List
 from enum import Enum
 
-from Ingestion.Schemas.taxonomy import CategoryKey
-
 ###############################################################################
 ############################## Output Schemas #################################
 @dataclass
@@ -38,23 +36,3 @@ class EmailRecord:
     bcc: List[str]
     body: str
     timestamp: str
-
-
-
-###############################################################################
-########################## InterComponent Schemas #############################
-@dataclass
-class Chunk:
-    """Normalized chunking format"""
-    chunk_id: int
-    text: str
-
-
-@dataclass
-class TagHit:
-    """A single tagged piece of data and all it carries"""
-    category_key: CategoryKey
-    evidence_text: str
-    start_pos: int
-    end_pos: int
-    confidence: float

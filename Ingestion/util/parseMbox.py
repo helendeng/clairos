@@ -4,8 +4,6 @@ Input controller: ingests a .mbox file and feeds each email through the pipeline
 Entry point: controller(mbox_fp, zero_shot_classify_fn)
 """
 import mailbox
-import sys
-import os
 
 from Ingestion.Schemas.schemas import EmailRecord, OutputSchema
 from Ingestion.dataTaggers.ZeroShotController import process_email_with_zero_shot

@@ -1,7 +1,5 @@
 # This will set the category to (domain, subcategory) pipeline and dataclass
-from enum import Enum
 
-# TODO: Fill out list with sensitive categories in mind
 TAXONOMY = {
     "financial.credit_card": {"domain": "PII", "subdomain": "Financial"},
     "taxpayer.ein": {"domain": "PII", "subdomain": "Tax IDs"},
@@ -183,16 +181,6 @@ TAXONOMY = {
     ########################## Other ############################
     "Other.Other": {"domain": "Other", "subdomain": "Other"}, 
 }
-
-###############################################################################
-############################### Category Keys #################################
-# canonical keys
-class CategoryKey(Enum):
-    CREDIT_CARD = "financial.credit_card"
-    EIN = "taxpayer.ein"
-    API_KEY = "security.api_key"
-
-
 
 
 ###############################################################################
