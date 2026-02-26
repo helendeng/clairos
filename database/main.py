@@ -4,8 +4,8 @@ Loads test cases and uploads all chunks to Qdrant
 Demonstrates domain/subdomain separation
 """
 
-from ingest_chunks import ChunkIngestion
-from test_cases import TEST_CHUNKS
+from database.core.ingest_chunks import ChunkIngestion
+from database.Schemas.test_cases import TEST_CHUNKS
 
 def flatten_test_chunks():
     """

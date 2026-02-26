@@ -9,8 +9,8 @@ from qdrant_client.models import PointStruct
 import uuid
 from collections import Counter
 
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, SUBDOMAINS, SUBDOMAIN_TO_DOMAIN
-from embedding_service import EmbeddingService
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, SUBDOMAINS, SUBDOMAIN_TO_DOMAIN
+from database.util.embedding_service import EmbeddingService
 
 class ChunkIngestion:
     def __init__(self):

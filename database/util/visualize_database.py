@@ -7,7 +7,7 @@ Ensures querying 'All Scheduling' never returns 'Health Disclosures' (Personal L
 
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_MODEL
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_MODEL
 import pandas as pd
 from collections import Counter
 

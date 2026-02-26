@@ -6,7 +6,7 @@ Generates metrics that prove the database works correctly
 
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_MODEL, SUBDOMAINS
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_MODEL, SUBDOMAINS
 import pandas as pd
 from collections import Counter, defaultdict
 import json

@@ -1,11 +1,15 @@
 """
 Setup Qdrant collection for ClairOS email chunks
+
+NOTE:
+This Qdrant setup is currently disconnected from the backend — backend/server.py uses 
+local FAISS indexes instead.
 """
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIM
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIM
 
 def delete_collection_if_exists():
     """Delete existing collection to start fresh"""

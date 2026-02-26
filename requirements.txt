@@ -1,7 +1,7 @@
 # ── Core ML / NLP ─────────────────────────────────────────────────────────────
 torch==2.10.0
 transformers==5.2.0
-sentence-transformers==3.3.1
+sentence-transformers==2.3.1    # Embedding model
 
 # ── Data ──────────────────────────────────────────────────────────────────────
 numpy==2.4.2
@@ -17,7 +17,7 @@ requests==2.32.3
 faiss-cpu==1.9.0
 rank-bm25==0.2.2
 
-# ── Vector Database ───────────────────────────────────────────────────────────
+# ── Qdrant Vector Database ───────────────────────────────────────────────────────────
 qdrant-client==1.12.1
 
 # ── RAG Evaluation (eval_ragas.py) ────────────────────────────────────────────
@@ -31,3 +31,10 @@ langchain-huggingface==0.1.2
 # ── Visualization (database/) ─────────────────────────────────────────────────
 matplotlib==3.8.2
 seaborn==0.13.0
+
+
+# Python Standard Library (no installation needed, but listed for reference)
+# uuid - built-in
+# collections - built-in
+# dataclasses - built-in
+# typing - built-in

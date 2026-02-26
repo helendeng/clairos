@@ -4,7 +4,7 @@ Used by ingest_chunks.py
 """
 
 from sentence_transformers import SentenceTransformer
-from config import EMBEDDING_MODEL
+from database.Schemas.config import EMBEDDING_MODEL
 
 class EmbeddingService:
     def __init__(self):

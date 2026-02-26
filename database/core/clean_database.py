@@ -5,7 +5,8 @@ Deletes all data and recreates collection from scratch
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
-from config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIM
+
+from database.Schemas.config import QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME, EMBEDDING_DIM
 
 def clean_database():
     """Delete and recreate collection - removes all data"""

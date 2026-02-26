@@ -1,5 +1,4 @@
-.venv/
-venv/
+# Python ignores
 __pycache__/
 *.pyc
 *.pyo
@@ -28,8 +27,16 @@ node_modules/
 
 # Virtual Environments
 .venv
+.venv/
+venv/
+
 # secrets
 .env
 
 # misc
 Thumbs.db
+
+# Database ignores
+*.png
+*.csv
+database_metrics.json
