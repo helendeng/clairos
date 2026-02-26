@@ -85,7 +85,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "001",
     "domain": "HR",
-    "subdomain": "All",
+    "subdomain": "All_HR",
     "text": "Can you send me a schedule of the salary and level of everyone in the scheduling group. Plus your thoughts on any changes that need to be made. (Patti S for example)",
     "source": {
       "email_id": "4",
@@ -100,7 +100,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "001",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "Let's shoot for Tuesday at 11:45.",
     "source": {
       "email_id": "5",
@@ -115,7 +115,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "002",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "How about either next Tuesday or Thursday?",
     "source": {
       "email_id": "6",
@@ -145,7 +145,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "003",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "any morning between 10 and 11:30",
     "source": {
       "email_id": "8",
@@ -292,10 +292,10 @@ TEST_CHUNKS = [
       "timestamp": "Mon, 9 Oct 2000 07:16:00 -0700 (PDT)"
     }
   },
-    {
+  {
     "chunk_id": "002",
     "domain": "HR",
-    "subdomain": "All",
+    "subdomain": "All_HR",
     "text": "Here are the names of the west desk members by category. The origination side is very sparse.",
     "source": {
       "email_id": "14",
@@ -325,7 +325,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "004",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "Please plan to attend the below Meeting: Topic: Var, Reporting and Resources Meeting Date: Wednesday, October 11th Time: 2:30 - 3:30 Location: EB30C1",
     "source": {
       "email_id": "16",
@@ -400,7 +400,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "005",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "There will be a meeting on Tuesday, Oct. 10th at 4:00pm in EB3270 regarding Storage Strategies in the West. Please mark your calendars.",
     "source": {
       "email_id": "19",
@@ -505,7 +505,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "006",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "What are your normal work hours? From: 7:00 AM To: 5:00 PM Will you be out of the office in the near future for vacation, leave, etc? NO",
     "source": {
       "email_id": "23",
@@ -565,7 +565,7 @@ TEST_CHUNKS = [
   {
     "chunk_id": "007",
     "domain": "Scheduling",
-    "subdomain": "All",
+    "subdomain": "All_Schedule",
     "text": "I scheduled a meeting with Jean Mrha tomorrow at 3:30",
     "source": {
       "email_id": "25",
@@ -577,7 +577,7 @@ TEST_CHUNKS = [
       "timestamp": "Wed, 6 Sep 2000 06:04:00 -0700 (PDT)"
     }
   },
-    {
+  {
     "chunk_id": "006",
     "domain": "Research & Development",
     "subdomain": "Technical R&D",
@@ -832,7 +832,7 @@ TEST_CHUNKS = [
       "timestamp": "Tue, 12 Sep 2000 04:23:00 -0700 (PDT)"
     }
   },
-    {
+  {
     "chunk_id": "014",
     "domain": "Financial",
     "subdomain": "Company Financial Strategy",
@@ -1072,4 +1072,635 @@ TEST_CHUNKS = [
       "timestamp": "Tue, 26 Sep 2000 09:28:00 -0700 (PDT)"
     }
   },
+  {
+    "chunk_id": "029",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "Enclosed is the preliminary proforma for the Westgate property is Austin that we told you about. As you can tell from the proforma this project should produce a truly exceptional return of over 40% per year over 3 years. This is especially attractive when the project is in a market as strong as Austin and we are introducing new product that in a very low price range for this market. This is the best project in terms of risk and reward that we have uncovered to date in the Austin market.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "030",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "The project does have approved zoning and will only require a site plan. As it is in the Smart Growth Corridor area designated by the City of Austin for preferred development, this will be fast tracked and should be complete in less than 6 months. Additionally, many of the current and more severe water treatment ordinances have been waived.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "031",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "The Lone Star gas line easement in the lower portion of the property is not expected to impact sales significantly. Other projects have been quite successful with identical relationships to this pipeline, such as the adjoining single family residential and a project at St. Edwards University.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "032",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "The seller accepted our offer Thursday evening with a price of $680,000 and an extended escrow. This will enable us to probably obtain an approved site plan before closing on the contract, which will mean that we can close into an A&D Loan rather than into a land loan and then an improvement loan.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "033",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "This analysis shows your investment at $700,000 for a 50% interest in the profits of the project. As we discussed in San Marcos, we can also discuss having you invest only in the lots, sell the lots to the construction entity with your profit in the lot. I believe this would facilitate the use of a 1031 Exchange of the proceeds from this deal into another project that is a rental deal or at least into the land for a rental project that would then be the equity for that project.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "002",
+    "domain": "Personal Life",
+    "subdomain": "Health Disclosures",
+    "text": "I regret that it took so long to get back to you, but we had some unusual events these past few weeks. A small freakish wind storm with severe 60+mpg downdrafts hit the South part of Austin where we are building 10 town homes. One of these units had just had the roof decked with the siding scheduled to start the next day. The severe downdraft hitting the decked roof was enough to knock it down. Then last week I had to take my wife to emergency. She has a bulge in the material between the vertebra in her spine and it causes her extreme pain and has kept her bedridden this past week. There is nothing like having your wife incapacitated to realize the enormous number of things she does everyday. Fortunately, it looks as if she will be ok in the long run.",
+    "source": {
+      "email_id": "35",
+      "to": "pallen70@hotmail.com",
+      "cc": "Larry Lewter",
+      "bcc": "",
+      "from": "phillip.allen@enron.com",
+      "subject": "Westgate Proforma-Phillip Allen.xls",
+      "timestamp": "Fri, 8 Sep 2000 05:29:00 -0700 (PDT)"
+    }
+  },
+  {
+    "chunk_id": "001",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "On Friday I attended an industry luncheon with Fernanda Young, FERC's Chief Information Officer. She discussed some of the electronic filing and research changes coming to FERC. The crux of the discussion is that within a few years (by 2003), FERC's internet website will include a searchable database that functions very much like Lexus/Nexus (except for the exorbitant fees).",
+    "source": {
+      "email_id": "36",
+      "to": "Shelley Corman, Dari Dornan, Glen Hass, Bambi Heckerman, Robert Kilmer, Frazier King, Ray Neppl, Maria Pavlou, Janet Place, Michele Winckowski, Mary Kay Miller, Donna Fulton, Sarah Novosel, Michael Van Norden, Janet Butler",
+      "cc": "",
+      "bcc": "",
+      "from": "Nancy Bagot",
+      "subject": "IT news from FERC",
+      "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+    }
+  },
+  {
+    "chunk_id": "002",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "For electronic filing, the first step begins tomorrow with comments (without service lists) being filed electronically. Filers do not have to duplicate with a paper copy. All filings, which can be received by FERC in almost any format, will be converted to Adobe Acrobat (.pdf files) by FERC for viewing online and available within minutes of being received. The electronic PDF version will be the official copy for pagination citations.",
+    "source": {
+      "email_id": "36",
+      "to": "Shelley Corman, Dari Dornan, Glen Hass, Bambi Heckerman, Robert Kilmer, Frazier King, Ray Neppl, Maria Pavlou, Janet Place, Michele Winckowski, Mary Kay Miller, Donna Fulton, Sarah Novosel, Michael Van Norden, Janet Butler",
+      "cc": "",
+      "bcc": "",
+      "from": "Nancy Bagot",
+      "subject": "IT news from FERC",
+      "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+    }
+  },
+  {
+    "chunk_id": "003",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "The next round of filings to be accepted electronically will include interventions and protests. Coming on line further down the road are documents with extensive service lists, as Fernanda is intent on cleaning up those lists of duplicate or stale names, companies and parties before going forward with electronic service of parties. That process could be very involved, since each party will have to be contacted with a chance to respond before being removed or changed from a service list.",
+    "source": {
+      "email_id": "36",
+      "to": "Shelley Corman, Dari Dornan, Glen Hass, Bambi Heckerman, Robert Kilmer, Frazier King, Ray Neppl, Maria Pavlou, Janet Place, Michele Winckowski, Mary Kay Miller, Donna Fulton, Sarah Novosel, Michael Van Norden, Janet Butler",
+      "cc": "",
+      "bcc": "",
+      "from": "Nancy Bagot",
+      "subject": "IT news from FERC",
+      "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+    }
+  },
+  {
+    "chunk_id": "004",
+    "domain": "Security",
+    "subdomain": "Operational Security",
+    "text": "Another sticking point with major filings is the issue of electronic signatures, which is a security issue rather than a legal issue. Electronic signatures demand the highest level of security and will be very costly to implement. Fernanda believes that encryption offers sufficient security and she will urge the Commission to make an initial recommendation that does not include electronic filing.",
+    "source": {
+      "email_id": "36",
+      "to": "Shelley Corman, Dari Dornan, Glen Hass, Bambi Heckerman, Robert Kilmer, Frazier King, Ray Neppl, Maria Pavlou, Janet Place, Michele Winckowski, Mary Kay Miller, Donna Fulton, Sarah Novosel, Michael Van Norden, Janet Butler",
+      "cc": "",
+      "bcc": "",
+      "from": "Nancy Bagot",
+      "subject": "IT news from FERC",
+      "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+    }
+  },
+  {
+    "chunk_id": "005",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "As for internet access and research capabilities, the FERC homepage will be revamped to include better design and more accessible information for non-FERC watchers (ie, the general public). RIMS and CIPS will eventually be combined into one database that will be searchable (by words contained in a document's Abstract) and easy to use for researching and printing documents. All documents will be in PDF format. The timeline for these changes is relatively short, with the full transition of the database and electronic filing requirements completed by 2003.",
+    "source": {
+      "email_id": "36",
+      "to": "Shelley Corman, Dari Dornan, Glen Hass, Bambi Heckerman, Robert Kilmer, Frazier King, Ray Neppl, Maria Pavlou, Janet Place, Michele Winckowski, Mary Kay Miller, Donna Fulton, Sarah Novosel, Michael Van Norden, Janet Butler",
+      "cc": "",
+      "bcc": "",
+      "from": "Nancy Bagot",
+      "subject": "IT news from FERC",
+      "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+    }
+  },
+  {
+    "chunk_id": "006",
+    "domain": "Legal",
+    "subdomain": "Contractual",
+    "text": "Attached for your review and comment is a draft of a policy to be distributed to EOL/ENA employees. While the policy may seem over-restrictive, the fact basis upon which the policy is based is that the activities identified in the policy are currently performed by ENA employees.",
+    "source": {
+      "email_id": "37",
+      "to": "martha.benner@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "EOL Policy",
+      "timestamp": "Wed, 1 Nov 2000 03:09:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "034",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "NiSource Inc. and Columbia Energy Group received approval for their merger from the U.S. Securities and Exchange Commission (SEC) and are expected to close their transaction today. The combined company will continue to trade on the New York Stock Exchange as NiSource (NYSE: NI). The merger creates a company that could gain a strong lock on the natural-gas market in a corridor stretching from Texas to Maine.",
+    "source": {
+      "email_id": "38",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "NiSource and Columbia Energy Group Complete Merger",
+      "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "035",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "Under the terms of the merger agreement, NiSource is offering 3.04 shares for each Columbia common share. CEG shareholders can elect to receive New NiSource stock, or receive a combination of $70 in cash plus $2.60 in securities. Just today, NiSource revised its estimate of the number of CEG shares electing to receive NiSource stock upward to approximately 77 percent from its original estimate of 60 percent.",
+    "source": {
+      "email_id": "38",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "NiSource and Columbia Energy Group Complete Merger",
+      "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "036",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "The SEC gave its approval to the merger on an important condition. Under the laws of the Public Utilities Holding Company Act of 1935 (PUHCA), the SEC has required NiSource to divest of IWC Resources, its water operations subsidiary based in Indianapolis. Under PUHCA, utility holding companies are required to divest operations that are not integral to their primary operations. The divestiture must take place within three years to comply with U.S. legislation.",
+    "source": {
+      "email_id": "38",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "NiSource and Columbia Energy Group Complete Merger",
+      "timestamp": "Wed, 1 Nov 2000 02:25:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "003",
+    "domain": "Financial",
+    "subdomain": "Accounting",
+    "text": "I had assumed that the cost of service underlying the 11-1-99 rates was the most recent data we have handy, but I guess clarification-- do we want the latest cost of service or based on the settlement??",
+    "source": {
+      "email_id": "39",
+      "to": "mary.miller@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "Re: Memo - Field-Market Cost Analysis",
+      "timestamp": "Fri, 21 Jan 2000 05:48:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "037",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "Please see attached file. The margins are lower as compared to last weeks because of a lower fuel index price and lower volumes do to the trail derailment.",
+    "source": {
+      "email_id": "40",
+      "to": "steven.harris@enron.com, audrey.robertson@enron.com, jeffery.fawcett@enron.com, lorraine.lindberg@enron.com, christine.stokes@enron.com, therese.lohman@enron.com, terry.galassini@enron.com, ronald.matthews@enron.com, mansoor.abdmoulaie@enron.com, julia.white@enron.com, bob.burleson@enron.com, james.harvey@enron.com, lynn.blair@enron.com, steven.january@enron.com, rick.dietz@enron.com, sheila.nacey@enron.com, darrell.schoolcraft@enron.com, john.buchanan@enron.com, ramona.betancourt@enron.com, william.banks@enron.com, martha.cormier@enron.com, garvin.jobs@enron.com, beverly.miller@enron.com, cynthia.rivers@enron.com, linda.ward@enron.com, kathy.washington@enron.com, lindy.donoho@enron.com, steve.gilbert@enron.com, michel.nelson@enron.com, mary.miller@enron.com, drew.fossum@enron.com, terry.kowalke@enron.com, albert.hernandez@enron.com, kevin.hyatt@enron.com, michele.lokay@enron.com, jeanette.doll@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "jeanette.doll@enron.com",
+      "subject": "TW Weekly 10/31/00",
+      "timestamp": "Thu, 2 Nov 2000 05:25:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "008",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "Above meeting is scheduled for Monday, November 6, at 3:00 pm in the Video Conference Room (49C2 - Houston).",
+    "source": {
+      "email_id": "41",
+      "to": "john.dushinske@enron.com, steven.harris@enron.com, kent.miller@enron.com, mary.miller@enron.com, dave.neubauer@enron.com, rockey.storie@enron.com",
+      "cc": "deb.cappiello@enron.com, teresa@travelpark.com, audrey.robertson@enron.com, sharon.solon@enron.com, linda.wehring@enron.com",
+      "bcc": "",
+      "from": "martha.benner@enron.com",
+      "subject": "Virtual Power Meeting",
+      "timestamp": "Wed, 1 Nov 2000 05:24:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "009",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "Tony will come to the 42nd floor, whichever of your offices you wish to have the conference call take place in. The subject wil be ET&S Trading Policy. Drew - Tony, Bob and Dan will call you at 9:00 a.m.",
+    "source": {
+      "email_id": "42",
+      "to": "bob.chandler@enron.com, drew.fossum@enron.com, dan.fancler@enron.com",
+      "cc": "martha.benner@enron.com",
+      "bcc": "",
+      "from": "janet.cones@enron.com",
+      "subject": "Telephone Conference Call- Thursday 11-02-00, 9:00 am - Trading Policy",
+      "timestamp": "Wed, 1 Nov 2000 05:49:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "010",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "I will be out of the office all day tomorrow, so won't be able to participate.",
+    "source": {
+      "email_id": "43",
+      "to": "tony.pryor@enron.com",
+      "cc": "drew.fossum@enron.com, dan.fancler@enron.com, martha.benner@enron.com",
+      "bcc": "",
+      "from": "bob.chandler@enron.com",
+      "subject": "Re: Telephone Conference Call- Thursday 11-02-00, 9:00 am - Trading Policy",
+      "timestamp": "Wed, 1 Nov 2000 05:54:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "007",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "There is no way this is ready to go. Once you receive, please call and lets go through line by line. Lee as you can see I did send to Drew.",
+    "source": {
+      "email_id": "44",
+      "to": "lee.huber@enron.com, gary.zahn@enron.com, drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "keith.petersen@enron.com",
+      "subject": "Data Request #29",
+      "timestamp": "Wed, 1 Nov 2000 06:06:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "008",
+    "domain": "Legal",
+    "subdomain": "Litigation Sensitive",
+    "text": "Attached is October's monthly report and the weekly report. Please send me your new items and/or updates as soon as possible.",
+    "source": {
+      "email_id": "45",
+      "to": "peggy.phillips@enron.com, frazier.king@enron.com, dorothy.mccoppin@enron.com, staci.spalding@enron.com, louis.soldano@enron.com, colleen.raker@enron.com, philip.crowley@enron.com, susan.scott@enron.com, lee.huber@enron.com, maria.pavlou@enron.com, dari.dornan@enron.com, jim.talcott@enron.com, drew.fossum@enron.com, kathy.ringblom@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "emily.sellers@enron.com",
+      "subject": "Monthly & Weekly Significant Litigation Reports",
+      "timestamp": "Wed, 1 Nov 2000 06:56:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "009",
+    "domain": "Legal",
+    "subdomain": "Litigation Sensitive",
+    "text": "There were no changes this week to Enron Transporation Services Company's Weekly Report.",
+    "source": {
+      "email_id": "46",
+      "to": "stephanie.harris@enron.com, eric.benson@enron.com, philip.crowley@enron.com, britt.davis@enron.com, drew.fossum@enron.com, dorothy.mccoppin@enron.com, rockford.meyer@enron.com, kathy.ringblom@enron.com, louis.soldano@enron.com, jim.talcott@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "emily.sellers@enron.com",
+      "subject": "Weekly Significant Litigation Report",
+      "timestamp": "Wed, 1 Nov 2000 07:00:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "011",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "Paul Bieniawski's phone number is 713-345-8641. Go ahead and give him a call just as a courtesy to let him what you guys are looking at at Bushton and let him know I put you up to it. If he has some useful off the cuff insights, great. If not, that's fine also. I don't expect you to send him any material or get him deeply involved--just give him a heads up.",
+    "source": {
+      "email_id": "47",
+      "to": "frank.oldenhuis@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "Paul B",
+      "timestamp": "Wed, 1 Nov 2000 07:08:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "010",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "You may link to the Commission Agenda by clicking on URL noted below: http://www.ferc.fed.us/public/isd/sunshine.htm Items of interest are: CAG-6, NNG order expected on Carlton Resolution, RP96-347 CAG-7, NNG order expected on VFT filing, RP00-264 CAG-2, Reliant's filing proposing flexible nomination process, RP00-571 CAG-13, Texas Eastern issues concerning production area rates effect on market center (voluntary remand settlement) CAG-14, Standards for Business Practices, RM96-1-014, remaining Order No. 587-L imbalance netting & trading filings",
+    "source": {
+      "email_id": "48",
+      "to": "daniel.allegretti@enron.com, tim.aron@enron.com, nancy.bagot@enron.com, john.ballentine@enron.com, martha.benner@enron.com, eric.benson@enron.com, donna.bily@enron.com, lynn.blair@enron.com, jack.boatman@enron.com, rob.bradley@enron.com, theresa.branney@enron.com, lorna.brennan@enron.com, bob.chandler@enron.com, bill.cordes@enron.com, shelley.corman@enron.com, christi.culwell@enron.com, mary.darveaux@enron.com, larry.deroin@enron.com, rick.dietz@enron.com, dari.dornan@enron.com, john.dushinske@enron.com, sharon.farrell@enron.com, drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "janet.butler@enron.com",
+      "subject": "Commission Agenda",
+      "timestamp": "Wed, 1 Nov 2000 08:03:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "011",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "CAM-1, Preservation of Records, RM99-8, expect rehearing order on record retention Discussion RM98-4, Revised Filing Requirements under Part 33, Final Rule (this was on agenda last meeting but was cancelled)",
+    "source": {
+      "email_id": "48",
+      "to": "daniel.allegretti@enron.com, tim.aron@enron.com, nancy.bagot@enron.com, john.ballentine@enron.com, martha.benner@enron.com, eric.benson@enron.com, donna.bily@enron.com, lynn.blair@enron.com, jack.boatman@enron.com, rob.bradley@enron.com, theresa.branney@enron.com, lorna.brennan@enron.com, bob.chandler@enron.com, bill.cordes@enron.com, shelley.corman@enron.com, christi.culwell@enron.com, mary.darveaux@enron.com, larry.deroin@enron.com, rick.dietz@enron.com, dari.dornan@enron.com, john.dushinske@enron.com, sharon.farrell@enron.com, drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "janet.butler@enron.com",
+      "subject": "Commission Agenda",
+      "timestamp": "Wed, 1 Nov 2000 08:03:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "012",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Attached is the response Data Request #29. In the response is everything. We need to review and agree on the content to be given to in this response. Lee and my concern is the information in the Planning report. This is towards the end of the response.",
+    "source": {
+      "email_id": "49",
+      "to": "mary.miller@enron.com, lee.huber@enron.com, drew.fossum@enron.com, gary.zahn@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "keith.petersen@enron.com",
+      "subject": "FERC Audit",
+      "timestamp": "Wed, 1 Nov 2000 23:11:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "038",
+    "domain": "Financial",
+    "subdomain": "Company Financial Strategy",
+    "text": "I wish. As to your complaint about my failure to tip you off, there were two primary reasons: (1) if I told you and got caught I'd go to prison, and, more importantly, (2) I had no clue. its better to be lucky than good! Check out ENE over the last 30 days. I'm a few more weeks away from retirement. Do you own any?",
+    "source": {
+      "email_id": "50",
+      "to": "dhill@wrf.com",
+      "cc": "",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "Re: ENE",
+      "timestamp": "Fri, 21 Jan 2000 07:31:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "014",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Attached is the Weekly Regulatory Report for week ending January 21, 2000. The Commission agenda and two orders are also attached that may be of interest to you.",
+    "source": {
+      "email_id": "51",
+      "to": "tim.aron@enron.com, john.ballentine@enron.com, martha.benner@enron.com, eric.benson@enron.com, donna.bily@enron.com, lynn.blair@enron.com, rob.bradley@enron.com, lorna.brennan@enron.com, bob.chandler@enron.com, bill.cordes@enron.com, shelley.corman@enron.com, larry.deroin@enron.com, rick.dietz@enron.com, dari.dornan@enron.com, john.dushinske@enron.com, diane.eckels@enron.com, george.fastuca@enron.com, drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "janet.butler@enron.com",
+      "subject": "Weekly Regulatory Report",
+      "timestamp": "Fri, 21 Jan 2000 08:52:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "004",
+    "domain": "Financial",
+    "subdomain": "Accounting",
+    "text": "Here are the paragraphs in the 3QTR 10Q relative to ETS that contain references to our base gas sales. We have suggested the change shown to de-emphasize the fact that there were sales in both years. Do you want to suggest any further changes in the next draft we receive for review?",
+    "source": {
+      "email_id": "52",
+      "to": "rod.hayslett@enron.com, tracy.geaccone@enron.com, drew.fossum@enron.com",
+      "cc": "harry.walters@enron.com",
+      "bcc": "",
+      "from": "bob.chandler@enron.com",
+      "subject": "Enron 3rd Qtr 00- 10Q",
+      "timestamp": "Thu, 2 Nov 2000 23:48:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "005",
+    "domain": "Financial",
+    "subdomain": "Accounting",
+    "text": "Ugh. Do we need to say from storage inventory or can we just mention gas sales? I seem to recall that we already discussed that and the accountants wanted to mention the source of the sold gas, but if I'm wrong, lets make the reference less specific.",
+    "source": {
+      "email_id": "53",
+      "to": "bob.chandler@enron.com",
+      "cc": "rod.hayslett@enron.com, tracy.geaccone@enron.com, harry.walters@enron.com, dave.neubauer@enron.com, kent.miller@enron.com, mary.miller@enron.com",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "Re: Enron 3rd Qtr 00- 10Q",
+      "timestamp": "Fri, 3 Nov 2000 00:31:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "015",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "The following updates are included in the attached report: IOWA * NOI-98-3 Small volume gas transportation - MidAm urges IUB to drop the idea KANSAS * Kansas Ad Valorem Tax Refunds - Settlement language being finalized MICHIGAN * U-12550 Final order exempts Xcel and Peninsular from customer choice plan filing requirements MINNESOTA * E,G999/DI-99-1073 Keeping the Lights On legislative initiative -- NNG comments filed stressing ability to serve gas fired generation WISCONSIN * 6650-CG-194 Wisconsin Gas' Guardian lateral - PSC approval in economic phase",
+    "source": {
+      "email_id": "54",
+      "to": "mark.adelmann@enron.com, joe.allen@enron.com, david.badura@enron.com, ron.beidelman@enron.com, mike.bonnstetter@enron.com, janet.bowers@enron.com, roy.boston@enron.com, morris.brassfield@enron.com, lorna.brennan@enron.com, greg.cade@enron.com, harry.chaffin@enron.com, edward.coats@enron.com, joan.collins@enron.com, bill.cordes@enron.com, shelley.corman@enron.com, dari.dornan@enron.com, john.dushinske@enron.com, ken.earl@enron.com, drew.fossum@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "lon.stanton@enron.com",
+      "subject": "Government Affairs Report",
+      "timestamp": "Wed, 1 Nov 2000 23:15:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "012",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "The above meeting has been rescheduled for Thursday, November 9, at 9:00 AM in the video conference room (49C2 in Houston).",
+    "source": {
+      "email_id": "55",
+      "to": "john.dushinske@enron.com, steven.harris@enron.com, kent.miller@enron.com, mary.miller@enron.com, dave.neubauer@enron.com, rockey.storie@enron.com, chuck.wilkinson@enron.com",
+      "cc": "deb.cappiello@enron.com, audrey.robertson@enron.com, sharon.solon@enron.com, linda.wehring@enron.com",
+      "bcc": "",
+      "from": "martha.benner@enron.com",
+      "subject": "Virtual Power Meeting",
+      "timestamp": "Thu, 2 Nov 2000 00:26:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "016",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Attached is a draft of an answer to protests received in Docket No. RP01-56. Please let me know your comments before noon tomorrow if possible.",
+    "source": {
+      "email_id": "56",
+      "to": "maria.pavlou@enron.com",
+      "cc": "",
+      "bcc": "",
+      "from": "drew.fossum@enron.com",
+      "subject": "TW Options: Answer to protests",
+      "timestamp": "Thu, 2 Nov 2000 03:27:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "017",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "The Federal Energy Regulatory Commission (FERC) issued a draft order outlining a major overhaul of the California wholesale market, including changes to market rules concerning the California ISO (Cal-ISO) and Power Exchange (PX). Conceding that the market rules and structure for wholesale sales of electricity are flawed and have caused unjust and unreasonable rates, FERC has proposed a number of remedies that will become effective in approximately 60 days.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "018",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "FERC based its 77-page draft order on several assumptions. First, FERC wants to hold overall rates to competitive levels that benefit consumers, while at the same time induce sufficient investment in capacity to ensure adequate service. Second, FERC acknowledged that some matters that have adversely impacted the California wholesale market are not under its jurisdiction, but that of the CPUC. Thus, FERC focused on matters within its exclusive jurisdiction, even if some of the proposals preempt prior state decisions.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "019",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Here's what FERC's order prescribes: 1). Eliminate the requirement that California's three IOUs (PG&E, SCE and SDG&E) must sell into and buy from the PX. This proposal essentially permits the three IOUs to establish bilateral contracts with energy suppliers, which was previously restricted under AB1890. 2). Require market participants to schedule 95 percent of their transactions in the day-ahead markets. A penalty charge will be affixed for deviations in scheduling in excess of 5 percent of an entity's hourly load requirements. 3). The establishment of independent (non-stakeholder) governing boards for the California ISO and PX. 4). The establishment of generation interconnection procedures.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "020",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Perhaps most contentious within the order is FERC's decision to set a $150/MWh rate cap so that bids above this amount cannot set the market clearing price that is paid to all bidders. This policy negates a previous proposal from the Cal-ISO, under which it lobbied for a $100/MWh bid cap (reduced from $250/MWh) on electricity purchases in the ISO's spot market. FERC's order freezes the ISO bid cap at its current $250 level for the next 60 days. However, beyond that FERC is instating what is being referred to as a soft price cap of $150/MWh, to remain in place until December 2002.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "021",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "It's referred to as soft because sellers may bid above this level and receive their bid if they are dispatched, but anything higher than $150/MWh will not set the price that all generators will receive. Also, any generator setting a bid above $150/MWh must report their bid to the Commission, and presumably fall under intense scrutiny.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "022",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "Commissioner Hebert hesitantly concurred with the order, although he believed the commission went too far in its attempt to mitigate prices, something he believes FERC is ill-equipped to do. Specifically, Hebert dissented with the decision to place any sort of price cap on wholesale transactions, preferring instead to entrust market participants with the ability and responsibility to mitigate their price exposure as they deem best.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "023",
+    "domain": "Legal",
+    "subdomain": "Compliance & Regulatory",
+    "text": "FERC will vote on the proposed order in December, after receiving commentary from industry participants. FERC Chair James Hoecker already knows the position of one major player. He received a letter from Enron CEO Kenneth Lay just this week, in which Lay urged FERC to avoid placing price cap band aids over hemorrhaging wounds. Lay further predicted that installing price caps would plunge markets into greater uncertainty and discourage new supplies and conservation methods, and stated that a capped formula would encourage natural-gas suppliers to deploy their turbines in other states or countries.",
+    "source": {
+      "email_id": "57",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "issuealert@scientech.com",
+      "subject": "FERC Proposes Major Changes to California's Wholesale Market",
+      "timestamp": "Thu, 2 Nov 2000 02:53:00 -0800 (PST)"
+    }
+  },
+  {
+    "chunk_id": "013",
+    "domain": "Scheduling",
+    "subdomain": "All_Schedule",
+    "text": "EEI's State Restructuring Service is proud to present an Internet E-Forum to investigate whether the problems of California could occur in other parts of the country. The California restructuring earthquake is marked by the doubling of some electric bills, multi-billion dollar utility under collections, electric reserve margin problems, and consumer outrage. November 17, 2000 1 p.m. ET. Registration Cut-off and Cancellation Policy: All registrations must be received by November 15, 2000.",
+    "source": {
+      "email_id": "58",
+      "to": "",
+      "cc": "",
+      "bcc": "",
+      "from": "lmiller@eei.org",
+      "subject": "Will California's Restructuring Tremors Be Felt in Your Region?",
+      "timestamp": "Thu, 2 Nov 2000 05:25:00 -0800 (PST)"
+    }
+  }
+
 ]

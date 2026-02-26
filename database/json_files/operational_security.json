@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "subdomain": "Operational Security",
+    "domain": "Security",
+    "chunk_count": 4,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-18T20:53:03.421186",
+    "export_date": "2026-02-18",
+    "export_time": "20:53:03"
+  },
+  "chunks": [
+    {
+      "chunk_id": "003",
+      "subdomain": "Operational Security",
+      "domain": "Security",
+      "text": "Do you have permission to access anyone's Email/Calendar? NO Does anyone have permission to access your Email/Calendar? YES If yes, who? INA RANGEL",
+      "source": {
+        "email_id": "23",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: 2- SURVEY - PHILLIP ALLEN",
+        "timestamp": "Wed, 2 May 2001 10:27:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "004",
+      "subdomain": "Operational Security",
+      "domain": "Security",
+      "text": "Another sticking point with major filings is the issue of electronic signatures, which is a security issue rather than a legal issue. Electronic signatures demand the highest level of security and will be very costly to implement. Fernanda believes that encryption offers sufficient security and she will urge the Commission to make an initial recommendation that does not include electronic filing.",
+      "source": {
+        "email_id": "36",
+        "from": "Nancy Bagot",
+        "cc": "",
+        "bcc": "",
+        "subject": "IT news from FERC",
+        "timestamp": "Tue, 31 Oct 2000 02:02 PM"
+      }
+    },
+    {
+      "chunk_id": "002",
+      "subdomain": "Operational Security",
+      "domain": "Security",
+      "text": "mike grigsby is having problems with accessing the west power site. Can you please make sure he has an active password.",
+      "source": {
+        "email_id": "17",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "",
+        "timestamp": "Fri, 4 May 2001 11:26:00 -0700 (PDT)"
+      }
+    },
+    {
+      "chunk_id": "001",
+      "subdomain": "Operational Security",
+      "domain": "Security",
+      "text": "1. login: pallen pw: ke9davis I don't think these are required by the ISP",
+      "source": {
+        "email_id": "9",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re: High Speed Internet Access",
+        "timestamp": "Tue, 17 Oct 2000 02:26:00 -0700 (PDT)"
+      }
+    }
+  ]
+}

@@ -20,7 +20,10 @@ MODEL = "qwen2.5:14b-instruct"
 PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "deepseek_api")
 API_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
 API_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")
-API_KEY = os.getenv("LLM_API_KEY", "sk-acb050a499c64547b5a5af2321aee72d")
+API_KEY = os.getenv("LLM_API_KEY", "AIzaSyCiNx71KtQ2L19JuYJoCQDD0oP9Ler-sQE")
+GEMINI_API_BASE_URL = os.getenv("GEMINI_API_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai")
+GEMINI_API_MODEL = os.getenv("GEMINI_API_MODEL", "gemini-2.0-flash")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyCiNx71KtQ2L19JuYJoCQDD0oP9Ler-sQE")
 TOP_K = int(os.getenv("RAGAS_TOP_K", "4"))
 ENABLE_ANSWER_RELEVANCY = os.getenv("RAGAS_ENABLE_ANSWER_RELEVANCY", "1").strip() not in {"0", "false", "False"}
 RAISE_EXCEPTIONS = os.getenv("RAGAS_RAISE_EXCEPTIONS", "0").strip() in {"1", "true", "True"}
@@ -122,8 +125,22 @@ def main():
         )
         contexts = [h.text for h in hits]
         prompt = PROMPT_TMPL.format(context=format_context(hits), question=t["question"])
-        selected_model = MODEL if PROVIDER.lower() in {"ollama", "local", "local_ollama"} else API_MODEL
-        answer = generate(prompt, provider=PROVIDER, model=selected_model).strip()
+        provider_name = PROVIDER.lower()
+        if provider_name in {"ollama", "local", "local_ollama"}:
+            selected_model = MODEL
+            answer = generate(prompt, provider=PROVIDER, model=selected_model).strip()
+        elif provider_name in {"gemini", "google", "google_gemini", "gemini_api"}:
+            selected_model = GEMINI_API_MODEL
+            answer = generate(
+                prompt,
+                provider=PROVIDER,
+                model=selected_model,
+                api_base_url=GEMINI_API_BASE_URL,
+                api_key=GEMINI_API_KEY,
+            ).strip()
+        else:
+            selected_model = API_MODEL
+            answer = generate(prompt, provider=PROVIDER, model=selected_model).strip()
         if not answer:
             answer = "NOT_FOUND"
 
@@ -154,9 +171,11 @@ def main():
         llm = _build_ollama_llm(MODEL, base_url)
     elif provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible"}:
         llm = _build_openai_compatible_chat(API_MODEL, API_BASE_URL, API_KEY)
+    elif provider_name in {"gemini", "google", "google_gemini", "gemini_api"}:
+        llm = _build_openai_compatible_chat(GEMINI_API_MODEL, GEMINI_API_BASE_URL, GEMINI_API_KEY)
     else:
         raise ValueError(
-            f"Unsupported EVAL_LLM_PROVIDER '{PROVIDER}'. Use deepseek_api or ollama."
+            f"Unsupported EVAL_LLM_PROVIDER '{PROVIDER}'. Use deepseek_api, gemini, or ollama."
         )
 
     # Use LangChain's HuggingFace embeddings (has embed_query method needed by answer_relevancy)
@@ -177,7 +196,7 @@ def main():
     if ENABLE_ANSWER_RELEVANCY:
         # DeepSeek OpenAI-compatible endpoint supports only n=1.
         # answer_relevancy may request multiple generations via strictness>1.
-        if provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible"}:
+        if provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible", "gemini", "google", "google_gemini", "gemini_api"}:
             try:
                 answer_relevancy.strictness = 1
             except Exception:

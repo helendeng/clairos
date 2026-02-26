@@ -5,4 +5,7 @@ __pycache__/
 .DS_Store
 *.png
 *.csv
-database_metrics.json
+../venv/
+../.venv/
+../backend/__pycache__/
+

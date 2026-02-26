@@ -70,7 +70,21 @@ def generate(
             api_key=api_key,
         )
 
+    if provider_name in {"gemini", "google", "google_gemini", "gemini_api"}:
+        chosen_model = model or os.getenv("GEMINI_API_MODEL", "gemini-2.0-flash")
+        chosen_api_base_url = api_base_url or os.getenv(
+            "GEMINI_API_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai"
+        )
+        chosen_api_key = api_key or os.getenv("GEMINI_API_KEY", "")
+        return _generate_with_openai_compatible_api(
+            prompt=prompt,
+            model=chosen_model,
+            timeout_s=timeout_s,
+            api_base_url=chosen_api_base_url,
+            api_key=chosen_api_key,
+        )
+
     raise ValueError(
         f"Unsupported provider '{provider}'. Use one of: "
-        "ollama/local/local_ollama/deepseek/deepseek_api/api/openai_compatible."
+        "ollama/local/local_ollama/deepseek/deepseek_api/api/openai_compatible/gemini/google/google_gemini/gemini_api."
     )

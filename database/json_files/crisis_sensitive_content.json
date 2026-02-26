@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "subdomain": "Crisis/Sensitive Content",
+    "domain": "Personal Life",
+    "chunk_count": 1,
+    "collection_name": "clairos_email_chunks",
+    "exported_at": "2026-02-18T20:53:03.420649",
+    "export_date": "2026-02-18",
+    "export_time": "20:53:03"
+  },
+  "chunks": [
+    {
+      "chunk_id": "001",
+      "subdomain": "Crisis/Sensitive Content",
+      "domain": "Personal Life",
+      "text": "My suggestion for where to go is Austin. Play golf and rent a ski boat and jet ski's. Flying somewhere takes too much time.",
+      "source": {
+        "email_id": "2",
+        "from": "phillip.allen@enron.com",
+        "cc": "",
+        "bcc": "",
+        "subject": "Re:",
+        "timestamp": "Fri, 4 May 2001 13:51:00 -0700 (PDT)"
+      }
+    }
+  ]
+}
