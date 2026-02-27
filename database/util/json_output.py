@@ -28,7 +28,7 @@ def export_database_to_json():
     """Export entire database to separate JSON files per subdomain"""
     
     # Fixed output directory
-    output_dir = "../RAG_demo3/json_output"
+    output_dir = "../rag_demo4/json_output"
     
     print("=" * 70)
     print("EXPORT DATABASE TO JSON FILES")
@@ -268,7 +268,7 @@ def main():
     print("=" * 70)
     print()
     print("This script exports your Qdrant database to:")
-    print("  ../RAG_demo3/json_output/")
+    print("  ../_rag_demo4/json_output/")
     print()
     print("One JSON file will be created per subdomain.")
     print("Existing files will be overwritten.")
@@ -313,7 +313,7 @@ def main():
     
     print()
     print("=" * 70)
-    print("Done! Your JSON files are in ../RAG_demo3/json_output/")
+    print("Done! Your JSON files are in ../rag_demo4/json_output/")
     print("=" * 70)
 
 
