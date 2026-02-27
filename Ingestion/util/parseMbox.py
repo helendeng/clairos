@@ -8,6 +8,7 @@ import mailbox
 from Ingestion.Schemas.schemas import EmailRecord, OutputSchema
 from Ingestion.dataTaggers.ZeroShotController import process_email_with_zero_shot
 from Ingestion.Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS
+from database.core.ingest_chunks import ChunkIngestion
 
 
 # ---------------------------------------------------------------------------
@@ -57,6 +58,31 @@ def parse_message_to_record(message, email_id: int) -> EmailRecord | None:
     )
 
 
+def output_schemas_to_dicts(outputs: list[OutputSchema]) -> list[dict]:
+    """
+    Converts a list of OutputSchema objects into a list of plain dicts
+    matching the canonical chunk format used for storage/export.
+    """
+    result = []
+    for output in outputs:
+        src = output.source
+        result.append({
+            "chunk_id": str(output.chunk_id),
+            "domain": output.domain,
+            "subdomain": output.sub_domain,
+            "text": output.text,
+            "source": {
+                "email_id": src.email_id,
+                "from": src.sender,
+                "cc": ", ".join(src.cc),
+                "bcc": ", ".join(src.bcc),
+                "subject": src.subject,
+                "timestamp": src.timestamp,
+            },
+        })
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
@@ -101,4 +127,12 @@ def controller(
 
         all_outputs.extend(outputs)
 
-    return all_outputs
+    all_outputs_list = output_schemas_to_dicts(all_outputs)
+    print(all_outputs_list)
+    return all_outputs_list
+
+    ## Add this when we want to fully connect the data ingestion to the database
+    # ingestion = ChunkIngestion()
+    # ingestion.upload_batch(all_outputs_list)
+
+
