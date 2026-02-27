@@ -1,36 +1,36 @@
 # ── Core ML / NLP ─────────────────────────────────────────────────────────────
-torch==2.10.0
-transformers==5.2.0
-sentence-transformers==2.3.1    # Embedding model
+torch
+transformers
+sentence-transformers    # Embedding model
 
 # ── Data ──────────────────────────────────────────────────────────────────────
-numpy==2.4.2
-pandas==3.0.1
+numpy<2
+pandas
 
 # ── Backend API ───────────────────────────────────────────────────────────────
-fastapi==0.115.5
-uvicorn==0.32.1
-python-multipart==0.0.9
-requests==2.32.3
+fastapi
+uvicorn
+python-multipart
+requests
 
 # ── RAG / Retrieval ───────────────────────────────────────────────────────────
-faiss-cpu==1.9.0
-rank-bm25==0.2.2
+faiss-cpu
+rank-bm25
 
 # ── Qdrant Vector Database ───────────────────────────────────────────────────────────
 qdrant-client==1.12.1
 
 # ── RAG Evaluation (eval_ragas.py) ────────────────────────────────────────────
-ragas==0.2.14
-datasets==3.2.0
-langchain-ollama==0.3.2
-langchain-community==0.3.13
-langchain-openai==0.3.1
-langchain-huggingface==0.1.2
+ragas
+datasets
+langchain-ollama
+langchain-community
+langchain-openai
+langchain-huggingface
 
 # ── Visualization (database/) ─────────────────────────────────────────────────
-matplotlib==3.8.2
-seaborn==0.13.0
+matplotlib
+seaborn
 
 
 # Python Standard Library (no installation needed, but listed for reference)
