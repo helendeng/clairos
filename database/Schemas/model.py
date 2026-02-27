@@ -36,9 +36,9 @@ class EmailChunk:
     @classmethod
     def from_parsed(cls, parsed_chunk: dict):
         """
-        Create EmailChunk from your teammate's output
         
-        Input format (from your teammate):
+        
+        Input format:
         {
             "chunk_id": "scheduling_001",
             "domain": "scheduling",

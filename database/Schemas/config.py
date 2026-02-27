@@ -15,6 +15,8 @@ EMBEDDING_DIM = 384  # Update when you switch to Qwen3
 # SUBDOMAIN as Primary Classification (27 separate blocks)
 # Domain is metadata only, SUBDOMAIN is the main searchable tag
 SUBDOMAINS = [
+    #Raw emails
+    "Raw Email",
     # PII
     "Direct Identifier",
     "Contact Identifier",
@@ -66,6 +68,7 @@ SUBDOMAINS = [
 ]
 
 SUBDOMAIN_TO_DOMAIN = {
+    "Raw Email": "Raw Email",
     "Direct Identifier": "PII",
     "Contact Identifier": "PII",
     "Financial Identifier": "PII",
