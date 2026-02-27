@@ -8,7 +8,7 @@ from enum import Enum
 class SourceInfo:
     """The source variable in class OutputSchema"""
     email_id: str
-    sender: List[str]
+    sender: str
     subject: str
     cc: List[str]
     bcc: List[str]
