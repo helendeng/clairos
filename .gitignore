@@ -40,3 +40,6 @@ Thumbs.db
 *.png
 *.csv
 database_metrics.json
+
+# The Enron Dataset (1.33 Gb's)
+enron_structured.csv
