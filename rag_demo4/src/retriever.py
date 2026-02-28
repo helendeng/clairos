@@ -1,10 +1,16 @@
-"""Domain-constrained retriever: vector search (FAISS) + optional BM25.
+"""Domain-constrained retriever with pluggable backend.
+
+Supported backends:
+- local: FAISS vector + optional BM25 over local index files
+- qdrant: live vector search against shared database collection
 
 Key point: the upstream router provides domains_to_search.
-The retriever only searches within those domain indexes.
+The retriever only searches within those routed domains/subdomains.
 """
 
 import json
+import importlib.util
+import os
 from collections import Counter
 from dataclasses import dataclass
 from math import log
@@ -14,6 +20,99 @@ EMB_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_DIR = ROOT / "indexes"
+
+
+# Map common routed/index names to database-side subdomain labels.
+_RAG_DOMAIN_TO_SUBDOMAIN = {
+    "accounting": "Accounting",
+    "all_hr": "HR",
+    "all_schedule": "Scheduling",
+    "business_strategy": "Business_Strategy",
+    "company_financial_strategy": "Financial_Strategy",
+    "compliance_and_regulatory": "Compliance&Regulatory",
+    "contact_identifiers": "Contact Identifier",
+    "contractual": "Contractual",
+    "crisis_sensitive_content": "Crisis_&_Sensitive",
+    "direct_identifiers": "Direct Identifier",
+    "financial_identifiers": "Financial Identifier",
+    "health_disclosures": "Health_Disclosures",
+    "litigation_sensitive": "Litigation Sensitive",
+    "operational_security": "Operational_Security",
+    "orgstructure_metadata": "Org_Structure_Metadata",
+    "org_structure_metadata": "Org_Structure_Metadata",
+    "privileged_communications": "Privileged_Communications",
+    "project_metadata": "Project_Metadata",
+    "scientific_and_ip_randd": "Scientific_&_IP",
+    "security_behavioral_data": "Behavioral Data",
+    "sensitive_vendor_documents": "Sensitive_Vendor_Docs",
+    "support_and_escalation": "Support_&_Escalation",
+    "system_operations": "System_Operations",
+    "technical_randd": "Technical",
+    "vendor_metadata": "Vendor_Metadata",
+    # Already subdomain-shaped outputs from router:
+    "financial_strategy": "Financial_Strategy",
+    "hr": "HR",
+    "technical": "Technical",
+    "scientific_and_ip": "Scientific_&_IP",
+}
+
+
+def _normalize_domain_key(value: str) -> str:
+    return (
+        str(value)
+        .strip()
+        .lower()
+        .replace(" ", "_")
+        .replace("&", "and")
+        .replace("-", "_")
+    )
+
+
+def _to_subdomain_candidates(domain: str) -> list[str]:
+    domain_s = str(domain).strip()
+    if not domain_s:
+        return []
+    key = _normalize_domain_key(domain_s)
+    mapped = _RAG_DOMAIN_TO_SUBDOMAIN.get(key)
+    cands = []
+    if mapped:
+        cands.append(mapped)
+    # Also try original string as-is and light variants for compatibility.
+    cands.extend(
+        [
+            domain_s,
+            domain_s.replace("_", " "),
+            domain_s.replace("_", "&"),
+        ]
+    )
+    seen = set()
+    out = []
+    for c in cands:
+        if c and c not in seen:
+            seen.add(c)
+            out.append(c)
+    return out
+
+
+def _load_qdrant_config_from_database_file() -> tuple[str, str, str] | None:
+    """Load Qdrant settings from sibling database config file if available."""
+    cfg_path = ROOT.parent / "database" / "Schemas" / "config.py"
+    if not cfg_path.exists():
+        return None
+    try:
+        spec = importlib.util.spec_from_file_location("clairos_database_config", str(cfg_path))
+        if spec is None or spec.loader is None:
+            return None
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        url = str(getattr(module, "QDRANT_URL", "") or "").strip()
+        api_key = str(getattr(module, "QDRANT_API_KEY", "") or "").strip()
+        collection_name = str(getattr(module, "COLLECTION_NAME", "") or "").strip()
+        if not url:
+            return None
+        return url, api_key, (collection_name or "clairos_email_chunks")
+    except Exception:
+        return None
 
 
 @dataclass
@@ -32,7 +131,10 @@ class DomainRetriever:
         self._embedder = None
         self._np = None
         self._faiss = None
+        self._qdrant_client = None
+        self._qdrant_models = None
         self._vector_ready = False
+        self._qdrant_ready = False
 
     @staticmethod
     def _dedupe_keep_best(hits: list[Hit]) -> list[Hit]:
@@ -92,6 +194,141 @@ class DomainRetriever:
         self._embedder = SentenceTransformer(EMB_MODEL)
         self._vector_ready = True
 
+    def _ensure_qdrant_backend(self):
+        if self._qdrant_ready:
+            return
+        try:
+            from qdrant_client import QdrantClient
+            from qdrant_client.models import Filter, FieldCondition, MatchValue
+        except Exception as exc:  # pragma: no cover - depends on local env
+            raise RuntimeError(
+                "Qdrant backend unavailable. Install qdrant-client."
+            ) from exc
+
+        qdrant_url = os.getenv("QDRANT_URL", "").strip()
+        qdrant_api_key = os.getenv("QDRANT_API_KEY", "").strip()
+        collection_name = os.getenv("QDRANT_COLLECTION_NAME", "clairos_email_chunks").strip() or "clairos_email_chunks"
+
+        if not qdrant_url:
+            loaded = _load_qdrant_config_from_database_file()
+            if loaded:
+                qdrant_url, qdrant_api_key, collection_name = loaded
+
+        if not qdrant_url:
+            raise RuntimeError(
+                "QDRANT_URL is required for qdrant backend. Set env vars or provide "
+                "database/Schemas/config.py with QDRANT_URL."
+            )
+
+        self._qdrant_client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key or None)
+        self._qdrant_models = {
+            "Filter": Filter,
+            "FieldCondition": FieldCondition,
+            "MatchValue": MatchValue,
+            "collection_name": collection_name,
+        }
+        self._qdrant_ready = True
+
+    def _search_qdrant(
+        self,
+        question: str,
+        domains_to_search: list[str],
+        top_k: int,
+    ) -> list[Hit]:
+        self._ensure_qdrant_backend()
+        self._ensure_vector_backend()
+
+        qv = self._embedder.encode([question], normalize_embeddings=True)
+        qvec = [float(x) for x in qv[0]]
+
+        Filter = self._qdrant_models["Filter"]
+        FieldCondition = self._qdrant_models["FieldCondition"]
+        MatchValue = self._qdrant_models["MatchValue"]
+        collection_name = self._qdrant_models["collection_name"]
+
+        hits = []
+        seen = set()
+
+        if not domains_to_search:
+            try:
+                results = self._qdrant_client.search(
+                    collection_name=collection_name,
+                    query_vector=qvec,
+                    limit=top_k,
+                    with_payload=True,
+                    with_vectors=False,
+                )
+            except Exception:
+                return []
+
+            for p in results:
+                payload = p.payload or {}
+                chunk_id = str(payload.get("chunk_id", ""))
+                text = str(payload.get("text", ""))
+                source = payload.get("source") or {}
+                domain_name = str(payload.get("domain") or payload.get("subdomain") or "unknown")
+                unique_key = (domain_name, chunk_id)
+                if unique_key in seen:
+                    continue
+                seen.add(unique_key)
+                hits.append(
+                    Hit(
+                        domain=domain_name,
+                        chunk_id=chunk_id,
+                        score=float(getattr(p, "score", 0.0) or 0.0),
+                        method="qdrant_vector",
+                        text=text,
+                        source=source,
+                    )
+                )
+            return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
+
+        for routed_domain in domains_to_search:
+            subdomain_cands = _to_subdomain_candidates(routed_domain)
+            if not subdomain_cands:
+                continue
+
+            for sub in subdomain_cands:
+                qfilter = Filter(
+                    must=[
+                        FieldCondition(key="subdomain", match=MatchValue(value=sub)),
+                    ]
+                )
+                try:
+                    results = self._qdrant_client.search(
+                        collection_name=collection_name,
+                        query_vector=qvec,
+                        query_filter=qfilter,
+                        limit=top_k,
+                        with_payload=True,
+                        with_vectors=False,
+                    )
+                except Exception:
+                    continue
+
+                for p in results:
+                    payload = p.payload or {}
+                    chunk_id = str(payload.get("chunk_id", ""))
+                    text = str(payload.get("text", ""))
+                    source = payload.get("source") or {}
+                    domain_name = str(payload.get("domain") or routed_domain)
+                    unique_key = (domain_name, chunk_id)
+                    if unique_key in seen:
+                        continue
+                    seen.add(unique_key)
+                    hits.append(
+                        Hit(
+                            domain=domain_name,
+                            chunk_id=chunk_id,
+                            score=float(getattr(p, "score", 0.0) or 0.0),
+                            method="qdrant_vector",
+                            text=text,
+                            source=source,
+                        )
+                    )
+
+        return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
+
     def _load_domain(self, domain: str, need_index: bool):
         idx_path = self.index_dir / f"{domain}.faiss"
         chunks_path = self.index_dir / f"{domain}.chunks.json"
@@ -149,7 +386,21 @@ class DomainRetriever:
         use_bm25: bool = True,
         use_vector: bool = True,
         fusion: str = "rrf",
+        backend: str | None = None,
     ) -> list[Hit]:
+        backend_name = (backend or os.getenv("RAG_RETRIEVER_BACKEND", "auto")).strip().lower()
+
+        if backend_name in {"qdrant", "auto"}:
+            try:
+                qdrant_hits = self._search_qdrant(question, domains_to_search, top_k)
+                if qdrant_hits:
+                    return qdrant_hits
+                if backend_name == "qdrant":
+                    return []
+            except Exception:
+                if backend_name == "qdrant":
+                    raise
+
         # Query vector (optional)
         if use_vector:
             self._ensure_vector_backend()

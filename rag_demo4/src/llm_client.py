@@ -18,7 +18,9 @@ def _generate_with_ollama(prompt: str, model: str, timeout_s: int) -> str:
     url = "http://localhost:11434/api/generate"
     payload = {"model": model, "prompt": prompt, "stream": False}
     response = requests.post(url, json=payload, timeout=timeout_s)
-    response.raise_for_status()
+    if response.status_code >= 400:
+        detail = response.text[:500]
+        raise RuntimeError(f"Ollama request failed ({response.status_code}): {detail}")
     return response.json().get("response", "")
 
 

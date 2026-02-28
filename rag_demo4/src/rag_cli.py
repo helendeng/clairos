@@ -13,6 +13,7 @@ Run:
 from .retriever import DomainRetriever
 from .llm_client import generate
 from .domain_router import get_domains_to_search
+import os
 
 MODEL = "qwen2.5:14b-instruct"
 TOP_K = 5
@@ -40,17 +41,38 @@ def format_context(hits):
 
 def main():
     question = input("question: ").strip()
-    categories_to_search = get_domains_to_search(question)
-    print(f"domains_to_search (auto): {categories_to_search}")
-    if not categories_to_search:
-        print("No routed domains. Unable to retrieve context.")
-        return
+    retriever_backend = os.getenv("RAG_RETRIEVER_BACKEND", "auto")
+    bypass_router = os.getenv("RAG_BYPASS_ROUTER", "0").strip().lower() in {"1", "true", "yes"}
+
+    if bypass_router:
+        categories_to_search = []
+        print("domain_router bypassed: querying all available Qdrant chunks")
+    else:
+        try:
+            categories_to_search = get_domains_to_search(question)
+            print(f"domains_to_search (auto): {categories_to_search}")
+            if not categories_to_search and retriever_backend not in {"qdrant", "auto"}:
+                print("No routed domains. Unable to retrieve context.")
+                return
+        except Exception as exc:
+            if retriever_backend in {"qdrant", "auto"}:
+                categories_to_search = []
+                print(f"domain_router failed ({exc}); falling back to all-domain Qdrant search")
+            else:
+                raise
 
     llm_provider = input("llm_provider [deepseek_api/ollama] (default: deepseek_api): ").strip() or "deepseek_api"
     llm_model = input("llm_model (blank for provider default): ").strip() or None
 
     retriever = DomainRetriever()
-    hits = retriever.search(question, categories_to_search, top_k=TOP_K, use_bm25=True)
+    print(f"retriever_backend: {retriever_backend}")
+    hits = retriever.search(
+        question,
+        categories_to_search,
+        top_k=TOP_K,
+        use_bm25=True,
+        backend=retriever_backend,
+    )
 
     context = format_context(hits)
     prompt = PROMPT_TMPL.format(context=context, question=question)

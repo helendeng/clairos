@@ -16,7 +16,7 @@ from .llm_client import generate
 ROOT = Path(__file__).resolve().parents[1]
 TESTS_PATH = Path(os.getenv("EVAL_TESTS_PATH", str(ROOT / "data" / "tests.json")))
 
-MODEL = "qwen2.5:14b-instruct"
+MODEL = os.getenv("EVAL_OLLAMA_MODEL", os.getenv("OLLAMA_MODEL", "qwen2.5:14b-instruct"))
 PROVIDER = os.getenv("EVAL_LLM_PROVIDER", "deepseek_api")
 API_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
 API_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")

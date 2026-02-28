@@ -3,6 +3,7 @@ faiss-cpu
 sentence-transformers
 rank-bm25
 requests
+qdrant-client
 ragas
 datasets
 langchain-ollama

@@ -49,6 +49,11 @@ The goal of this README is to help teammates (especially database integration) c
 ## 2) How To Run
 
 ## 2.1 Install
+(optional virtual environment)```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -63,18 +68,45 @@ python -m src.build_indexes
 python -m src.rag_cli
 ```
 
+### 2.3.1 Realtime DB Retrieval (no JSON export needed)
+`rag_cli` now supports live retrieval from Qdrant so database updates are immediately queryable.
+
+PowerShell example:
+```powershell
+$env:RAG_RETRIEVER_BACKEND="qdrant"   # qdrant | auto | local
+$env:QDRANT_URL="https://<your-endpoint>:6333"
+$env:QDRANT_API_KEY="<your-api-key>"
+$env:QDRANT_COLLECTION_NAME="clairos_email_chunks"  # optional
+python -m src.rag_cli
+```
+
+Notes:
+- `RAG_RETRIEVER_BACKEND=auto` (default): try Qdrant first, fallback to local FAISS/BM25.
+- `RAG_RETRIEVER_BACKEND=qdrant`: force live DB retrieval only.
+- `RAG_RETRIEVER_BACKEND=local`: keep old behavior (indexes/*.faiss + *.chunks.json).
+- If env vars are not set, retriever will try loading Qdrant settings from `../database/Schemas/config.py`.
+
 ## 2.4 Web demo backend
 ```bash
 cd clairos/backend
 uvicorn server:app --reload --port 8000
+
+(or use): 
+cd clairos
+npm run dev
 ```
 
-## 2.5 Web demo frontend
+## 2.5 Web demo frontend (new terminal)
 ```bash
 cd clairos
 npm install
 npm run dev
+
+(or use)
+cd clairos
+npm run dev
 ```
+
 
 ## 2.6 Evaluation examples
 ```bash
@@ -82,6 +114,12 @@ npm run dev
 set EVAL_TESTS_PATH=C:\path\to\rag_demo3\data\tests_singlehop.json
 set EVAL_LLM_PROVIDER=deepseek_api
 python -m src.eval_ragas
+
+(or use)
+$env:EVAL_TESTS_PATH="C:\path\to\repo\data\tests_singlehop.json"
+$env:EVAL_LLM_PROVIDER="deepseek_api"
+python -m src.eval_ragas
+
 
 # multi-hop ragas
 set EVAL_TESTS_PATH=C:\path\to\rag_demo3\data\tests_multihop.json
@@ -144,4 +182,3 @@ Useful function signatures:
 2. Enable real-world email ingestion and chunking pipeline.
 3. Run larger-scale evaluation (100+ tests) on real data.
 4. Add production-safe observability (latency, retrieval hit quality, failure reasons).
-
