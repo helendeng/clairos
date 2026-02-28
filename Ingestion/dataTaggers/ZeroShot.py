@@ -1,4 +1,4 @@
-# The core model that will be run using the wrapper of ZeroShotController during inference, 
+e# The core model that will be run using the wrapper of ZeroShotController during inference, 
 # or tested in the ZeroShotValidation code for validation and accuracy verification
 
 

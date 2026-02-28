@@ -415,15 +415,16 @@ def export_results_to_csv(results: Dict[str, Any], output_prefix: str = "zero_sh
     print(f"Saved predictions to {output_prefix}_predictions.csv")
 
 
-# ===== RUN EVALUATION =====
-results = evaluate_zero_shot_classifier_parallel(
-    test_examples=zero_shot_test_examples,
-    label_groups=ZERO_SHOT_LABEL_GROUPS,
-    zero_shot_classify_fn=zero_shot_classify,
-    category_thresholds=CATEGORY_THRESHOLDS,
-    default_threshold=0.5,
-    multi_label=True
-)
+if __name__ == "__main__":
+    # ===== RUN EVALUATION =====
+    results = evaluate_zero_shot_classifier_parallel(
+        test_examples=zero_shot_test_examples,
+        label_groups=ZERO_SHOT_LABEL_GROUPS,
+        zero_shot_classify_fn=zero_shot_classify,
+        category_thresholds=CATEGORY_THRESHOLDS,
+        default_threshold=0.5,
+        multi_label=True
+    )
 
-# Print report
-print_evaluation_report(results, top_n=24)
+    # Print report
+    print_evaluation_report(results, top_n=24)

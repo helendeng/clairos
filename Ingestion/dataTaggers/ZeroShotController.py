@@ -12,7 +12,7 @@ def process_email_with_zero_shot(
             label_groups: dict = ZERO_SHOT_LABEL_GROUPS,
             threshold: float = 0.5,
             split_by: str = "sentence",
-        ) -> list[OutputSchema]:
+        ) -> list[dict]:
     """
     Classifies an EmailRecord with zero-shot and returns a list of OutputSchema objects.
 
@@ -36,13 +36,12 @@ def process_email_with_zero_shot(
     -------
     list[OutputSchema]
     """
-    full_text = f"Subject: {email.subject}\n\n{email.body}"
+    full_text = email.body.strip()
 
     if split_by == "sentence":
-        chunks = re.split(r"[.!?]+", full_text)
-        chunks = [c.strip() for c in chunks if c.strip() and len(c.strip()) > 50]
+        chunks = [n for c in re.split(r"[.!?]+", full_text) if (n := re.sub(r'\s+', ' ', c).strip()) and len(n) > 50]
     elif split_by == "paragraph":
-        chunks = [p.strip() for p in full_text.split("\n\n") if p.strip()]
+        chunks = [n for p in full_text.split("\n\n") if (n := re.sub(r'\s+', ' ', p).strip())]
     else:
         raise ValueError(f"Invalid split_by: {split_by!r}. Use 'sentence' or 'paragraph'")
 
@@ -52,7 +51,7 @@ def process_email_with_zero_shot(
     # Build SourceInfo once — it's the same for every chunk of this email
     source = SourceInfo(
         email_id=email.email_id,
-        sender=[email.sender],
+        sender=email.sender,
         subject=email.subject,
         cc=email.cc,
         bcc=email.bcc,
@@ -69,6 +68,9 @@ def process_email_with_zero_shot(
     outputs: list[OutputSchema] = []
 
     for chunk_id, chunk_text in enumerate(chunks):
+        # Collect all qualifying (score, category_key) pairs across all label groups
+        candidates: list[tuple[float, str]] = []
+
         for desc_to_key, candidate_labels in groups:
             result = zero_shot_classify_fn(chunk_text, candidate_labels, multi_label=True)
 
@@ -81,18 +83,23 @@ def process_email_with_zero_shot(
                 if score < category_threshold:
                     continue
 
-                taxonomy_entry = TAXONOMY.get(category_key)
-                if taxonomy_entry is None:
-                    continue
+                if TAXONOMY.get(category_key) is not None:
+                    candidates.append((score, category_key))
 
-                outputs.append(
-                    OutputSchema(
-                        chunk_id=chunk_id,
-                        domain=taxonomy_entry["domain"],
-                        sub_domain=taxonomy_entry["subdomain"],
-                        text=chunk_text,
-                        source=source,
-                    )
-                )
+        if not candidates:
+            continue
+
+        # Emit one OutputSchema per chunk using the highest-scoring label
+        best_score, best_key = max(candidates, key=lambda x: x[0])
+        taxonomy_entry = TAXONOMY[best_key]
+        outputs.append(
+            OutputSchema(
+                chunk_id=chunk_id,
+                domain=taxonomy_entry["domain"],
+                sub_domain=taxonomy_entry["subdomain"],
+                text=chunk_text,
+                source=source,
+            )
+        )
 
     return outputs

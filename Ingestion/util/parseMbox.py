@@ -4,6 +4,7 @@ Input controller: ingests a .mbox file and feeds each email through the pipeline
 Entry point: controller(mbox_fp, zero_shot_classify_fn)
 """
 import mailbox
+import re
 
 from Ingestion.Schemas.schemas import EmailRecord, OutputSchema
 from Ingestion.dataTaggers.ZeroShotController import process_email_with_zero_shot
@@ -15,19 +16,60 @@ from database.core.ingest_chunks import ChunkIngestion
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _decode_qp_artifacts(text: str) -> str:
+    """
+    Decode residual quoted-printable sequences left in email bodies.
+
+    Emails that contain forwarded messages often have an inner QP-encoded
+    body that Python's mailbox decoder never touches (it only decodes the
+    outer Content-Transfer-Encoding). This does a safe second pass:
+      - '=\\r\\n' / '=\\n'  →  ''   (soft line-break join)
+      - '=XX'               →  chr  (hex-encoded character)
+    """
+    text = re.sub(r'=\r?\n', '', text)
+    text = re.sub(r'=([0-9A-Fa-f]{2})', lambda m: chr(int(m.group(1), 16)), text)
+    return text
+
+
+def _strip_forwarding_headers(text: str) -> str:
+    """
+    Remove forwarding boilerplate and inline email header lines from body text.
+
+    Strips:
+      - Separator lines like '--- Forwarded by ... ---' or '--- Original Message ---'
+      - Inline header lines: To:, From:, Cc:, Bcc:, Subject:, Date:, Sent:
+    Collapses any resulting runs of blank lines down to a single blank line.
+    """
+    # Remove separator lines (5+ dashes or equals, optional text)
+    text = re.sub(r'^[-=]{5,}.*$', '', text, flags=re.MULTILINE)
+    # Remove inline email header lines
+    text = re.sub(r'^(To|From|Cc|Bcc|Subject|Date|Sent|cc):\s.*$', '', text, flags=re.MULTILINE)
+    # Collapse excess blank lines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+
 def _get_email_body(message) -> str | None:
-    """Extracts the plain-text body from a mailbox.Message."""
+    """Extracts, decodes, and cleans the plain-text body from a mailbox.Message."""
     if message.is_multipart():
         for part in message.walk():
             if part.get_content_type() == "text/plain":
-                return part.get_payload(decode=True).decode(
-                    part.get_content_charset() or "utf-8", "ignore"
-                )
+                payload = part.get_payload(decode=True)
+                if payload:
+                    text = payload.decode(part.get_content_charset() or "utf-8", "ignore")
+                    text = _decode_qp_artifacts(text)
+                    text = _strip_forwarding_headers(text)
+                    return text
+
     else:
         if message.get_content_type() == "text/plain":
-            return message.get_payload(decode=True).decode(
-                message.get_content_charset() or "utf-8", "ignore"
-            )
+            payload = message.get_payload(decode=True)
+            if payload:
+                text = payload.decode(message.get_content_charset() or "utf-8", "ignore")
+                text = _decode_qp_artifacts(text)
+                text = _strip_forwarding_headers(text)
+                return text
+
     return None
 
 
@@ -50,7 +92,7 @@ def parse_message_to_record(message, email_id: int) -> EmailRecord | None:
     return EmailRecord(
         email_id=str(email_id),
         sender=message.get("From", ""),
-        subject=message.get("Subject", ""),
+        subject=" ".join(message.get("Subject", "").split()),
         cc=_parse_addresses(message.get("Cc")),
         bcc=_parse_addresses(message.get("Bcc")),
         body=body,
