@@ -70,12 +70,10 @@ def detect_pii(text):
         "redacted_count": redacted_count
     }
 
-DEFAULT_LLM_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek_api")
-DEFAULT_DEEPSEEK_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")
-DEFAULT_DEEPSEEK_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
-DEFAULT_DEEPSEEK_API_KEY = os.getenv("LLM_API_KEY", "sk-acb050a499c64547b5a5af2321aee72d")
+# LLM and RAG configuration, no more deepseek
+DEFAULT_LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
+DEFAULT_OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:14b")
 DEFAULT_TOP_K = int(os.getenv("RAG_TOP_K", "5"))
-
 
 def _available_categories() -> list[str]:
     index_dir = PROJECT_ROOT / "rag_demo4" / "indexes"
@@ -120,44 +118,11 @@ def call_ollama(prompt, model="llama3.2"):
         return f"Error: {str(e)}"
 
 
-def call_deepseek_api(
-    prompt: str,
-    model: str = DEFAULT_DEEPSEEK_MODEL,
-    api_key: str = DEFAULT_DEEPSEEK_API_KEY,
-    api_base_url: str = DEFAULT_DEEPSEEK_BASE_URL,
-):
-    try:
-        response = requests.post(
-            f"{api_base_url.rstrip('/')}/chat/completions",
-            headers={
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": model,
-                "messages": [{"role": "user", "content": prompt}],
-                "temperature": 0.2,
-            },
-            timeout=30,
-        )
-        if response.status_code == 200:
-            data = response.json()
-            choices = data.get("choices", [])
-            if not choices:
-                return ""
-            return choices[0].get("message", {}).get("content", "")
-        return f"Error calling DeepSeek API: {response.text}"
-    except Exception as e:
-        return f"Error: {str(e)}"
-
-
 def call_llm(prompt: str, provider: str = DEFAULT_LLM_PROVIDER, model: Optional[str] = None):
     provider_name = (provider or DEFAULT_LLM_PROVIDER).strip().lower()
     if provider_name in {"ollama", "local", "local_ollama"}:
-        return call_ollama(prompt, model=model or "llama3.2")
-    if provider_name in {"deepseek", "deepseek_api", "api", "openai_compatible"}:
-        return call_deepseek_api(prompt, model=model or DEFAULT_DEEPSEEK_MODEL)
-    return f"Unsupported llm_provider: {provider}. Use deepseek_api or ollama."
+        return call_ollama(prompt, model=model or DEFAULT_OLLAMA_MODEL)
+    return f"Unsupported llm_provider: {provider}. Use ollama."
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
