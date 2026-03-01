@@ -40,7 +40,7 @@ approval_storage = {
     "metadata": {}
 }
 
-# Simple PII detection using regex (your teammates can replace with ML models)
+# Simple PII detection using regex
 def detect_pii(text):
     pii_found = []
     redacted_count = 0
@@ -78,7 +78,7 @@ DEFAULT_TOP_K = int(os.getenv("RAG_TOP_K", "5"))
 
 
 def _available_categories() -> list[str]:
-    index_dir = PROJECT_ROOT / "indexes"
+    index_dir = PROJECT_ROOT / "rag_demo4" / "indexes"
     return sorted([p.name.replace(".chunks.json", "") for p in index_dir.glob("*.chunks.json")])
 
 
@@ -219,7 +219,6 @@ async def query_document(
     llm_provider: str = Form(DEFAULT_LLM_PROVIDER),
     llm_model: Optional[str] = Form(None),
 ):
-    # FIXED: run_rag is commented out so use the inline document query approach
     if doc_id not in document_storage:
         return {
             "question": question,
@@ -227,25 +226,25 @@ async def query_document(
             "confidence": 0.0,
             "sources": []
         }
-    
-    full_text = document_storage[doc_id]
-    
-    query_prompt = f"""Based on the following document, answer this question: {question}
 
-Full Document:
-{full_text[:4000]}
+    categories = _available_categories()
+    
+    rag_out = run_rag(
+        question=question,
+        categories_to_search=categories,
+        top_k=DEFAULT_TOP_K,
+        llm_provider="ollama",
+        llm_model="qwen2.5:14b",
+    )
 
-Provide a clear, concise answer. If you cannot find the answer in the document, say "I don't have verified context for that specific question in the documentation."
+    answer = rag_out.get("answer", "")
+    confidence = calculate_confidence(answer, len(question))
 
-Answer:"""
-    
-    answer = call_llm(query_prompt, provider=llm_provider, model=llm_model)
-    confidence = calculate_confidence(answer, len(query_prompt))
-    
-    sources = [{"type": "document", "name": doc_id}]
-    if "don't have" in answer.lower():
-        sources = [{"type": "system", "name": "System Prompt"}]
-    
+    sources = [
+        {"type": "document", "name": f"{s.get('domain', '')} | {s.get('subject', '')}"}
+        for s in rag_out.get("sources", [])
+    ]
+
     return {
         "question": question,
         "answer": answer,
