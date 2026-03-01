@@ -24,7 +24,6 @@ function App() {
   // Employee/Chat state
   const [query, setQuery] = useState('');
   const [queryHistory, setQueryHistory] = useState([]);
-  const [llmProvider, setLlmProvider] = useState('deepseek_api');
 
   // Manager: Upload & Process
   const handleFileUpload = async (e) => {
@@ -542,18 +541,6 @@ function App() {
             </div>
 
             {/* Query Input */}
-            <div className="mb-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">LLM Provider</label>
-              <select
-                value={llmProvider}
-                onChange={(e) => setLlmProvider(e.target.value)}
-                className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                disabled={processing}
-              >
-                <option value="deepseek_api">DeepSeek API (default)</option>
-                <option value="ollama">Ollama Local</option>
-              </select>
-            </div>
 
             <div className="flex gap-2">
               <input
@@ -574,9 +561,6 @@ function App() {
               </button>
             </div>
 
-            <p className="text-sm text-gray-500 mt-2">
-              RAG backend uses rag_demo3 indexes. Generation supports DeepSeek API and local Ollama.
-            </p>
 
             {/* Reset Button */}          {/* ← FIXED: moved inside the flex-col div */}
             <div className="text-center mt-4">
