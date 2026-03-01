@@ -179,7 +179,174 @@ TAXONOMY = {
     "Personal_Life.Crisis_Content": {"domain": "Personal", "subdomain": "Crisis_&_Sensitive"},
 
     ########################## Other ############################
-    "Other.Other": {"domain": "Other", "subdomain": "Other"}, 
+    "Other.Other": {"domain": "Other", "subdomain": "Other"},
+}
+
+
+###############################################################################
+########################## RAG Domain Routing Map #############################
+# Maps every taxonomy key → list of FAISS index basenames (without extension).
+# Names must exactly match filenames in rag_demo4/indexes/ (e.g. "all_hr" →
+# "all_hr.faiss" / "all_hr.chunks.json").
+# Use [] for subdomains that should NOT be served via RAG (sensitive PII, etc).
+LABEL_TO_RAG_DOMAIN: dict[str, list[str]] = {
+
+    # ── PII / Direct Identifiers — redacted, no RAG index ─────────────────
+    "direct_ID.SSN":                                        [],
+    "direct_ID.Passport_Number":                            [],
+    "direct_ID.Visa_Number":                                [],
+    "direct_ID.Medical_Device_Data":                        [],
+    "direct_ID.Birthday":                                   [],
+    "direct_ID.Drivers_License":                            [],
+    "direct_ID.Geographical_ID":                            [],
+
+    # ── PII / Contact Identifiers ──────────────────────────────────────────
+    "contact_ID.Personal_Address":                          ["contact_identifiers"],
+    "contact_ID.Personal_Phone":                            ["contact_identifiers"],
+    "contact_ID.Personal_Email":                            ["contact_identifiers"],
+    "contact_ID.Employee_ID":                               ["contact_identifiers"],
+
+    # ── PII / Financial Identifiers — sensitive PII, no RAG index ─────────
+    "financial_ID.Personal_Credit_Card":                    [],
+    "financial_ID.Bank_Routing_Number":                     [],
+    "financial_ID.Taxpayer_ID":                             [],
+    "financial.credit_card":                                [],
+    "taxpayer.ein":                                         [],
+    "security.api_key":                                     ["operational_security"],
+
+    # ── HR ─────────────────────────────────────────────────────────────────
+    "HR.External_Credit_Card":                              ["all_hr"],
+    "HR.External_Bank_Information":                         ["all_hr"],
+    "HR.Performance_Reviews":                               ["all_hr"],
+    "HR.Internal_Disputes":                                 ["all_hr"],
+
+    # ── Legal / Litigation Sensitive ───────────────────────────────────────
+    "litigation_sensitive.legal_disputes":                  ["litigation_sensitive"],
+    "litigation_sensitive.Notice_of_Claims":                ["litigation_sensitive"],
+    "litigation_sensitive.Pre_Litigation_Discussions":      ["litigation_sensitive"],
+
+    # ── Legal / Compliance & Regulatory ───────────────────────────────────
+    "compliance&regulatory.SOX_Compliance":                 ["compliance_and_regulatory"],
+    "compliance&regulatory.Safety_Compliance":              ["compliance_and_regulatory"],
+    "compliance&regulatory.Reporting_Obligations":          ["compliance_and_regulatory"],
+
+    # ── Legal / Contractual ────────────────────────────────────────────────
+    "contractual.NDA":                                      ["contractual"],
+    "contractual.Customer_Agreements":                      ["contractual"],
+    "contractual.Vendor_Agreements":                        ["contractual"],
+
+    # ── Legal / Privileged Communications ─────────────────────────────────
+    "privileged_communications.Messages_to&from_counsel":   ["litigation_sensitive"],
+    "privileged_communications.Internal_Legal_Advice":      ["litigation_sensitive"],
+
+    # ── Security / Operational Security ───────────────────────────────────
+    "operational_security.System_Diagrams":                 ["operational_security"],
+    "operational_security.Deployment_URLs":                 ["operational_security"],
+    "operational_security.Internal_IP_Address":             ["operational_security"],
+    "operational_security.VPN_Credentials":                 ["operational_security"],
+    "operational_security.Encryption_Keys":                 ["operational_security"],
+    "operational_security.MFA_Recovery_Codes":              ["operational_security"],
+    "operational_security.Admin_Credentials":               ["operational_security"],
+    "operational_security.API_Key":                         ["operational_security"],
+    "operational_security.Secret_Link":                     ["operational_security"],
+    "operational_security.Tokens":                          ["operational_security"],
+
+    # ── Security / Behavioral Data ─────────────────────────────────────────
+    "behavioral.Audit_Log":                                 ["operational_security"],
+    "behavioral.Failed_login_events":                       ["operational_security"],
+    "behavioral.Incident_Postmortems":                      ["operational_security"],
+
+    # ── Strategic ──────────────────────────────────────────────────────────
+    "Strategic.M&A":                                        ["business_strategy"],
+    "Strategic.Market_Expansion":                           ["business_strategy"],
+    "Strategic.Pricing_Models":                             ["business_strategy", "company_financial_strategy"],
+    "Strategic.Customer_Acquisition":                       ["business_strategy"],
+    "Strategic.Competitive_Analysis":                       ["business_strategy"],
+    "Strategic.Board_Communications":                       ["business_strategy"],
+
+    # ── R&D / Technical ────────────────────────────────────────────────────
+    "R&D.Technical.Experiments":                            ["technical_randd"],
+    "R&D.Technical.Algorithms":                             ["technical_randd"],
+    "R&D.Technical.Models":                                 ["technical_randd"],
+    "R&D.Technical.Prototypes":                             ["technical_randd"],
+    "Technical_R&D.Hardware_Specifications":                ["technical_randd"],
+
+    # ── R&D / IP ───────────────────────────────────────────────────────────
+    "R&D.IP.Patentable_Ideas":                              ["technical_randd"],
+    "R&D.IP.Proprietary_Formulas":                          ["technical_randd"],
+    "Scientific_&_IP.Novel_Engineering_Concepts":           ["technical_randd"],
+
+    # ── Financial / Accounting ─────────────────────────────────────────────
+    "Accounting.Company_Credit_Card":                       ["accounting"],
+    "Accounting.Company_Bank_Account_Info":                 ["accounting"],
+    "Accounting.Tax_Info":                                  ["accounting"],
+    "Accounting.W9_Info":                                   ["accounting"],
+    "Accounting.1099_Info":                                 ["accounting"],
+    "Accounting.Payroll_Attachments":                       ["accounting"],
+    "Accounting.Salary_Information":                        ["accounting"],
+    "Financial.Accounting.Salary_Negotiations":             ["accounting"],
+    "Financial.Accounting.Firing_Hiring":                   ["accounting"],
+    "Accounting.Hiring_Info":                               ["accounting"],
+    "Financial.Accounting.Bonuses":                         ["accounting"],
+    "Accounting.Raise_Info":                                ["accounting"],
+
+    # ── Financial / Strategy ───────────────────────────────────────────────
+    "Financial.Strategy.Budget_Forecasting":                ["company_financial_strategy"],
+    "Financial.Strategy.Revenue_Projections":               ["company_financial_strategy"],
+    "Financial_Strategy.Financial_Risk_Models":             ["company_financial_strategy"],
+    "Financial.Strategy.Investment_Strategies":             ["company_financial_strategy"],
+    "Financial_Strategy.Pricing_Models":                    ["company_financial_strategy", "business_strategy"],
+
+    # ── Operational / Project Metadata ─────────────────────────────────────
+    "Project_Metadata.Project_Deadlines":                   ["project_metadata"],
+    "Project_Metadata.Deliverables":                        ["project_metadata"],
+    "Project_Metadata.Handoff_Notes":                       ["project_metadata"],
+    "Operational.Project.Progress_Updates":                 ["project_metadata"],
+    "Operational.Project.Technical_Blockers":               ["project_metadata"],
+
+    # ── Operational / Org Structure ────────────────────────────────────────
+    "Org_Structure_Metadata.Coworker_Name":                 ["orgstructure_metadata"],
+    "Org_Structure_Metadata.Coworker_Email":                ["orgstructure_metadata"],
+    "Org_Structure_Metadata.Roles":                         ["orgstructure_metadata"],
+    "Org_Structure_Metadata.Team_Transition":               ["orgstructure_metadata"],
+    "Org_Structure_Metadata.Onboarding_Notes":              ["orgstructure_metadata"],
+
+    # ── Operational / System Operations ───────────────────────────────────
+    "System_Operations.Maintenance_Window":                 ["system_operations"],
+    "System_Operations.Deployment_Schedule":                ["system_operations"],
+    "System_Operations.Production_Alerts":                  ["system_operations"],
+    "System_Operations.Internal_System_ID":                 ["system_operations"],
+
+    # ── Vendor ─────────────────────────────────────────────────────────────
+    "Sensitive_Vendor_Docs.Invoices":                       ["vendor_metadata"],
+    "Sensitive_Vendor_Docs.Contracts":                      ["vendor_metadata"],
+    "Sensitive_Vendor_Docs.Statements_of_Work":             ["vendor_metadata"],
+    "Support_&_Escalation.Customer_Success_Hotline":        ["vendor_metadata"],
+    "Support_&_Escalation.Support_Escalation_Contact":      ["vendor_metadata"],
+    "Vendor_Metadata.Vendor_Address":                       ["vendor_metadata"],
+    "Vendor_Metadata.Vendor_Email":                         ["vendor_metadata"],
+    "Vendor_Metadata.Vendor_Name":                          ["vendor_metadata"],
+    "Vendor_Metadata.Contractor_Address":                   ["vendor_metadata"],
+    "Vendor_Metadata.Contractor_Email":                     ["vendor_metadata"],
+    "Vendor_Metadata.Contractor_Name":                      ["vendor_metadata"],
+
+    # ── Scheduling ─────────────────────────────────────────────────────────
+    "Scheduling.Recurrences":                               ["all_schedule"],
+    "Scheduling.Travel_Itineraries":                        ["all_schedule"],
+    "Scheduling.Time_Zones":                                ["all_schedule"],
+    "Scheduling.Cross_Team_Coordination":                   ["all_schedule"],
+    "Scheduling.Meeting_Moved_Notices":                     ["all_schedule"],
+
+    # ── Personal / Health ──────────────────────────────────────────────────
+    "Personal_Life.Health_Disclosures":                     ["health_disclosures"],
+
+    # ── Personal / Crisis & Sensitive ──────────────────────────────────────
+    "Crisis_&_Sensitive.Breakups":                          ["crisis_sensitive_content"],
+    "Crisis_&_Sensitive.Family_Emergency":                  ["crisis_sensitive_content"],
+    "Personal_Life.Crisis_Content":                         ["crisis_sensitive_content"],
+
+    # ── Other ──────────────────────────────────────────────────────────────
+    "Other.Other":                                          [],
 }
 
 

@@ -8,50 +8,16 @@ ensure consistent domain routing.
 """
 
 from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
-from Ingestion.Schemas.taxonomy import ZERO_SHOT_LABEL_GROUPS, CATEGORY_THRESHOLDS
+from Ingestion.Schemas.taxonomy import (
+    ZERO_SHOT_LABEL_GROUPS,
+    CATEGORY_THRESHOLDS,
+    LABEL_TO_RAG_DOMAIN,
+)
 
 # Fallback confidence threshold for any category not listed in CATEGORY_THRESHOLDS.
 # CATEGORY_THRESHOLDS is always the primary source; this only applies to labels
 # that were not tuned (e.g. Personal_Life.*).
 _DEFAULT_THRESHOLD = 0.5
-
-# Maps zero-shot category keys → RAG index domain names.
-# Domain names must match filenames in RAG_demo3/indexes/ (without extension).
-LABEL_TO_RAG_DOMAIN: dict[str, list[str]] = {
-    # Strategic
-   # Strategic
-    "Strategic.M&A":                            ["Business_Strategy"],
-    "Strategic.Market_Expansion":               ["Business_Strategy"],
-    "Strategic.Pricing_Models":                 ["Business_Strategy", "Financial_Strategy"],
-    "Strategic.Customer_Acquisition":           ["Business_Strategy"],
-    "Strategic.Competitive_Analysis":           ["Business_Strategy"],
-    "Strategic.Board_Communications":           ["Business_Strategy"],
-    # HR
-    "HR.Performance_Reviews":                   ["HR"],
-    "HR.Internal_Disputes":                     ["HR"],
-    # R&D — Technical
-    "R&D.Technical.Experiments":                ["Technical"],
-    "R&D.Technical.Algorithms":                 ["Technical"],
-    "R&D.Technical.Models":                     ["Technical"],
-    "R&D.Technical.Prototypes":                 ["Technical"],
-    # R&D — IP
-    "R&D.IP.Patentable_Ideas":                  ["Scientific_&_IP"],
-    "R&D.IP.Proprietary_Formulas":              ["Scientific_&_IP"],
-    # Financial — Accounting
-    "Financial.Accounting.Salary_Negotiations": ["Accounting"],
-    "Financial.Accounting.Firing_Hiring":       ["Accounting"],
-    "Financial.Accounting.Bonuses":             ["Accounting"],
-    # Financial — Strategy
-    "Financial.Strategy.Budget_Forecasting":    ["Financial_Strategy"],
-    "Financial.Strategy.Revenue_Projections":   ["Financial_Strategy"],
-    "Financial.Strategy.Investment_Strategies": ["Financial_Strategy"],
-    # Operational
-    "Operational.Project.Technical_Blockers":   ["Project_Metadata"],
-    "Operational.Project.Progress_Updates":     ["Project_Metadata"],
-    # Personal Life — no dedicated RAG index
-    "Personal_Life.Health_Disclosures":         [],
-    "Personal_Life.Crisis_Content":             [],
-}
 
 
 def get_domains_for_rag(query: str) -> list[str]:
@@ -76,7 +42,7 @@ def get_domains_for_rag(query: str) -> list[str]:
     -------
     list[str] — sorted, deduplicated domain index names
                 (e.g. ["accounting", "business_strategy"]) that correspond
-                to files in RAG_demo3/indexes/. Returns [] if no label
+                to files in rag_demo4/indexes/. Returns [] if no label
                 clears its threshold.
     """
     domains: set[str] = set()
