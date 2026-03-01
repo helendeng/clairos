@@ -9,6 +9,7 @@ function App() {
   const [viewMode, setViewMode] = useState('manager'); // 'manager' or 'employee'
   const [activeTab, setActiveTab] = useState('upload'); // manager: 'upload' or 'review' | employee: 'brief' or 'chat'
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000' // no more hardcoded URLs, but still fallback to localhost
   // Shared state
   const [file, setFile] = useState(null);
   const [processing, setProcessing] = useState(false);
@@ -37,7 +38,7 @@ function App() {
       const formData = new FormData();
       formData.append('file', uploadedFile);
 
-      const response = await fetch('http://localhost:8000/upload', {
+      const response = await fetch(`${API_URL}/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -65,7 +66,7 @@ function App() {
 
   const fetchApprovalItems = async () => {
     try {
-      const response = await fetch('http://localhost:8000/approval-items');
+      const response = await fetch(`${API_URL}/approval-items`);
       const data = await response.json();
       setApprovalItems(data.items || []);
     } catch (error) {
@@ -80,7 +81,7 @@ function App() {
       formData.append('approved', approved);
       formData.append('flagged', flagged);
 
-      await fetch('http://localhost:8000/approve-item', {
+      await fetch(`${API_URL}/approve-item`, {
         method: 'POST',
         body: formData,
       });
@@ -102,9 +103,9 @@ function App() {
       const formData = new FormData();
       formData.append('question', query);
       formData.append('doc_id', docId);
-      formData.append('llm_provider', llmProvider);
+      // formData.append('llm_provider', llmProvider);
 
-      const response = await fetch('http://localhost:8000/query', {
+      const response = await fetch(`${API_URL}/query`, {
         method: 'POST',
         body: formData,
       });
