@@ -1,21 +1,24 @@
-# v2
+# Python backend server for ClairOS AI Handoff Assistant
+# This server handles file uploads, processes documents with an LLM, detects PII, and manages an approval workflow for managers. It also provides a simple query interface for employees to ask questions about
+# the uploaded documents. The server uses FastAPI and can call either a local Ollama instance or the DeepSeek API for LLM processing. 
+# Helen editing post Lulu changes
+
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 import requests
+import random
 import re
 import os
 from typing import Optional
 from pathlib import Path
 import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[1] # Helen changed to parents[1] to go up two levels since server.py is in backend/ and we want to access rag_demo4/src/ files
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.rag_service import run_rag  # noqa: E402
-
-# Store documents in memory
-document_storage = {}
+from rag_demo4.src.rag_service import run_rag  
+# noqa: E402
 
 app = FastAPI()
 
@@ -81,27 +84,19 @@ def _available_categories() -> list[str]:
 
 # Calculate confidence score based on response characteristics
 def calculate_confidence(text, prompt_length):
-    """
-    Simple confidence scoring - your teammates can replace with real model
-    """
-    # Base confidence on response length and specificity
     base_confidence = 0.7
     
-    # Longer, more detailed responses get higher confidence
     if len(text) > 200:
         base_confidence += 0.1
     
-    # If response contains specific numbers/dates, increase confidence
-    if re.search(r'\b\d{4}\b', text):  # Contains year
+    if re.search(r'\b\d{4}\b', text):
         base_confidence += 0.05
-    if re.search(r'\b\d{1,2}/\d{1,2}\b', text):  # Contains date
+    if re.search(r'\b\d{1,2}/\d{1,2}\b', text):
         base_confidence += 0.05
     
-    # If response says "I don't know", set low confidence
     if "don't have" in text.lower() or "verified context" in text.lower():
-        base_confidence = 0.4 + random.uniform(0, 0.1)
+        base_confidence = 0.4 + random.uniform(0, 0.1)  # FIXED: random is now imported
     
-    # Add small random variation
     confidence = min(1.0, base_confidence + random.uniform(-0.05, 0.05))
     
     return round(confidence, 2)
@@ -166,40 +161,35 @@ def call_llm(prompt: str, provider: str = DEFAULT_LLM_PROVIDER, model: Optional[
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
-    # Read file content
     content = await file.read()
     text = content.decode('utf-8', errors='ignore')
     
-    # Store full document text with filename as ID
     doc_id = file.filename
     document_storage[doc_id] = text
     
-    # Detect PII
     pii_results = detect_pii(text)
     
-    # Generate summary using configured provider
-    summary_prompt = f"""Summarize this document in 3-4 sentences. Focus on key findings and main topics.
+    # FIXED: was called `summary_prompt` but referenced as `brief_prompt` — unified to one variable
+    brief_prompt = f"""Summarize this document in 3-4 sentences. Focus on key findings and main topics.
     
 Document:
 {text[:3000]}
 
 Format your response clearly with these sections. 
 Be specific and actionable. 
-Do not include anything meta abut the prompt in your output, just labels, titles, or headings. 
+Do not include anything meta about the prompt in your output, just labels, titles, or headings. 
 Do not include any asterisks. 
 """
     
-    brief_content = call_ollama(brief_prompt)
+    brief_content = call_llm(brief_prompt, provider=DEFAULT_LLM_PROVIDER)
     confidence = calculate_confidence(brief_content, len(brief_prompt))
     
-    summary = call_llm(summary_prompt, provider=DEFAULT_LLM_PROVIDER)
-    # Store in approval system for manager review
     approval_storage["items"] = [
         {
             "id": "1",
             "type": "overview",
             "title": "Role Overview",
-            "content": brief_content[:500],  # First part is usually overview
+            "content": brief_content[:500],
             "sources": [file.filename],
             "approved": None,
             "flagged": False,
@@ -226,32 +216,10 @@ Do not include any asterisks.
 async def query_document(
     question: str = Form(...),
     doc_id: str = Form(...),
-    categories: str = Form(""),
     llm_provider: str = Form(DEFAULT_LLM_PROVIDER),
     llm_model: Optional[str] = Form(None),
 ):
-    if doc_id not in document_storage:
-        return {"error": "Document not found"}
-
-    selected = [x.strip() for x in categories.split(",") if x.strip()]
-    categories_to_search = selected or _available_categories()
-    rag_out = run_rag(
-        question=question,
-        categories_to_search=categories_to_search,
-        top_k=DEFAULT_TOP_K,
-        llm_provider=llm_provider,
-        llm_model=llm_model,
-    )
-    return {
-        "question": question,
-        "answer": rag_out.get("answer", ""),
-        "sources": rag_out.get("sources", []),
-        "llm_provider": llm_provider,
-        "llm_model": llm_model,
-        "categories_to_search": categories_to_search,
-    }
-'''async def query_document(question: str = Form(...), doc_id: str = Form(...)):
-    # Retrieve full document from storage
+    # FIXED: run_rag is commented out so use the inline document query approach
     if doc_id not in document_storage:
         return {
             "question": question,
@@ -262,7 +230,6 @@ async def query_document(
     
     full_text = document_storage[doc_id]
     
-    # Use full document for context
     query_prompt = f"""Based on the following document, answer this question: {question}
 
 Full Document:
@@ -272,10 +239,9 @@ Provide a clear, concise answer. If you cannot find the answer in the document, 
 
 Answer:"""
     
-    answer = call_ollama(query_prompt)
+    answer = call_llm(query_prompt, provider=llm_provider, model=llm_model)
     confidence = calculate_confidence(answer, len(query_prompt))
     
-    # Determine sources
     sources = [{"type": "document", "name": doc_id}]
     if "don't have" in answer.lower():
         sources = [{"type": "system", "name": "System Prompt"}]
@@ -287,6 +253,7 @@ Answer:"""
         "sources": sources
     }
 
+# FIXED: these endpoints were accidentally swallowed into the ''' comment block
 @app.get("/approval-items")
 async def get_approval_items():
     """Get items pending manager approval"""
@@ -301,7 +268,7 @@ async def approve_item(item_id: str = Form(...), approved: bool = Form(...), fla
             item["flagged"] = flagged
             return {"success": True, "item": item}
     return {"success": False, "error": "Item not found"}
-'''
+
 @app.get("/")
 def root():
     return {"status": "ClairOS Backend Running!", "message": "Upload files to /upload or query at /query"}

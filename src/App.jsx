@@ -1,27 +1,29 @@
-// v2
+// App.jsx - React frontend for ClairOS AI Handoff Assistant
+// This file implements the main React component for the application, providing both manager and employee views.
+// It handles file uploads, AI processing, approval workflows, and a simple Q&A interface for employees.
+// Helen editing post Lulu changes
 import React, { useState } from 'react';
 import { Upload, FileText, MessageSquare, AlertTriangle, CheckCircle, Loader, Users, Settings, ChevronRight, ThumbsUp, ThumbsDown, Flag, XCircle } from 'lucide-react';
 
 function App() {
   const [viewMode, setViewMode] = useState('manager'); // 'manager' or 'employee'
   const [activeTab, setActiveTab] = useState('upload'); // manager: 'upload' or 'review' | employee: 'brief' or 'chat'
-  
+
   // Shared state
   const [file, setFile] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const [docId, setDocId] = useState('');
+  const [docId, setDocId] = useState('');       // ← FIXED: removed duplicate declaration
   const [piiResults, setPiiResults] = useState(null);
   const [briefContent, setBriefContent] = useState('');
   const [confidence, setConfidence] = useState(0);
   const [sources, setSources] = useState([]);
-  
+
   // Manager state
   const [approvalItems, setApprovalItems] = useState([]);
-  
+
   // Employee/Chat state
   const [query, setQuery] = useState('');
   const [queryHistory, setQueryHistory] = useState([]);
-  const [docId, setDocId] = useState('');
   const [llmProvider, setLlmProvider] = useState('deepseek_api');
 
   // Manager: Upload & Process
@@ -31,7 +33,6 @@ function App() {
 
     setFile(uploadedFile);
     setProcessing(true);
-    setShowResults(false);
 
     try {
       const formData = new FormData();
@@ -43,17 +44,17 @@ function App() {
       });
 
       const data = await response.json();
-      
+
       setPiiResults(data.pii);
       setBriefContent(data.summary);
       setDocId(data.doc_id);
       setConfidence(data.confidence);
       setSources(data.sources);
       setProcessing(false);
-      
+
       // Auto-switch to review tab after upload
       setActiveTab('review');
-      
+
       // Fetch approval items
       fetchApprovalItems();
     } catch (error) {
@@ -79,12 +80,12 @@ function App() {
       formData.append('item_id', itemId);
       formData.append('approved', approved);
       formData.append('flagged', flagged);
-      
+
       await fetch('http://localhost:8000/approve-item', {
         method: 'POST',
         body: formData,
       });
-      
+
       // Refresh approval items
       fetchApprovalItems();
     } catch (error) {
@@ -95,7 +96,7 @@ function App() {
   // Employee: Query
   const handleQuery = async () => {
     if (!query.trim() || !docId) return;
-    
+
     setProcessing(true);
 
     try {
@@ -110,7 +111,7 @@ function App() {
       });
 
       const data = await response.json();
-      
+
       setQueryHistory([...queryHistory, {
         question: query,
         answer: data.answer,
@@ -159,28 +160,26 @@ function App() {
           </div>
         </div>
 
-   {/* Tabs */}
+        {/* Tabs */}
         <div className="bg-white border-b">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex gap-8">
               <button
                 onClick={() => setActiveTab('upload')}
-                className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${
-                  activeTab === 'upload'
+                className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${activeTab === 'upload'
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
+                  }`}
               >
                 <Upload className="w-4 h-4" />
                 Data Ingestion
               </button>
               <button
                 onClick={() => setActiveTab('review')}
-                className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${
-                  activeTab === 'review'
+                className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${activeTab === 'review'
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
+                  }`}
               >
                 <FileText className="w-4 h-4" />
                 Review Draft
@@ -189,7 +188,7 @@ function App() {
                     {approvalItems.filter(i => i.approved === null).length}
                   </span>
                 )}
-              </button>'''
+              </button>
             </div>
           </div>
         </div>
@@ -205,7 +204,7 @@ function App() {
 
               <div className="bg-white rounded-lg shadow-sm border p-6">
                 <h3 className="text-lg font-semibold mb-4">New Handoff Creation</h3>
-                
+
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Departing Employee</label>
@@ -259,7 +258,7 @@ function App() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex gap-3">
                 <FileText className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-blue-900">
-                  All uploaded data is encrypted. PII and sensitive content are automatically filtered. 
+                  All uploaded data is encrypted. PII and sensitive content are automatically filtered.
                   Only manager-approved content will be included in the final handoff brief.
                 </p>
               </div>
@@ -305,11 +304,10 @@ function App() {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <h3 className="text-lg font-semibold">Generated Handoff Brief</h3>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        confidence >= 0.8 ? 'bg-green-100 text-green-700' :
-                        confidence >= 0.6 ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${confidence >= 0.8 ? 'bg-green-100 text-green-700' :
+                          confidence >= 0.6 ? 'bg-yellow-100 text-yellow-700' :
+                            'bg-red-100 text-red-700'
+                        }`}>
                         {(confidence * 100).toFixed(0)}% Confidence
                       </span>
                     </div>
@@ -337,7 +335,7 @@ function App() {
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="bg-gray-50 p-4 rounded whitespace-pre-line text-gray-700 mb-4">
                     {briefContent}
                   </div>
@@ -400,22 +398,20 @@ function App() {
           <div className="flex gap-8">
             <button
               onClick={() => setActiveTab('brief')}
-              className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${
-                activeTab === 'brief'
+              className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${activeTab === 'brief'
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-gray-600 hover:text-gray-900'
-              }`}
+                }`}
             >
               <FileText className="w-4 h-4" />
               Handoff Brief
             </button>
             <button
               onClick={() => setActiveTab('chat')}
-              className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${
-                activeTab === 'chat'
+              className={`py-4 px-2 border-b-2 transition flex items-center gap-2 ${activeTab === 'chat'
                   ? 'border-blue-600 text-blue-600'
                   : 'border-transparent text-gray-600 hover:text-gray-900'
-              }`}
+                }`}
             >
               <MessageSquare className="w-4 h-4" />
               Ask Questions
@@ -429,7 +425,7 @@ function App() {
         {activeTab === 'brief' && (
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h2 className="text-2xl font-bold mb-4">Employee Handoff Brief</h2>
-            
+
             {!briefContent ? (
               <div className="text-center py-12">
                 <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
@@ -499,7 +495,7 @@ function App() {
                     <div className="flex-1 max-w-[70%]">
                       <div className="bg-white border rounded-lg p-4">
                         <p className="text-gray-900 mb-3">{item.answer}</p>
-                        
+
                         {item.sources && item.sources.length > 0 && (
                           <div className="border-t pt-3 mt-3">
                             <p className="text-xs text-gray-600 mb-2">Sources:</p>
@@ -514,11 +510,10 @@ function App() {
                         )}
 
                         <div className="border-t pt-3 mt-3 flex items-center justify-between">
-                          <span className={`text-xs ${
-                            item.confidence >= 0.8 ? 'text-green-600' :
-                            item.confidence >= 0.6 ? 'text-yellow-600' :
-                            'text-red-600'
-                          }`}>
+                          <span className={`text-xs ${item.confidence >= 0.8 ? 'text-green-600' :
+                              item.confidence >= 0.6 ? 'text-yellow-600' :
+                                'text-red-600'
+                            }`}>
                             Confidence: {(item.confidence * 100).toFixed(0)}%
                           </span>
                           <div className="flex gap-1">
@@ -546,46 +541,45 @@ function App() {
               )}
             </div>
 
-              {/* Query Input */}
-              <div className="mb-3">
-                <label className="block text-sm font-medium text-gray-700 mb-1">LLM Provider</label>
-                <select
-                  value={llmProvider}
-                  onChange={(e) => setLlmProvider(e.target.value)}
-                  className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  disabled={processing}
-                >
-                  <option value="deepseek_api">DeepSeek API (default)</option>
-                  <option value="ollama">Ollama Local</option>
-                </select>
-              </div>
-
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && !processing && handleQuery()}
-                  placeholder="Ask a question about your role..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={processing || !docId}
-                />
-                <button
-                  onClick={handleQuery}
-                  disabled={processing || !query.trim() || !docId}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {processing ? <Loader className="w-4 h-4 animate-spin" /> : 'Ask'}
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-500 mt-2">
-                RAG backend uses rag_demo3 indexes. Generation supports DeepSeek API and local Ollama.
-              </p>
+            {/* Query Input */}
+            <div className="mb-3">
+              <label className="block text-sm font-medium text-gray-700 mb-1">LLM Provider</label>
+              <select
+                value={llmProvider}
+                onChange={(e) => setLlmProvider(e.target.value)}
+                className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                disabled={processing}
+              >
+                <option value="deepseek_api">DeepSeek API (default)</option>
+                <option value="ollama">Ollama Local</option>
+              </select>
             </div>
 
-            {/* Reset Button */}
-            <div className="text-center">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && !processing && handleQuery()}
+                placeholder="Ask a question about your role..."
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={processing || !docId}
+              />
+              <button
+                onClick={handleQuery}
+                disabled={processing || !query.trim() || !docId}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {processing ? <Loader className="w-4 h-4 animate-spin" /> : 'Ask'}
+              </button>
+            </div>
+
+            <p className="text-sm text-gray-500 mt-2">
+              RAG backend uses rag_demo3 indexes. Generation supports DeepSeek API and local Ollama.
+            </p>
+
+            {/* Reset Button */}          {/* ← FIXED: moved inside the flex-col div */}
+            <div className="text-center mt-4">
               <button
                 onClick={handleReset}
                 className="text-indigo-600 hover:text-indigo-800 underline"
