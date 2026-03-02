@@ -96,21 +96,43 @@ def call_llm(prompt: str, provider: str = DEFAULT_LLM_PROVIDER, model: Optional[
 
 # ── Background mbox ingestion ──────────────────────────────────────────────────
 
-def run_mbox_ingestion(mbox_path: str, doc_id: str):
+def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
     ingestion_status[doc_id] = {"status": "running", "chunks_ingested": 0, "error": None}
     try:
         from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
         from Ingestion.util.parseMbox import controller
         print(f"Starting mbox ingestion for {doc_id}...")
         chunks = controller(mbox_fp=mbox_path, zero_shot_classify_fn=zero_shot_classify)
+        
+        # Generate brief AFTER ingestion completes
+        print("Generating handoff brief...")
+        brief_content = call_llm(brief_prompt)
+        confidence = calculate_confidence(brief_content, len(brief_prompt))
+        
+        # Store brief so frontend can fetch it
         ingestion_status[doc_id] = {
             "status": "done",
             "chunks_ingested": len(chunks) if chunks else 0,
-            "error": None
+            "error": None,
+            "brief": brief_content,
+            "confidence": confidence
         }
-        print(f"✓ Ingestion complete: {len(chunks)} chunks")
+        
+        # Update approval storage
+        approval_storage["items"] = [{
+            "id": "1",
+            "type": "overview",
+            "title": "Role Overview",
+            "content": brief_content[:500],
+            "sources": [doc_id],
+            "approved": None,
+            "flagged": False,
+            "confidence": confidence
+        }]
+        
+        print(f"✓ Done: {len(chunks)} chunks, brief generated")
     except Exception as e:
-        ingestion_status[doc_id] = {"status": "failed", "chunks_ingested": 0, "error": str(e)}
+        ingestion_status[doc_id] = {"status": "failed", "chunks_ingested": 0, "error": str(e), "brief": None, "confidence": None}
         print(f"❌ Ingestion failed: {e}")
     finally:
         try:
@@ -129,29 +151,48 @@ async def upload_file(
     doc_id = file.filename
 
     if file.filename.lower().endswith(".mbox"):
-        # Save to temp file for background ingestion
         tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".mbox", dir="/tmp")
         tmp.write(content)
         tmp.close()
 
-        document_storage[doc_id] = "[.mbox file — ingestion in progress. Ask questions after ingestion completes.]"
-        background_tasks.add_task(run_mbox_ingestion, tmp.name, doc_id)
-
         preview_text = content.decode("utf-8", errors="ignore")[:3000]
-        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
-Based on this email archive preview, generate a professional handoff brief covering:
-- The employee's main responsibilities
-- Key projects and topics they were working on
-- Important contacts and relationships
-- Any ongoing issues or priorities to be aware of
-
-Be specific, actionable, and professional. Do not include anything meta about the prompt in your output, just labels, titles, or headings.
-No asterisks, no meta commentary, no headings with colons.
-
-Email archive preview:
-{preview_text}
-"""
         pii_results = detect_pii(preview_text)
+
+        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
+            Based on this email archive, generate a professional handoff brief covering:
+            - The employee's main responsibilities
+            - Key projects and topics they were working on
+            - Important contacts and relationships
+            - Any ongoing issues or priorities to be aware of
+
+            Be specific, actionable, and professional. No asterisks, no meta commentary, no headings with colons.
+
+            Email archive preview:
+            {preview_text}
+            """
+        document_storage[doc_id] = "[.mbox file — ingestion in progress.]"
+        ingestion_status[doc_id] = {"status": "running", "chunks_ingested": 0, "error": None, "brief": None, "confidence": None}
+        
+        # Pass brief_prompt into background task
+        background_tasks.add_task(run_mbox_ingestion, tmp.name, doc_id, brief_prompt)
+
+        approval_storage["items"] = []
+        approval_storage["metadata"] = {
+            "doc_id": doc_id,
+            "filename": file.filename,
+            "pii_detected": pii_results["detected"],
+            "pii_count": pii_results["redacted_count"]
+        }
+
+        return {
+            "pii": pii_results,
+            "summary": None,
+            "filename": file.filename,
+            "doc_id": doc_id,
+            "confidence": None,
+            "sources": [{"type": "document", "name": file.filename}],
+            "ingestion": "started"
+        }
         ingestion_note = "started"
 
     else:
