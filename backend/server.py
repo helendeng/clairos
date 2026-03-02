@@ -138,9 +138,17 @@ async def upload_file(
         background_tasks.add_task(run_mbox_ingestion, tmp.name, doc_id)
 
         preview_text = content.decode("utf-8", errors="ignore")[:3000]
-        brief_prompt = f"""This is a raw email archive. Summarize in 3-4 sentences what topics appear.
-Do not include asterisks or meta commentary.
-Content preview:
+        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
+Based on this email archive preview, generate a professional handoff brief covering:
+- The employee's main responsibilities
+- Key projects and topics they were working on
+- Important contacts and relationships
+- Any ongoing issues or priorities to be aware of
+
+Be specific, actionable, and professional. Do not include anything meta about the prompt in your output, just labels, titles, or headings.
+No asterisks, no meta commentary, no headings with colons.
+
+Email archive preview:
 {preview_text}
 """
         pii_results = detect_pii(preview_text)
@@ -150,12 +158,17 @@ Content preview:
         text = content.decode("utf-8", errors="ignore")
         document_storage[doc_id] = text
         pii_results = detect_pii(text)
-        brief_prompt = f"""Summarize this document in 3-4 sentences. Focus on key findings and main topics.
-Document:
+        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
+Based on this email archive preview, generate a professional handoff brief covering:
+- The employee's main responsibilities
+- Key projects and topics they were working on
+- Important contacts and relationships
+- Any ongoing issues or priorities to be aware of
+
+Be specific, actionable, and professional. Do not include anything meta about the prompt in your output, just labels, titles, or headings.
+No asterisks, no meta commentary, no headings with colons.
+
 {text[:3000]}
-Be specific and actionable.
-Do not include anything meta about the prompt in your output, just labels, titles, or headings.
-Do not include any asterisks.
 """
         ingestion_note = "not_applicable"
 
