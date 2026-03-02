@@ -141,10 +141,15 @@ class ChunkIngestion:
             ))
         
         # Batch upload
-        self.client.upsert(
-            collection_name=COLLECTION_NAME,
-            points=points
-        )
+        # Edit: upload in small batches to avoid Qdrant payload size limit
+        BATCH_SIZE = 50
+        for i in range(0, len(points), BATCH_SIZE):
+            batch = points[i:i + BATCH_SIZE]
+            self.client.upsert(
+                collection_name=COLLECTION_NAME,
+                points=batch
+            )
+            print(f"  Uploaded batch {i//BATCH_SIZE + 1}/{(len(points)-1)//BATCH_SIZE + 1}")
         
         print(f"✓ Uploaded {len(valid_chunks)} chunks")
         
