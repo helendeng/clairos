@@ -6,11 +6,12 @@ from typing import Optional
 
 import requests
 
-DEFAULT_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek_api")
+# removed deepseek
+DEFAULT_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 DEFAULT_OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:14b")
-DEFAULT_API_BASE_URL = os.getenv("LLM_API_BASE_URL", "https://api.deepseek.com")
-DEFAULT_API_MODEL = os.getenv("LLM_API_MODEL", "deepseek-chat")
-DEFAULT_API_KEY = os.getenv("LLM_API_KEY", "sk-acb050a499c64547b5a5af2321aee72d")
+DEFAULT_API_BASE_URL = os.getenv("LLM_API_BASE_URL", "")
+DEFAULT_API_MODEL = os.getenv("LLM_API_MODEL", "")
+DEFAULT_API_KEY = os.getenv("LLM_API_KEY", "")
 RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 
 
