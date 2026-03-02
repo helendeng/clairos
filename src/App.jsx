@@ -542,11 +542,14 @@ function App() {
               </button>
             </div>
 
-            <div className="text-center mt-4">
+            {/* <div className="text-center mt-4">
               <button onClick={handleReset} className="text-indigo-600 hover:text-indigo-800 underline">
                 Upload New Document
               </button>
-            </div>
+            </div>""" 
+            Note: Commented out reset button in employee view to simplify UI and avoid confusion. Employee can upload new document from manager view after export.
+             */}
+            
           </div>
         )}
       </div>
