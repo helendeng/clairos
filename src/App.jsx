@@ -374,7 +374,7 @@ function App() {
           )}
         </div>
 
-        <button onClick={() => setViewMode('employee')} className="fixed bottom-6 right-6 px-6 py-3 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-800 transition flex items-center gap-2">
+        <button onClick={() => { setViewMode('employee'); setActiveTab('brief'); }} className="fixed bottom-6 right-6 px-6 py-3 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-800 transition flex items-center gap-2">
           Switch to Employee View <ChevronRight className="w-4 h-4" />
         </button>
       </div>
@@ -554,7 +554,7 @@ function App() {
         )}
       </div>
 
-      <button onClick={() => setViewMode('manager')} className="fixed bottom-6 right-6 px-6 py-3 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-800 transition flex items-center gap-2">
+      <button onClick={() => {setViewMode('manager'); setActiveTab('upload');}} className="fixed bottom-6 right-6 px-6 py-3 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-800 transition flex items-center gap-2">
         Switch to Manager View
         <span className="px-2 py-0.5 bg-white text-gray-900 rounded text-xs font-medium">Admin</span>
       </button>
