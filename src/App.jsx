@@ -575,7 +575,7 @@ function App() {
           </div>
         )}
 
-        {/* Tech Stack Note */}
+        {/* Tech Stack Note 
         <div className="mt-8 bg-white rounded-lg shadow p-4 text-sm text-gray-600">
           <p className="font-semibold mb-2">Tech Stack:</p>
           <ul className="list-disc list-inside space-y-1 ml-4">
@@ -584,7 +584,7 @@ function App() {
             <li><strong>AI:</strong> Ollama (localhost:11434) with llama3.2</li>
             <li><strong>Privacy:</strong> 100% local processing, no data leaves your machine</li>
           </ul>
-        </div>
+        </div>*/}
       </div>
 
       {/* View Toggle Button */}

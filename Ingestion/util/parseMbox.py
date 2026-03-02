@@ -169,12 +169,12 @@ def controller(
 
         all_outputs.extend(outputs)
 
+
     all_outputs_list = output_schemas_to_dicts(all_outputs)
-    print(all_outputs_list)
-    return all_outputs_list
 
     ## Add this when we want to fully connect the data ingestion to the database
-    # ingestion = ChunkIngestion()
-    # ingestion.upload_batch(all_outputs_list)
+    # upload to qdrant
+    ingestion = ChunkIngestion()
+    ingestion.upload_batch(all_outputs_list)
 
-
+    return all_outputs_list    # Return list of dicts for easier downstream handling (e.g. JSON export)
