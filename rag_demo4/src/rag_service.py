@@ -26,11 +26,20 @@ def run_rag(
 
     hits = retriever.search(
         question=question,
-        domains_to_search=categories_to_search,
+        domains_to_search=[],   # ← empty = no subdomain filter, searches ALL Qdrant chunks
         top_k=top_k,
-        use_bm25=True,
+        use_bm25=False,         # ← BM25 is FAISS-only, disable it
         use_vector=True,
+        backend="qdrant",       # ← force Qdrant, no FAISS fallback
     )
+
+    # hits = retriever.search(
+    #     question=question,
+    #     domains_to_search=categories_to_search,
+    #     top_k=top_k,
+    #     use_bm25=True,
+    #     use_vector=True,
+    # )
 
     context = _format_context(hits)
 
