@@ -1,9 +1,12 @@
-# backend/rag/rag_service.py
+# rag_demo4/src/rag_service.py
 from typing import Any, Dict, List
 from .retriever import DomainRetriever
 from .llm_client import generate
 
 DEFAULT_TOP_K = 5
+
+# Module-level singleton — loaded once, reused on every query
+_retriever = DomainRetriever()
 
 
 def _format_context(hits) -> str:
@@ -14,8 +17,6 @@ def _format_context(hits) -> str:
         )
     return "\n\n".join(parts)
 
-# Add this at module level, outside the function
-_retriever = DomainRetriever()
 
 def run_rag(
     question: str,
@@ -24,24 +25,15 @@ def run_rag(
     llm_provider: str = "deepseek_api",
     llm_model: str | None = None,
 ) -> Dict[str, Any]:
-    _retriever = DomainRetriever()  # uses backend/indexes automatically
 
-    hits = _retriever.search.search(
+    hits = _retriever.search(
         question=question,
-        domains_to_search=[],   # ← empty = no subdomain filter, searches ALL Qdrant chunks
+        domains_to_search=[],
         top_k=top_k,
-        use_bm25=False,         # ← BM25 is FAISS-only, disable it
+        use_bm25=False,
         use_vector=True,
-        backend="qdrant",       # ← force Qdrant, no FAISS fallback
+        backend="qdrant",
     )
-
-    # hits = retriever.search(
-    #     question=question,
-    #     domains_to_search=categories_to_search,
-    #     top_k=top_k,
-    #     use_bm25=True,
-    #     use_vector=True,
-    # )
 
     context = _format_context(hits)
 
@@ -51,8 +43,8 @@ Do not mention the context, documents, or your own reasoning process.
 Do not say "based on the context" or "the emails show" — just answer as fact.
 If the information is not available, say "I don't have enough information about that."
 Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
-Provide as much context as is helpful for the employee, and cite the specific source documentation (not just "[domain | chunk_id]" 
-but rather a user friendly identifier like "From email titled 'Project Update - Q1 2024'") for each distinct piece of information 
+Provide as much context as is helpful for the employee, and cite the specific source documentation (not just "[domain | chunk_id]"
+but rather a user friendly identifier like "From email titled 'Project Update - Q1 2024'") for each distinct piece of information
 you use from the emails.
 
 EMAIL CONTEXT:
