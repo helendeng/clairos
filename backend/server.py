@@ -95,23 +95,71 @@ def call_llm(prompt: str, provider: str = DEFAULT_LLM_PROVIDER, model: Optional[
     return f"Unsupported llm_provider: {provider}. Use ollama."
 
 # ── Background mbox ingestion ──────────────────────────────────────────────────
-
 def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
     ingestion_status[doc_id] = {"status": "running", "chunks_ingested": 0, "error": None}
     try:
-        # Ensure collection exists
+        # Check if THIS specific file is already ingested
+        try:
+            from qdrant_client import QdrantClient
+            from qdrant_client.models import Filter, FieldCondition, MatchValue
+            client = QdrantClient(url=os.getenv("QDRANT_URL", "http://localhost:6333"))
+            results = client.scroll(
+                collection_name="clairos_email_chunks",
+                scroll_filter=Filter(
+                    must=[FieldCondition(
+                        key="source.email_id",
+                        match=MatchValue(value=f"{doc_id}_0")
+                    )]
+                ),
+                limit=1
+            )
+            if results[0]:
+                count = client.get_collection("clairos_email_chunks").points_count
+                print(f"✓ {doc_id} already ingested ({count} chunks), skipping ZeroShot")
+                brief_content = call_llm(brief_prompt)
+                confidence = calculate_confidence(brief_content, len(brief_prompt))
+                document_storage[doc_id] = (
+                    f"Email archive: {doc_id}. Contains {count} classified "
+                    f"email chunks in knowledge base."
+                )
+                ingestion_status[doc_id] = {
+                    "status": "done",
+                    "chunks_ingested": count,
+                    "error": None,
+                    "brief": brief_content,
+                    "confidence": confidence
+                }
+                approval_storage["items"] = [{
+                    "id": "1",
+                    "type": "overview",
+                    "title": "Role Overview",
+                    "content": brief_content[:500],
+                    "sources": [doc_id],
+                    "approved": None,
+                    "flagged": False,
+                    "confidence": confidence
+                }]
+                return
+        except Exception as e:
+            print(f"Could not check Qdrant, proceeding with full ingestion: {e}")
+
+        # Full ingestion — file not yet in Qdrant
         from database.core.create_collection import create_collection
         create_collection()
-        
+
         from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
         from Ingestion.util.parseMbox import controller
         print(f"Starting mbox ingestion for {doc_id}...")
         chunks = controller(mbox_fp=mbox_path, zero_shot_classify_fn=zero_shot_classify)
-        
+
         print("Generating handoff brief...")
         brief_content = call_llm(brief_prompt)
         confidence = calculate_confidence(brief_content, len(brief_prompt))
-        
+
+        document_storage[doc_id] = (
+            f"Email archive: {doc_id}. Contains {len(chunks)} classified "
+            f"email chunks in knowledge base."
+        )
         ingestion_status[doc_id] = {
             "status": "done",
             "chunks_ingested": len(chunks) if chunks else 0,
@@ -119,7 +167,6 @@ def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
             "brief": brief_content,
             "confidence": confidence
         }
-        
         approval_storage["items"] = [{
             "id": "1",
             "type": "overview",
@@ -130,16 +177,77 @@ def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
             "flagged": False,
             "confidence": confidence
         }]
-        
         print(f"✓ Done: {len(chunks)} chunks, brief generated")
+
     except Exception as e:
-        ingestion_status[doc_id] = {"status": "failed", "chunks_ingested": 0, "error": str(e), "brief": None, "confidence": None}
+        ingestion_status[doc_id] = {
+            "status": "failed",
+            "chunks_ingested": 0,
+            "error": str(e),
+            "brief": None,
+            "confidence": None
+        }
         print(f"❌ Ingestion failed: {e}")
     finally:
         try:
             os.remove(mbox_path)
         except Exception:
             pass
+        
+# OLD
+# def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
+    
+#     ingestion_status[doc_id] = {"status": "running", "chunks_ingested": 0, "error": None}
+#     try:
+#         # Ensure collection exists
+#         from database.core.create_collection import create_collection
+#         create_collection()
+        
+#         from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
+#         from Ingestion.util.parseMbox import controller
+#         print(f"Starting mbox ingestion for {doc_id}...")
+#         chunks = controller(mbox_fp=mbox_path, zero_shot_classify_fn=zero_shot_classify)
+        
+#         print("Generating handoff brief...")
+#         brief_content = call_llm(brief_prompt)
+#         confidence = calculate_confidence(brief_content, len(brief_prompt))
+        
+#         ingestion_status[doc_id] = {
+#             "status": "done",
+#             "chunks_ingested": len(chunks) if chunks else 0,
+#             "error": None,
+#             "brief": brief_content,
+#             "confidence": confidence
+#         }
+        
+#         # add
+#         document_storage[doc_id] = (
+#     f"Email archive: {doc_id}. "
+#     f"Contains {len(chunks)} classified email chunks in the knowledge base. "
+#     f"Topics covered: business strategy, regulatory compliance, HR, "
+#     f"financial strategy, project metadata, scheduling, and more."
+# )
+
+#         approval_storage["items"] = [{
+#             "id": "1",
+#             "type": "overview",
+#             "title": "Role Overview",
+#             "content": brief_content[:500],
+#             "sources": [doc_id],
+#             "approved": None,
+#             "flagged": False,
+#             "confidence": confidence
+#         }]
+        
+#         print(f"✓ Done: {len(chunks)} chunks, brief generated")
+#     except Exception as e:
+#         ingestion_status[doc_id] = {"status": "failed", "chunks_ingested": 0, "error": str(e), "brief": None, "confidence": None}
+#         print(f"❌ Ingestion failed: {e}")
+#     finally:
+#         try:
+#             os.remove(mbox_path)
+#         except Exception:
+#             pass
 
 # ── Endpoints ──────────────────────────────────────────────────────────────────
 
