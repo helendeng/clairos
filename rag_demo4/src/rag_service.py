@@ -14,6 +14,8 @@ def _format_context(hits) -> str:
         )
     return "\n\n".join(parts)
 
+# Add this at module level, outside the function
+_retriever = DomainRetriever()
 
 def run_rag(
     question: str,
@@ -22,9 +24,9 @@ def run_rag(
     llm_provider: str = "deepseek_api",
     llm_model: str | None = None,
 ) -> Dict[str, Any]:
-    retriever = DomainRetriever()  # uses backend/indexes automatically
+    _retriever = DomainRetriever()  # uses backend/indexes automatically
 
-    hits = retriever.search(
+    hits = _retriever.search.search(
         question=question,
         domains_to_search=[],   # ← empty = no subdomain filter, searches ALL Qdrant chunks
         top_k=top_k,
@@ -43,18 +45,22 @@ def run_rag(
 
     context = _format_context(hits)
 
-    prompt = f"""You are ClairOS (RAG demo).
-Answer ONLY using the provided CONTEXT.
-If the answer is not in the context, respond with NOT_FOUND.
+    prompt = f"""You are a helpful assistant answering questions about an employee's role based on their emails.
+Answer directly and concisely using only the email context below.
+Do not mention the context, documents, or your own reasoning process.
+Do not say "based on the context" or "the emails show" — just answer as fact.
+If the information is not available, say "I don't have enough information about that."
+Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
+Provide as much context as is helpful for the employee, and cite the specific source documentation (not just "[domain | chunk_id]" 
+but rather a user friendly identifier like "From email titled 'Project Update - Q1 2024'") for each distinct piece of information 
+you use from the emails.
 
-CONTEXT:
+EMAIL CONTEXT:
 {context}
 
-QUESTION:
-{question}
+QUESTION: {question}
 
-ANSWER:
-"""
+ANSWER:"""
 
     answer = generate(prompt, provider=llm_provider, model=llm_model)
 
