@@ -35,6 +35,12 @@ def run_rag(
         backend="qdrant",
     )
 
+    # TEMP DEBUG — remove before demo
+    print(f"DEBUG: got {len(hits)} hits from Qdrant")
+    if hits:
+        print(f"DEBUG first hit: {hits[0].text[:200]}")
+
+
     context = _format_context(hits)
 
     prompt = f"""You are a helpful assistant answering questions about an employee's role based on their emails.
