@@ -18,7 +18,12 @@ def _get_retriever() -> DomainRetriever:
 def _format_context(hits) -> str:
     parts = []
     for h in hits:
-        parts.append(f"[{h.domain} | {h.chunk_id} | {h.method} | score={h.score:.3f}]\n{h.text}")
+        src = h.source or {}
+        subject = src.get("subject", "unknown subject")
+        timestamp = src.get("timestamp", "")
+        parts.append(
+            f"[Email: '{subject}' ({timestamp})]\n{h.text}"
+        )
     return "\n\n".join(parts)
 
 def run_rag(question, categories_to_search, top_k=DEFAULT_TOP_K, llm_provider="deepseek_api", llm_model=None):
