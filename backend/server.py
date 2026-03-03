@@ -65,6 +65,7 @@ def _available_categories() -> list[str]:
     return sorted([p.name.replace(".chunks.json", "") for p in index_dir.glob("*.chunks.json")])
 
 def calculate_confidence(text, prompt_length):
+    # Heuristic for brief generation (no retrieval scores available)
     base_confidence = 0.7
     if len(text) > 200:
         base_confidence += 0.1
@@ -72,9 +73,16 @@ def calculate_confidence(text, prompt_length):
         base_confidence += 0.05
     if re.search(r'\b\d{1,2}/\d{1,2}\b', text):
         base_confidence += 0.05
-    if "don't have" in text.lower() or "verified context" in text.lower():
-        base_confidence = 0.4 + random.uniform(0, 0.1)
-    return round(min(1.0, base_confidence + random.uniform(-0.05, 0.05)), 2)
+    return min(base_confidence, 1.0)
+
+def calculate_rag_confidence(sources: list) -> float:
+    # Based on actual Qdrant cosine similarity scores
+    if not sources:
+        return 0.0
+    scores = [s.get("score", 0.0) for s in sources if s.get("score")]
+    if not scores:
+        return 0.0
+    return round(min(sum(scores) / len(scores), 1.0), 2)
 
 def call_ollama(prompt, model="qwen2.5:14b"):
     try:
@@ -325,7 +333,7 @@ No asterisks, no meta commentary, no headings with colons.
         ingestion_note = "not_applicable"
 
     brief_content = call_llm(brief_prompt)
-    confidence = calculate_confidence(brief_content, len(brief_prompt))
+    confidence = calculate_rag_confidence(sources)
 
     approval_storage["items"] = [{
         "id": "1",
@@ -394,7 +402,7 @@ async def query_document(
 
     answer = rag_out.get("answer", "")
     sources = rag_out.get("sources", [])
-    confidence = calculate_confidence(answer, len(question))
+    confidence = calculate_rag_confidence(sources)
 
     formatted_sources = [{"name": s.get("subject") or s.get("chunk_id", ""), "type": "knowledge_base"} for s in sources]
 
