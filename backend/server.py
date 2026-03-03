@@ -99,17 +99,19 @@ def call_llm(prompt: str, provider: str = DEFAULT_LLM_PROVIDER, model: Optional[
 def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
     ingestion_status[doc_id] = {"status": "running", "chunks_ingested": 0, "error": None}
     try:
+        # Ensure collection exists
+        from database.core.create_collection import create_collection
+        create_collection()
+        
         from Ingestion.dataTaggers.ZeroShot import zero_shot_classify
         from Ingestion.util.parseMbox import controller
         print(f"Starting mbox ingestion for {doc_id}...")
         chunks = controller(mbox_fp=mbox_path, zero_shot_classify_fn=zero_shot_classify)
         
-        # Generate brief AFTER ingestion completes
         print("Generating handoff brief...")
         brief_content = call_llm(brief_prompt)
         confidence = calculate_confidence(brief_content, len(brief_prompt))
         
-        # Store brief so frontend can fetch it
         ingestion_status[doc_id] = {
             "status": "done",
             "chunks_ingested": len(chunks) if chunks else 0,
@@ -118,7 +120,6 @@ def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
             "confidence": confidence
         }
         
-        # Update approval storage
         approval_storage["items"] = [{
             "id": "1",
             "type": "overview",
