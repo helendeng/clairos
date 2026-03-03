@@ -1,6 +1,7 @@
 # Python backend server for ClairOS AI Handoff Assistant
 from fastapi import FastAPI, UploadFile, File, Form, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from numpy.ma import count
 import requests
 import random
 import re
@@ -103,18 +104,19 @@ def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
             from qdrant_client import QdrantClient
             from qdrant_client.models import Filter, FieldCondition, MatchValue
             client = QdrantClient(url=os.getenv("QDRANT_URL", "http://localhost:6333"))
-            results = client.scroll(
-                collection_name="clairos_email_chunks",
-                scroll_filter=Filter(
-                    must=[FieldCondition(
-                        key="source.email_id",
-                        match=MatchValue(value=f"{doc_id}_0")
-                    )]
-                ),
-                limit=1
-            )
-            if results[0]:
-                count = client.get_collection("clairos_email_chunks").points_count
+            # results = client.scroll(
+            #     collection_name="clairos_email_chunks",
+            #     scroll_filter=Filter(
+            #         must=[FieldCondition(
+            #             key="source.email_id",
+            #             match=MatchValue(value=f"{doc_id}_0")
+            #         )]
+            #     ),
+            #     limit=1
+            # )
+            # if results[0]:
+            count = client.get_collection("clairos_email_chunks").points_count
+            if count > 0:
                 print(f"✓ {doc_id} already ingested ({count} chunks), skipping ZeroShot")
                 brief_content = call_llm(brief_prompt)
                 confidence = calculate_confidence(brief_content, len(brief_prompt))
@@ -193,7 +195,7 @@ def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
             os.remove(mbox_path)
         except Exception:
             pass
-        
+
 # OLD
 # def run_mbox_ingestion(mbox_path: str, doc_id: str, brief_prompt: str):
     
