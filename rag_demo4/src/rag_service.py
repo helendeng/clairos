@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 from .retriever import DomainRetriever
 from .llm_client import generate
 
-DEFAULT_TOP_K = 5
+DEFAULT_TOP_K = 15 #increased number of chunks retrieved to provide more context to the LLM, since we're now using a more powerful model (Qwen2.5-14B) that can handle longer inputs
 
 _retriever = None
 
@@ -45,11 +45,12 @@ Only say "I don't have enough information" if the context has absolutely nothing
 still try to provide helpful context from other documents in the source file that you have ingested and chunked.
 Cite emails by their subject line in your answer.
 Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
-Provide as much context as is helpful for the employee, and cite the specific source documentation (not just "[domain | chunk_id]"
-but rather a user friendly identifier like "From email titled 'Project Update - Q1 2024'") for each distinct piece of information
-you use from the emails.
+Answer the question as helpfully as possible using the excerpts below.
+If the excerpts are only partially relevant, synthesize what you can from them.
+Cite the email subject in your answer where relevant.
+Only say you don't have information if the excerpts are completely unrelated
 
-EMAIL CONTEXT:
+EMAIL EXCERPTS/CONTEXT:
 {context}
 
 QUESTION: {question}
