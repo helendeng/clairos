@@ -40,12 +40,10 @@ function App() {
 
         if (data.status === 'done') {
           setIngestionStatus('done');
-          // Brief is now available in the status response
           if (data.brief) {
             setBriefContent(data.brief);
             setConfidence(data.confidence || 0);
           }
-          // Refresh approval items now that brief is ready
           fetchApprovalItems();
           clearInterval(interval);
         } else if (data.status === 'failed') {
@@ -59,6 +57,13 @@ function App() {
 
     return () => clearInterval(interval);
   }, [docId, ingestionStatus]);
+
+  // ── Auto-dismiss green banner 5 minutes after ingestion completes ──
+  useEffect(() => {
+    if (ingestionStatus !== 'done') return;
+    const timer = setTimeout(() => setIngestionStatus('dismissed'), 5 * 60 * 1000);
+    return () => clearTimeout(timer);
+  }, [ingestionStatus]);
 
   // ── File upload ──
   const handleFileUpload = async (e) => {
@@ -166,6 +171,8 @@ function App() {
   // ── Ingestion status banner (reused in both views) ──
   const IngestionBanner = () => {
     if (!file) return null;
+    if (activeTab === 'chat') return null;
+    if (ingestionStatus === 'dismissed') return null;
     if (ingestionStatus === 'started') return (
       <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4 flex items-center gap-3">
         <Loader className="w-5 h-5 text-yellow-600 animate-spin flex-shrink-0" />
