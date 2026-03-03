@@ -384,47 +384,25 @@ async def query_document(
             "sources": []
         }
 
-    doc_text = document_storage[doc_id]
-    categories = _available_categories()
     rag_out = run_rag(
         question=question,
-        categories_to_search=categories,
+        categories_to_search=_available_categories(),
         top_k=DEFAULT_TOP_K,
         llm_provider="ollama",
         llm_model="qwen2.5:14b",
     )
-    rag_context = rag_out.get("answer", "")
 
-    combined_prompt = f"""You are ClairOS, an AI employee handoff assistant.
-Answer the question using BOTH sources below.
-Prioritize the UPLOADED DOCUMENT if it contains the answer.
-If neither source contains the answer, say NOT_FOUND.
-
-UPLOADED DOCUMENT ({doc_id}):
-{doc_text[:3000]}
-
-ADDITIONAL CONTEXT FROM KNOWLEDGE BASE:
-{rag_context}
-
-QUESTION: {question}
-
-ANSWER:"""
-
-    answer = call_llm(combined_prompt)
+    answer = rag_out.get("answer", "")
+    sources = rag_out.get("sources", [])
     confidence = calculate_confidence(answer, len(question))
 
-    sources = [{"type": "document", "name": doc_id}]
-    for s in rag_out.get("sources", []):
-        sources.append({
-            "type": "knowledge_base",
-            "name": f"{s.get('domain', '')} | {s.get('subject', '')}"
-        })
+    formatted_sources = [{"name": s.get("subject") or s.get("chunk_id", ""), "type": "knowledge_base"} for s in sources]
 
     return {
         "question": question,
         "answer": answer,
         "confidence": confidence,
-        "sources": sources
+        "sources": formatted_sources
     }
 
 @app.get("/approval-items")

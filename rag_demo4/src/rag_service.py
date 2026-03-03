@@ -32,9 +32,13 @@ def run_rag(question, categories_to_search, top_k=DEFAULT_TOP_K, llm_provider="d
     context = _format_context(hits)
     prompt = f"""You are a helpful assistant answering questions about an employee's role based on their emails.
 Answer directly and concisely using only the email context below.
-Do not mention the context, documents, or your own reasoning process.
+Do not mention the context, documents, or your own reasoning process. 
 Do not say "based on the context" or "the emails show" — just answer as fact.
-If the information is not available, say "I don't have enough information about that."
+Do not say "based on the context" or "the emails show" - just answer as fact.
+If the context is only partially relevant, summarize what IS available rather than saying NOT_FOUND.
+Only say "I don't have enough information" if the context has absolutely nothing relevant. If it's hard to find relevant context, 
+still try to provide helpful context from other documents in the source file that you have ingested and chunked.
+Cite emails by their subject line in your answer.
 Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
 Provide as much context as is helpful for the employee, and cite the specific source documentation (not just "[domain | chunk_id]"
 but rather a user friendly identifier like "From email titled 'Project Update - Q1 2024'") for each distinct piece of information
