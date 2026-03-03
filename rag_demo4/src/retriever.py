@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from math import log
 from pathlib import Path
 
+from networkx import hits
+
 EMB_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -229,6 +231,7 @@ class DomainRetriever:
         }
         self._qdrant_ready = True
 
+
     def _search_qdrant(
         self,
         question: str,
@@ -251,14 +254,14 @@ class DomainRetriever:
 
         if not domains_to_search:
             try:
-                results = self._qdrant_client.search(
+                results = self._qdrant_client.query_points(
                     collection_name=collection_name,
-                    query_vector=qvec,
+                    query=qvec,
                     limit=top_k,
                     with_payload=True,
-                    with_vectors=False,
-                )
-            except Exception:
+                ).points
+            except Exception as e:
+                print(f"Qdrant search error: {e}")
                 return []
 
             for p in results:
@@ -271,16 +274,14 @@ class DomainRetriever:
                 if unique_key in seen:
                     continue
                 seen.add(unique_key)
-                hits.append(
-                    Hit(
-                        domain=domain_name,
-                        chunk_id=chunk_id,
-                        score=float(getattr(p, "score", 0.0) or 0.0),
-                        method="qdrant_vector",
-                        text=text,
-                        source=source,
-                    )
-                )
+                hits.append(Hit(
+                    domain=domain_name,
+                    chunk_id=chunk_id,
+                    score=float(getattr(p, "score", 0.0) or 0.0),
+                    method="qdrant_vector",
+                    text=text,
+                    source=source,
+                ))
             return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
 
         for routed_domain in domains_to_search:
@@ -290,20 +291,18 @@ class DomainRetriever:
 
             for sub in subdomain_cands:
                 qfilter = Filter(
-                    must=[
-                        FieldCondition(key="subdomain", match=MatchValue(value=sub)),
-                    ]
+                    must=[FieldCondition(key="subdomain", match=MatchValue(value=sub))]
                 )
                 try:
-                    results = self._qdrant_client.search(
+                    results = self._qdrant_client.query_points(
                         collection_name=collection_name,
-                        query_vector=qvec,
+                        query=qvec,
                         query_filter=qfilter,
                         limit=top_k,
                         with_payload=True,
-                        with_vectors=False,
-                    )
-                except Exception:
+                    ).points
+                except Exception as e:
+                    print(f"Qdrant filtered search error ({sub}): {e}")
                     continue
 
                 for p in results:
@@ -316,18 +315,115 @@ class DomainRetriever:
                     if unique_key in seen:
                         continue
                     seen.add(unique_key)
-                    hits.append(
-                        Hit(
-                            domain=domain_name,
-                            chunk_id=chunk_id,
-                            score=float(getattr(p, "score", 0.0) or 0.0),
-                            method="qdrant_vector",
-                            text=text,
-                            source=source,
-                        )
-                    )
-
+                    hits.append(Hit(
+                        domain=domain_name,
+                        chunk_id=chunk_id,
+                        score=float(getattr(p, "score", 0.0) or 0.0),
+                        method="qdrant_vector",
+                        text=text,
+                        source=source,
+                    ))
         return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
+
+    # def _search_qdrant(
+    #     self,
+    #     question: str,
+    #     domains_to_search: list[str],
+    #     top_k: int,
+    # ) -> list[Hit]:
+    #     self._ensure_qdrant_backend()
+    #     self._ensure_vector_backend()
+
+    #     qv = self._embedder.encode([question], normalize_embeddings=True)
+    #     qvec = [float(x) for x in qv[0]]
+
+    #     Filter = self._qdrant_models["Filter"]
+    #     FieldCondition = self._qdrant_models["FieldCondition"]
+    #     MatchValue = self._qdrant_models["MatchValue"]
+    #     collection_name = self._qdrant_models["collection_name"]
+
+    #     hits = []
+    #     seen = set()
+
+    #     if not domains_to_search:
+    #         try:
+    #             results = self._qdrant_client.search(
+    #                 collection_name=collection_name,
+    #                 query_vector=qvec,
+    #                 limit=top_k,
+    #                 with_payload=True,
+    #                 with_vectors=False,
+    #             )
+    #         except Exception:
+    #             return []
+
+    #         for p in results:
+    #             payload = p.payload or {}
+    #             chunk_id = str(payload.get("chunk_id", ""))
+    #             text = str(payload.get("text", ""))
+    #             source = payload.get("source") or {}
+    #             domain_name = str(payload.get("domain") or payload.get("subdomain") or "unknown")
+    #             unique_key = (domain_name, chunk_id)
+    #             if unique_key in seen:
+    #                 continue
+    #             seen.add(unique_key)
+    #             hits.append(
+    #                 Hit(
+    #                     domain=domain_name,
+    #                     chunk_id=chunk_id,
+    #                     score=float(getattr(p, "score", 0.0) or 0.0),
+    #                     method="qdrant_vector",
+    #                     text=text,
+    #                     source=source,
+    #                 )
+    #             )
+    #         return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
+
+    #     for routed_domain in domains_to_search:
+    #         subdomain_cands = _to_subdomain_candidates(routed_domain)
+    #         if not subdomain_cands:
+    #             continue
+
+    #         for sub in subdomain_cands:
+    #             qfilter = Filter(
+    #                 must=[
+    #                     FieldCondition(key="subdomain", match=MatchValue(value=sub)),
+    #                 ]
+    #             )
+    #             try:
+    #                 results = self._qdrant_client.search(
+    #                     collection_name=collection_name,
+    #                     query_vector=qvec,
+    #                     query_filter=qfilter,
+    #                     limit=top_k,
+    #                     with_payload=True,
+    #                     with_vectors=False,
+    #                 )
+    #             except Exception:
+    #                 continue
+
+    #             for p in results:
+    #                 payload = p.payload or {}
+    #                 chunk_id = str(payload.get("chunk_id", ""))
+    #                 text = str(payload.get("text", ""))
+    #                 source = payload.get("source") or {}
+    #                 domain_name = str(payload.get("domain") or routed_domain)
+    #                 unique_key = (domain_name, chunk_id)
+    #                 if unique_key in seen:
+    #                     continue
+    #                 seen.add(unique_key)
+    #                 hits.append(
+    #                     Hit(
+    #                         domain=domain_name,
+    #                         chunk_id=chunk_id,
+    #                         score=float(getattr(p, "score", 0.0) or 0.0),
+    #                         method="qdrant_vector",
+    #                         text=text,
+    #                         source=source,
+    #                     )
+    #                 )
+
+    #     return sorted(hits, key=lambda h: h.score, reverse=True)[:top_k]
 
     def _load_domain(self, domain: str, need_index: bool):
         idx_path = self.index_dir / f"{domain}.faiss"
