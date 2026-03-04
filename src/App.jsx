@@ -142,12 +142,16 @@ function App() {
       formData.append('doc_id', docId);
       const response = await fetch(`${API_URL}/query`, { method: 'POST', body: formData });
       const data = await response.json();
+      const uniqueSources = data.sources.filter((s, idx, arr) =>
+        arr.findIndex(x => x.name === s.name) === idx
+      )
       setQueryHistory([...queryHistory, {
         question: query,
         answer: data.answer,
         confidence: data.confidence,
-        sources: data.sources
+        sources: uniqueSources
       }]);
+      
       setQuery('');
       setProcessing(false);
     } catch (error) {
