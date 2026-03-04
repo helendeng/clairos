@@ -271,8 +271,8 @@ class DomainRetriever:
                 source = payload.get("source") or {}
                 domain_name = str(payload.get("domain") or payload.get("subdomain") or "unknown")
                 unique_key = (domain_name, chunk_id)
-                if unique_key in seen:
-                    continue
+                # if unique_key in seen:
+                    # continue
                 seen.add(unique_key)
                 hits.append(Hit(
                     domain=domain_name,

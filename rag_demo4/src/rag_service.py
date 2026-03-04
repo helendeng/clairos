@@ -35,20 +35,18 @@ def run_rag(question, categories_to_search, top_k=DEFAULT_TOP_K, llm_provider="d
         print(f"DEBUG first hit: {hits[0].text[:200]}")
 
     context = _format_context(hits)
-    prompt = f"""You are a helpful assistant answering questions about an employee's role based on their emails.
-Answer directly and concisely using only the email context below.
-Do not mention the context, documents, or your own reasoning process. 
+    prompt = f"""You are a helpful assistant answering questions about an employee's role at a company based on their files and inbox.
+Answer directly and concisely, as helpfully as possible, using only the email context below.
+Do not mention your own reasoning process. 
 Do not say "based on the context" or "the emails show" — just answer as fact.
 Do not say "based on the context" or "the emails show" - just answer as fact.
-If the context is only partially relevant, summarize what IS available rather than saying NOT_FOUND.
-Only say "I don't have enough information" if the context has absolutely nothing relevant. If it's hard to find relevant context, 
-still try to provide helpful context from other documents in the source file that you have ingested and chunked.
-Cite emails by their subject line in your answer.
-Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
-Answer the question as helpfully as possible using the excerpts below.
-If the excerpts are only partially relevant, synthesize what you can from them.
+If the excerpts are only partially relevant, synthesize what you can from them and answer as best you can. 
 Cite the email subject in your answer where relevant.
-Only say you don't have information if the excerpts are completely unrelated
+If it's hard to find relevant context, still try to provide helpful context from other documents in the source file that you have ingested and chunked.
+Use the best of your reasoning ability to connect the dots and provide a helpful answer, but be clear about the limits of what you can infer from the available information.
+Try to avoid, but as a last resort: If relevant information is truly not at all available, or if the excerpts are completely unrelated to the question, you can say "I don't have enough information about that."
+Where relevant, cite the email subject in your answer.
+Be extremely professional, concise, and formal in your tone. Avoid any casual language or speculation.
 
 EMAIL EXCERPTS/CONTEXT:
 {context}
