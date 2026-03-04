@@ -478,7 +478,7 @@ class DomainRetriever:
         self,
         question: str,
         domains_to_search: list[str],
-        top_k: int = 5,
+        top_k: int = 30,
         use_bm25: bool = True,
         use_vector: bool = True,
         fusion: str = "rrf",

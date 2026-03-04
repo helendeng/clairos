@@ -3,7 +3,7 @@ from typing import Any, Dict, List
 from .retriever import DomainRetriever
 from .llm_client import generate
 
-DEFAULT_TOP_K = 15 #increased number of chunks retrieved to provide more context to the LLM, since we're now using a more powerful model (Qwen2.5-14B) that can handle longer inputs
+DEFAULT_TOP_K = 30 #increased number of chunks retrieved to provide more context to the LLM, since we're now using a more powerful model (Qwen2.5-14B) that can handle longer inputs
 
 _retriever = None
 

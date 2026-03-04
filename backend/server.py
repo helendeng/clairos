@@ -58,7 +58,7 @@ def detect_pii(text):
 
 DEFAULT_LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 DEFAULT_OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:14b")
-DEFAULT_TOP_K = int(os.getenv("RAG_TOP_K", "5"))
+DEFAULT_TOP_K = int(os.getenv("RAG_TOP_K", "30"))
 
 def _available_categories() -> list[str]:
     index_dir = PROJECT_ROOT / "rag_demo4" / "indexes"
