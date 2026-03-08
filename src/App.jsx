@@ -214,13 +214,13 @@ function App() {
                 <span className="text-2xl font-bold text-blue-600">C</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold">ClairOS AI Handoff Assistant</h1>
+                <h1 className="text-2xl font-bold">Trunq.io: AI Handoff Assistant</h1>
                 <p className="text-blue-100 text-sm">Private Knowledge Transfer | SOC 2 Compliant | Institutional Memory Platform</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="font-medium">Jennifer Martinez</p>
-              <p className="text-sm text-blue-100">Manager - Engineering Department</p>
+              <p className="font-medium">Adam Han</p>
+              <p className="text-sm text-blue-100">Manager</p>
             </div>
           </div>
         </div>
@@ -264,7 +264,7 @@ function App() {
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Departing Employee</label>
-                    <input type="text" defaultValue="Sarah Johnson - Project Manager" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <input type="text" defaultValue="Jeff Dasovich" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Incoming Employee</label>
@@ -444,7 +444,7 @@ function App() {
               <div className="space-y-6 mt-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div><span className="text-gray-600">Approved by:</span> Jennifer Martinez</div>
+                    <div><span className="text-gray-600">Approved by:</span> Adam Han</div>
                     <div><span className="text-gray-600">Date:</span> {new Date().toLocaleDateString()}</div>
                     <div><span className="text-gray-600">Document:</span> {docId}</div>
                     <div><span className="text-gray-600">Confidence:</span> {(confidence * 100).toFixed(0)}%</div>

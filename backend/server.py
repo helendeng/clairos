@@ -277,7 +277,7 @@ async def upload_file(
         preview_text = content.decode("utf-8", errors="ignore")[:3000]
         pii_results = detect_pii(preview_text)
 
-        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
+        brief_prompt = f"""You are Trunq.io, an AI that creates employee handoff briefs.
             Based on this email archive, generate a professional handoff brief covering:
             - The employee's main responsibilities
             - Key projects and topics they were working on
@@ -318,7 +318,7 @@ async def upload_file(
         text = content.decode("utf-8", errors="ignore")
         document_storage[doc_id] = text
         pii_results = detect_pii(text)
-        brief_prompt = f"""You are ClairOS, an AI that creates employee handoff briefs.
+        brief_prompt = f"""You are Trunq.io, an AI that creates employee handoff briefs.
 Based on this email archive preview, generate a professional handoff brief covering:
 - The employee's main responsibilities
 - Key projects and topics they were working on
@@ -428,4 +428,4 @@ async def approve_item(item_id: str = Form(...), approved: bool = Form(...), fla
 
 @app.get("/")
 def root():
-    return {"status": "ClairOS Backend Running!", "message": "Upload files to /upload or query at /query"}
+    return {"status": "Trunq.io Backend Running!", "message": "Upload files to /upload or query at /query"}
