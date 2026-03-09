@@ -1,4 +1,4 @@
-// App.jsx - React frontend for ClairOS AI Handoff Assistant
+// App.jsx - React frontend for AI Handoff Assistant
 import React, { useState, useEffect } from 'react';
 import { Upload, FileText, MessageSquare, AlertTriangle, CheckCircle, Loader, ChevronRight, ThumbsUp, ThumbsDown, Flag, XCircle } from 'lucide-react';
 
@@ -402,7 +402,7 @@ function App() {
               <span className="text-2xl font-bold text-blue-600">C</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold">ClairOS AI Handoff Assistant</h1>
+              <h1 className="text-2xl font-bold">Trunq.io: AI Handoff Assistant</h1>
               <p className="text-blue-100 text-sm">Institutional Memory Platform</p>
             </div>
           </div>
