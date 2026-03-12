@@ -279,12 +279,12 @@ function App() {
                     onChange={handleFileUpload}
                     className="hidden"
                     id="file-upload"
-                    accept=".txt,.pdf,.doc,.docx,.mbox"
+                    accept=".txt,.mbox"
                   />
                   <label htmlFor="file-upload" className="cursor-pointer">
                     <Upload className="w-12 h-12 text-gray-400 mx-auto mb-3" />
                     <p className="text-gray-700 mb-1">Drop file or click to browse</p>
-                    <p className="text-sm text-gray-500">Supports .txt, .pdf, .doc, .docx, .mbox files</p>
+                    <p className="text-sm text-gray-500">Supports .txt, .mbox files</p>
                   </label>
                 </div>
 
