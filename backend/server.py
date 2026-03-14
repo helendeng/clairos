@@ -89,7 +89,7 @@ def call_ollama(prompt, model="qwen2.5:14b"):
         response = requests.post(
             "http://localhost:11434/api/generate",
             json={"model": model, "prompt": prompt, "stream": False},
-            timeout=120
+            timeout=300
         )
         if response.status_code == 200:
             return response.json().get("response", "")
