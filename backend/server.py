@@ -333,7 +333,8 @@ No asterisks, no meta commentary, no headings with colons.
         ingestion_note = "not_applicable"
 
     brief_content = call_llm(brief_prompt)
-    confidence = calculate_rag_confidence(sources)
+    sources = [{"type": "document", "name": file.filename}]
+    confidence = calculate_confidence(brief_content, len(brief_prompt))
 
     approval_storage["items"] = [{
         "id": "1",
