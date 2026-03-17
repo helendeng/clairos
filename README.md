@@ -1,6 +1,14 @@
-# ClairOS — AI Handoff Assistant
+# ClairOS AI Handoff Assistant
 
 An institutional memory platform that ingests employee email archives (.mbox), tags content using zero-shot classification, stores it in a vector database, and lets new employees query it via a RAG-powered chat interface.
+
+ClairOS is an institutional memory platform that:
+1. Ingests employee email archives (.mbox files from the Enron dataset)
+2. Tags email content using zero-shot classification (facebook/bart-large-mnli)
+3. Stores tagged chunks in a Qdrant vector database
+4. Lets new employees query the knowledge base via a RAG-powered chat interface
+5. Has a manager view for reviewing/approving AI-generated handoff briefs
+Privacy goal: Everything runs locally, no external LLM APIs. Uses local Ollama with qwen2.5:14b.
 
 ---
 
