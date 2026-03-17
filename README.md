@@ -53,7 +53,7 @@ pii-demo-project/
 
 ---
 
-## Setup
+## Setup for Local Use
 
 ### 1. Install Python dependencies
 
@@ -82,7 +82,7 @@ Check available models anytime with `ollama list`.
 
 ---
 
-## Running the App (3 terminals required)
+## Running the App on Laptop (3 terminals required)
 
 You need **three terminals open simultaneously**.
 
